@@ -289,6 +289,8 @@ briefingForm.addEventListener("submit", (event) => {
     `Nome: ${senderName}`,
     `E-mail: ${String(data.get("email")).trim()}`,
     `Projeto: ${data.get("service")}`,
+    `Objetivo: ${String(data.get("goal")).trim()}`,
+    `Prazo: ${String(data.get("deadline")).trim()}`,
     "",
     "SOBRE A IDEIA",
     String(data.get("message")).trim(),
@@ -527,3 +529,47 @@ try {
     window.setTimeout(closeIntro, 1100);
   }
 } catch (_) { /* Sem armazenamento, o site funciona normalmente. */ }
+
+/* Aprimoramento progressivo do formulário: sem JS, todas as etapas são visíveis. */
+const wizardSteps = $$(".briefing-step");
+const wizardControls = $("#wizard-actions");
+const wizardNext = $("#wizard-next");
+const wizardPrev = $("#wizard-prev");
+const wizardSubmit = $("#briefing-submit");
+let wizardIndex = 0;
+function showWizardStep(index, moveFocus = false) {
+  wizardIndex = index;
+  wizardSteps.forEach((section, i) => { section.hidden = i !== index; });
+  $("#wizard-progress").hidden = false;
+  $("#wizard-progress").textContent = "Etapa " + (index + 1) + " de " + wizardSteps.length;
+  wizardPrev.hidden = index === 0;
+  wizardNext.hidden = index === wizardSteps.length - 1;
+  wizardSubmit.hidden = index !== wizardSteps.length - 1;
+  if (moveFocus) {
+    const first = $("input:not([type=hidden]), textarea, select", wizardSteps[index]);
+    first?.focus({preventScroll:true});
+  }
+}
+wizardControls.hidden = false;
+showWizardStep(0);
+wizardNext.addEventListener("click", () => {
+  const inputs = $$("input, select, textarea", wizardSteps[wizardIndex]);
+  for (const input of inputs) {
+    if (!input.checkValidity()) { input.reportValidity(); return; }
+  }
+  showWizardStep(Math.min(wizardIndex + 1, wizardSteps.length - 1), true);
+});
+wizardPrev.addEventListener("click", () => {
+  showWizardStep(Math.max(0, wizardIndex - 1), true);
+});
+function updateBriefingSummary() {
+  const data = new FormData(briefingForm);
+  ["service", "goal", "deadline", "message"].forEach((key) => {
+    const value = String(data.get(key) || "").trim();
+    const target = $("[data-summary='" + key + "']");
+    target.textContent = value ? (key === "message" ? value.slice(0, 150) : value) : "A definir";
+  });
+}
+briefingForm.addEventListener("input", updateBriefingSummary);
+briefingForm.addEventListener("change", updateBriefingSummary);
+updateBriefingSummary();
