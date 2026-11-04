@@ -97,12 +97,14 @@ updateThemeButton();
 /* Menu móvel: foco contido, Escape e fechamento após a navegação. */
 const menuToggle = $(".menu-toggle");
 const mobileMenu = $("#mobile-menu");
-function setMenu(open) {
+function setMenu(open, restoreFocus = false) {
+  const wasOpen = !mobileMenu.hidden;
   mobileMenu.hidden = !open;
   menuToggle.setAttribute("aria-expanded", String(open));
   menuToggle.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
   document.body.classList.toggle("menu-open", open);
   if (open) $("a", mobileMenu).focus();
+  else if (restoreFocus && wasOpen) menuToggle.focus();
 }
 menuToggle.addEventListener("click", () =>
   setMenu(menuToggle.getAttribute("aria-expanded") !== "true"),
@@ -120,8 +122,7 @@ $$("a", mobileMenu).forEach((link) =>
 document.addEventListener("keydown", (event) => {
   if (mobileMenu.hidden) return;
   if (event.key === "Escape") {
-    setMenu(false);
-    menuToggle.focus();
+    setMenu(false, true);
   }
   if (event.key === "Tab") {
     const items = [menuToggle, ...$$("a", mobileMenu)];
@@ -451,3 +452,78 @@ if (
     if (document.hidden) halo.style.opacity = "0";
   });
 }
+
+/* As três faces da marca têm significado e são operáveis com teclado. */
+const pieceInfo = ["Sites com identidade.", "Sistemas que simplificam.", "Landing pages que conectam."];
+$$(".tb-piece").forEach((piece, index) => {
+  function selectPiece() {
+    $$(".tb-piece").forEach((item) => item.classList.toggle("is-active", item === piece));
+    $("#tb-piece-caption").textContent = pieceInfo[index];
+  }
+  piece.addEventListener("click", selectPiece);
+  piece.addEventListener("focus", selectPiece);
+  piece.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      selectPiece();
+    }
+  });
+});
+if (window.matchMedia("(hover:hover) and (pointer:fine)").matches && !reducedMotion.matches) {
+  const heroArt = $(".tb-hero-art");
+  const stage = $(".tb-hero-stage");
+  let heroFrame = false;
+  let heroX = 0, heroY = 0;
+  heroArt.addEventListener("pointermove", (event) => {
+    const bounds = heroArt.getBoundingClientRect();
+    heroX = (event.clientX - bounds.left) / bounds.width - .5;
+    heroY = (event.clientY - bounds.top) / bounds.height - .5;
+    if (!heroFrame) {
+      heroFrame = true;
+      requestAnimationFrame(() => {
+        stage.style.setProperty("--tilt-x", (-heroY * 8).toFixed(2) + "deg");
+        stage.style.setProperty("--tilt-y", (heroX * 8).toFixed(2) + "deg");
+        heroFrame = false;
+      });
+    }
+  }, {passive:true});
+  heroArt.addEventListener("pointerleave", () => {
+    stage.style.removeProperty("--tilt-x");
+    stage.style.removeProperty("--tilt-y");
+  });
+  $$(".project-card, .team-card").forEach((card) => {
+    let pending = false, px = 0, py = 0;
+    card.addEventListener("pointermove", (event) => {
+      const bounds = card.getBoundingClientRect();
+      px = (event.clientX - bounds.left) / bounds.width - .5;
+      py = (event.clientY - bounds.top) / bounds.height - .5;
+      if (!pending) {
+        pending = true;
+        requestAnimationFrame(() => {
+          card.style.setProperty("--card-x", (-py * 3).toFixed(2) + "deg");
+          card.style.setProperty("--card-y", (px * 3).toFixed(2) + "deg");
+          card.style.setProperty("--shine-x", ((px + .5) * 100) + "%");
+          card.style.setProperty("--shine-y", ((py + .5) * 100) + "%");
+          card.style.setProperty("--shine-opacity", "1");
+          pending = false;
+        });
+      }
+    }, {passive:true});
+    card.addEventListener("pointerleave", () => {
+      card.style.removeProperty("--card-x");
+      card.style.removeProperty("--card-y");
+      card.style.setProperty("--shine-opacity", "0");
+    });
+  });
+}
+/* Introdução curta, pulável, uma única vez por sessão; nunca impede uso sem JS. */
+try {
+  if (!reducedMotion.matches && sessionStorage.getItem("tribyte-intro") !== "seen") {
+    sessionStorage.setItem("tribyte-intro", "seen");
+    const intro = $("#brand-intro");
+    intro.hidden = false;
+    const closeIntro = () => { intro.hidden = true; };
+    $("#skip-intro").addEventListener("click", closeIntro, {once:true});
+    window.setTimeout(closeIntro, 1100);
+  }
+} catch (_) { /* Sem armazenamento, o site funciona normalmente. */ }
