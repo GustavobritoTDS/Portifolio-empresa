@@ -18,8 +18,8 @@
   --text: #f4f3ee;
   --muted: #a5a5a2;
   --line: #303030;
-  --accent: #ff3547;
-  --accent-ink: #ff4b5c;
+  --accent: #fb1023;
+  --accent-ink: #ff5260;
   --on-accent: #130608;
   --header: rgba(11, 11, 11, 0.91);
   --display: "Space Grotesk", Arial, sans-serif;
@@ -35,8 +35,8 @@
   --text: #151515;
   --muted: #5b5b58;
   --line: #c9c7c0;
-  --accent: #ff3547;
-  --accent-ink: #c41e32;
+  --accent: #fb1023;
+  --accent-ink: #a90d1c;
   --header: rgba(241, 240, 234, 0.94);
   color-scheme: light;
 }
@@ -185,7 +185,7 @@ textarea:focus-visible {
   top: 0;
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(255, 53, 71, 0.6);
+  border: 1px solid rgba(251, 16, 35, 0.6);
   border-radius: 50%;
   pointer-events: none;
   z-index: 90;
@@ -201,7 +201,7 @@ textarea:focus-visible {
 .cursor-halo.is-hovering {
   width: 56px;
   height: 56px;
-  background: rgba(255, 53, 71, 0.15);
+  background: rgba(251, 16, 35, 0.15);
 }
 /* Header */
 .site-header {
@@ -336,7 +336,7 @@ textarea:focus-visible {
   height: 6px;
   background: var(--accent);
   border-radius: 50%;
-  box-shadow: 0 0 12px #ff354766;
+  box-shadow: 0 0 12px #fb102366;
   flex: none;
 }
 .hero-location {
@@ -1076,7 +1076,7 @@ h2 {
   left: 23%;
   width: 54%;
   height: 92%;
-  background: #ff3547;
+  background: #fb1023;
   transform: rotate(9deg);
   padding: 23px;
   color: #1b090c;
@@ -1130,11 +1130,11 @@ h2 {
   border-radius: 50%;
   transform: rotate(-30deg);
   box-shadow:
-    0 -8px 0 -1px #ff3547,
+    0 -8px 0 -1px #fb1023,
     0 -9px 0 #5e132d,
-    0 -17px 0 -1px #ff3547,
+    0 -17px 0 -1px #fb1023,
     0 -18px 0 #5e132d,
-    0 -26px 0 -1px #ff3547,
+    0 -26px 0 -1px #fb1023,
     0 -27px 0 #5e132d;
 }
 /* Estúdio e retratos tipográficos */
@@ -1231,11 +1231,11 @@ h2 {
 .shape-g {
   width: 230px;
   height: 230px;
-  border: 55px solid #ff3547;
+  border: 55px solid #fb1023;
   border-radius: 50%;
   right: -33px;
   top: 35px;
-  box-shadow: 0 0 55px #ff354722;
+  box-shadow: 0 0 55px #fb102322;
   transform: rotate(-25deg);
 }
 .shape-g::after {
@@ -1262,7 +1262,7 @@ h2 {
   top: 32px;
   background: repeating-linear-gradient(
     0deg,
-    #ff3547 0 7px,
+    #fb1023 0 7px,
     transparent 7px 16px
   );
   transform: skewY(-25deg);
@@ -1275,9 +1275,9 @@ h2 {
   top: 26px;
   width: 180px;
   height: 235px;
-  border: 48px solid #ff3547;
+  border: 48px solid #fb1023;
   transform: rotate(30deg);
-  box-shadow: 0 0 50px #ff354715;
+  box-shadow: 0 0 50px #fb102315;
 }
 .team-art-caption {
   position: absolute;
@@ -1628,7 +1628,7 @@ legend {
 }
 .service-options input:checked + span {
   border-color: var(--accent);
-  background: #ff354712;
+  background: #fb102312;
   color: var(--accent-ink);
 }
 .service-options input:focus-visible + span {
@@ -3427,3 +3427,49 @@ dialog[open] {
 }
 .project-live-link:hover, .project-live-link:focus-visible { border-color: var(--accent); color: var(--accent-ink); }
 #project-dialog-live:not([hidden]) { display: inline-flex; margin: 0 .75rem .75rem 0; min-height: 44px; }
+
+/* Marca TB oficial em SVG, com cor adaptada ao tema. */
+.wordmark { gap: 8px; }
+.brand-icon { width: 30px; height: 30px; flex: none; }
+.brand-lettering, .footer-lettering { display: inline-block; flex: none; background: var(--text); -webkit-mask: url("assets/logo-tribyte-wordmark.svg") center / contain no-repeat; mask: url("assets/logo-tribyte-wordmark.svg") center / contain no-repeat; }
+.brand-lettering { width: clamp(110px, 10vw, 150px); aspect-ratio: 1030 / 155; }
+.footer-mark { width: clamp(34px, 7vw, 90px); height: auto; }
+.footer-lettering { width: min(64vw, 550px); aspect-ratio: 1030 / 155; }
+.footer-wordmark { display: inline-flex; gap: clamp(6px,2vw,20px); align-items: center; font-size: inherit; }
+.tb-hero-stage { position: absolute; width: min(90%, 560px); aspect-ratio: 440 / 395; right: 2%; top: 10%; transform: perspective(1000px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)); transform-style: preserve-3d; transition: transform .25s; }
+.tb-hero-svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(14px 22px 17px rgba(0,0,0,.34)); }
+.tb-piece { fill: var(--accent); cursor: pointer; transform-box: fill-box; transform-origin: center; outline: none; transition: filter .22s, opacity .22s; }
+.tb-piece:hover, .tb-piece:focus-visible, .tb-piece.is-active { filter: drop-shadow(0 0 10px var(--accent)); }
+.tb-piece:focus-visible { stroke: var(--text); stroke-width: 3; }
+.tb-piece-caption { position: absolute; bottom: 12%; right: 4%; background: var(--surface); color: var(--text); border: 1px solid var(--line); padding: 9px; max-width: 240px; font: 11px var(--mono); }
+.project-card, .team-card { --shine-x: 50%; --shine-y: 50%; }
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .project-card, .team-card { transform: perspective(1200px) rotateX(var(--card-x,0deg)) rotateY(var(--card-y,0deg)); transition: transform .23s ease; }
+  .project-card::after, .team-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 4; background: radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(251,16,35,.13),transparent 44%); opacity: var(--shine-opacity,0); transition: opacity .22s; }
+}
+@media (prefers-reduced-motion:no-preference) {
+  .tb-piece { animation: tb-in .8s cubic-bezier(.2,.8,.2,1) both; }
+  .tb-piece-2 { animation-delay: .12s; }
+  .tb-piece-3 { animation-delay: .24s; }
+  @keyframes tb-in { from { opacity:0; transform:translate3d(0,-35px,0) scale(.94); } to { opacity:1; transform:translate3d(0,0,0) scale(1); } }
+}
+.brand-intro:not([hidden]) { position:fixed; inset:0; background:var(--bg); z-index:200; display:grid; place-items:center; }
+.brand-intro img { width:min(37vw,150px); height:auto; }
+.brand-intro button { position:absolute; bottom:10%; left:50%; transform:translateX(-50%); padding:12px; border:1px solid var(--line); color:var(--text); background:var(--surface); }
+@media (max-width:800px) {
+  .tb-hero-stage { width:min(94%,440px); right:2%; top:14%; }
+  .tb-piece-caption { bottom:9%; font-size:10px; }
+}
+@media (max-width:380px) {
+  :root { --gutter:16px; }
+  .hero h1 { font-size:clamp(42px,12vw,53px); overflow-wrap:anywhere; }
+  .project-heading h2, .studio-intro h2, .contact-copy h2 { font-size:clamp(32px,10vw,44px); }
+  .project-filters { flex-wrap:wrap; }
+  .team-card { grid-template-columns:38% minmax(0,1fr); }
+  .team-info { padding-inline:10px; }
+  .team-info h3 { font-size:19px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .tb-piece, .tb-hero-stage, .project-card, .team-card { transform:none !important; animation:none !important; transition:none !important; }
+  .brand-intro { display:none !important; }
+}
