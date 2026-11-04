@@ -681,90 +681,61 @@
               <p>O primeiro rascunho<br />de algo que pode ser incrível.</p>
             </div>
           </div>
+          <div class="briefing-layout">
           <form class="contact-form" id="briefing-form">
-            <div class="form-heading">
-              <span>SEU PROJETO COMEÇA AQUI</span><span>↗</span>
-            </div>
-            <div class="form-row">
-              <label for="name"
-                >Como podemos te chamar?<input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autocomplete="name"
-                  placeholder="Seu nome"
-                  required
-                  minlength="2"
-                  maxlength="100" /></label
-              ><label for="email"
-                >Seu e-mail<input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  placeholder="voce@exemplo.com"
-                  required
-                  maxlength="180"
-              /></label>
-            </div>
-            <fieldset>
-              <legend>O que você quer construir?</legend>
-              <div class="service-options">
-                <label
-                  ><input
-                    type="radio"
-                    name="service"
-                    value="Site institucional"
-                    checked
-                  /><span>Um site</span></label
-                ><label
-                  ><input
-                    type="radio"
-                    name="service"
-                    value="Sistema web"
-                  /><span>Um sistema</span></label
-                ><label
-                  ><input
-                    type="radio"
-                    name="service"
-                    value="Landing page"
-                  /><span>Landing page</span></label
-                ><label
-                  ><input
-                    type="radio"
-                    name="service"
-                    value="Vamos descobrir juntos"
-                  /><span>Ainda não sei</span></label
-                >
+            <div class="form-heading"><span>SEU PROJETO COMEÇA AQUI</span><span aria-hidden="true">↗</span></div>
+            <p class="wizard-progress" id="wizard-progress" aria-live="polite" hidden>Etapa 1 de 4</p>
+            <section class="briefing-step" data-step="0" aria-label="Tipo de projeto">
+              <fieldset><legend>O que você quer construir?</legend><div class="service-options">
+                <label><input type="radio" name="service" value="Site institucional" checked /><span>Um site</span></label>
+                <label><input type="radio" name="service" value="Sistema web" /><span>Um sistema</span></label>
+                <label><input type="radio" name="service" value="Landing page" /><span>Landing page</span></label>
+                <label><input type="radio" name="service" value="Vamos descobrir juntos" /><span>Ainda não sei</span></label>
+              </div></fieldset>
+            </section>
+            <section class="briefing-step" data-step="1" aria-label="Objetivo e prazo">
+              <label for="goal">Qual é o principal objetivo?
+                <textarea id="goal" name="goal" rows="3" minlength="5" maxlength="500" placeholder="Ex.: apresentar meus serviços ou organizar vendas" required></textarea>
+              </label>
+              <label for="deadline">Qual prazo você imagina?
+                <select id="deadline" name="deadline" required>
+                  <option value="">Selecione uma opção</option>
+                  <option value="O quanto antes">O quanto antes</option>
+                  <option value="Dentro de 1 mês">Dentro de 1 mês</option>
+                  <option value="Entre 1 e 3 meses">Entre 1 e 3 meses</option>
+                  <option value="Sem prazo definido">Sem prazo definido</option>
+                </select>
+              </label>
+            </section>
+            <section class="briefing-step" data-step="2" aria-label="Detalhes da ideia">
+              <label for="message">Conte um pouco mais sobre a sua ideia
+                <textarea id="message" name="message" rows="4" minlength="10" maxlength="3000" placeholder="O que imagina para o projeto?" required></textarea>
+              </label>
+            </section>
+            <section class="briefing-step" data-step="3" aria-label="Informações de contato">
+              <div class="form-row">
+                <label for="name">Como podemos te chamar?<input id="name" name="name" type="text" autocomplete="name" placeholder="Seu nome" required minlength="2" maxlength="100" /></label>
+                <label for="email">Seu e-mail<input id="email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required maxlength="180" /></label>
               </div>
-            </fieldset>
-            <label for="message"
-              >Um pouco sobre a sua ideia<textarea
-                id="message"
-                name="message"
-                placeholder="Qual problema você quer resolver? O que imagina para o projeto?"
-                required
-                minlength="10"
-                maxlength="3000"
-                rows="3"
-              ></textarea>
-            </label>
-            <div class="form-bottom">
-              <p id="contact-help">
-                Prepare seu briefing para copiar ou baixar.<br />Seus dados não
-                são enviados por este formulário.
-              </p>
-              <button class="button button-primary" type="submit">
-                Montar briefing <span aria-hidden="true">↗</span>
-              </button>
+            </section>
+            <div class="wizard-actions" id="wizard-actions" hidden>
+              <button class="button button-secondary" id="wizard-prev" type="button" hidden>Voltar</button>
+              <button class="button button-primary" id="wizard-next" type="button">Próxima etapa <span aria-hidden="true">↗</span></button>
             </div>
-            <p
-              class="form-status"
-              id="form-status"
-              role="status"
-              aria-live="polite"
-            ></p>
+            <div class="form-bottom">
+              <p id="contact-help">Prepare seu briefing para copiar ou baixar. Nenhuma mensagem é enviada automaticamente.</p>
+              <button class="button button-primary" id="briefing-submit" type="submit">Montar briefing <span aria-hidden="true">↗</span></button>
+            </div>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           </form>
+          <aside class="briefing-summary" aria-label="Resumo do briefing">
+            <span class="mono-label">SEU BRIEFING / AO VIVO</span>
+            <p><strong>Projeto</strong><span data-summary="service">Site institucional</span></p>
+            <p><strong>Objetivo</strong><span data-summary="goal">A definir</span></p>
+            <p><strong>Prazo</strong><span data-summary="deadline">A definir</span></p>
+            <p><strong>Mensagem</strong><span data-summary="message">A definir</span></p>
+          </aside>
+          </div>
         </div>
       </section>
     </main>
