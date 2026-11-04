@@ -3585,3 +3585,48 @@ dialog[open] {
 @media (prefers-reduced-motion: reduce) {
   .smart-photo, .smart-photo-primary, .smart-photo-secondary { transform: none !important; transition: none !important; }
 }
+
+/* Legenda ancorada abaixo do monograma, nunca por cima das peças. */
+.tb-hero-art .tb-hero-stage {
+  width: min(84%, 520px);
+  top: 3%;
+  right: 3%;
+}
+.tb-hero-stage > .tb-piece-caption {
+  position: absolute;
+  top: calc(100% + 9px);
+  bottom: auto;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 3px 0;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font: 11px/1.5 var(--mono);
+  text-align: center;
+  white-space: normal;
+  pointer-events: none;
+}
+@media (max-width: 800px) {
+  .tb-hero-art .tb-hero-stage {
+    width: min(82%, 340px);
+    top: 3%;
+    right: 3%;
+  }
+}
+@media (max-width: 540px) {
+  .tb-hero-art .tb-hero-stage {
+    width: min(72%, 235px);
+    top: 0;
+    right: 4%;
+  }
+  .tb-hero-stage > .tb-piece-caption {
+    font-size: 9px;
+    top: calc(100% + 7px);
+    max-width: 210px;
+  }
+}
