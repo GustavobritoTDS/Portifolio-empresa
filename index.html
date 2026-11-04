@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0b0b" />
+    <meta
+      name="description"
+      content="TRIBYTE: Gustavo de Brito Vieira, Márcio Andrey e Lucas Duarte Costa. Desenvolvimento de sites, sistemas e experiências digitais com identidade."
+    />
+    <meta property="og:title" content="TRIBYTE — Ideias em outra dimensão." />
+    <meta
+      property="og:description"
+      content="Três desenvolvedores. Diferentes perspectivas. Uma nova dimensão para sua ideia."
+    />
+    <meta property="og:type" content="website" />
+    <title>TRIBYTE™ — Ideias em outra dimensão.</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0b'/%3E%3Cpath d='M32 9 58 54H6Zm0 17L19 48h26Z' fill='%23ff3547' fill-rule='evenodd'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      // Evita uma troca de tema visível ao recarregar a página.
+      try {
+        const savedTheme = localStorage.getItem("tribyte-theme");
+        if (savedTheme === "light" || savedTheme === "dark")
+          document.documentElement.dataset.theme = savedTheme;
+      } catch (_) {}
+    </script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-halo" aria-hidden="true"></div>
+
+    <!-- Navegação: acessível com teclado e adaptada ao toque. -->
+    <header class="site-header">
+      <a class="wordmark" href="#inicio" aria-label="TRIBYTE, início">
+        <svg class="brand-icon" viewBox="0 0 40 38" aria-hidden="true">
+          <path
+            d="M20 2 39 35H1Zm0 13L10 31h20Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        TRIBYTE<span class="brand-dot">™</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="#projetos">Projetos<span>03</span></a>
+        <a href="#estudio">O estúdio</a>
+        <a href="#servicos">O que fazemos</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          class="theme-toggle icon-button"
+          type="button"
+          aria-label="Ativar modo claro"
+          aria-pressed="false"
+        >
+          <svg
+            class="sun-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+            />
+          </svg>
+          <svg
+            class="moon-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z" />
+          </svg>
+        </button>
+        <a class="header-cta" href="#contato"
+          >Vamos conversar <span aria-hidden="true">↗</span></a
+        >
+        <button
+          class="menu-toggle icon-button"
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+    <nav
+      class="mobile-menu"
+      id="mobile-menu"
+      aria-label="Navegação móvel"
+      hidden
+    >
+      <a href="#projetos"><small>01</small>Projetos <span>↗</span></a>
+      <a href="#estudio"><small>02</small>O estúdio <span>↗</span></a>
+      <a href="#servicos"><small>03</small>Serviços <span>↗</span></a>
+      <a href="#contato"><small>04</small>Vamos conversar <span>↗</span></a>
+      <p>Três mentes. Uma nova perspectiva.</p>
+    </nav>
+
+    <main id="conteudo">
+      <!-- Objeto vetorial original: três faces, três perspectivas. -->
+      <section
+        class="hero section-shell"
+        id="inicio"
+        aria-labelledby="hero-title"
+      >
+        <div class="hero-eyebrow">
+          <span class="status-dot"></span> ESTÚDIO INDEPENDENTE DE
+          DESENVOLVIMENTO
+          <span class="hero-location"
+            >GOIÁS, BRASIL · <time class="local-time">--:--</time></span
+          >
+        </div>
+        <div class="hero-composition">
+          <div class="hero-copy">
+            <h1 id="hero-title">
+              <span>IDEIAS EM</span><span>OUTRA</span
+              ><span class="red-type"
+                >DIMENSÃO<span class="title-period">.</span></span
+              >
+            </h1>
+            <div class="hero-intro">
+              <span class="mini-cross" aria-hidden="true">✳</span>
+              <p>
+                Transformamos ideias em sites e sistemas<br
+                  class="desktop-break"
+                />
+                com personalidade. Do primeiro pixel<br class="desktop-break" />
+                à experiência que faz sentido.
+              </p>
+            </div>
+            <a class="button button-primary" href="#projetos"
+              >Explore nosso trabalho <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="art-grid"></div>
+            <div class="art-orbit orbit-one"></div>
+            <div class="art-orbit orbit-two"></div>
+            <div class="artifact-shadow"></div>
+            <svg class="artifact" viewBox="0 0 660 660" fill="none">
+              <defs>
+                <linearGradient
+                  id="face-left"
+                  x1="180"
+                  y1="150"
+                  x2="340"
+                  y2="500"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#ff9d9d" />
+                  <stop offset=".18" stop-color="#ff3849" />
+                  <stop offset=".58" stop-color="#ff102c" />
+                  <stop offset="1" stop-color="#8a0013" />
+                </linearGradient>
+                <linearGradient
+                  id="face-right"
+                  x1="350"
+                  y1="90"
+                  x2="550"
+                  y2="510"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#ff7080" />
+                  <stop offset=".35" stop-color="#e10020" />
+                  <stop offset="1" stop-color="#550010" />
+                </linearGradient>
+                <linearGradient
+                  id="face-bottom"
+                  x1="100"
+                  y1="430"
+                  x2="500"
+                  y2="535"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#ff1937" />
+                  <stop offset=".5" stop-color="#ff6e77" />
+                  <stop offset="1" stop-color="#e90028" />
+                </linearGradient>
+                <linearGradient
+                  id="edge"
+                  x1="80"
+                  y1="490"
+                  x2="570"
+                  y2="540"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#a0001a" />
+                  <stop offset=".4" stop-color="#f52b44" />
+                  <stop offset="1" stop-color="#4a0011" />
+                </linearGradient>
+                <linearGradient
+                  id="sheen"
+                  x1="320"
+                  y1="100"
+                  x2="100"
+                  y2="510"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#ffd7d7" />
+                  <stop offset=".5" stop-color="#ff6d83" />
+                  <stop offset="1" stop-color="#ff455f" stop-opacity="0" />
+                </linearGradient>
+                <filter id="red-glow">
+                  <feGaussianBlur stdDeviation="18" />
+                </filter>
+              </defs>
+              <path
+                d="m332 115 239 405H94L332 115Z"
+                stroke="#ff1835"
+                stroke-width="12"
+                opacity=".14"
+                filter="url(#red-glow)"
+              />
+              <path
+                d="m322 87 249 428-16 31-492-7-18-26L300 87Z"
+                fill="#3d0010"
+              />
+              <path d="m45 513 492 3 34-1-16 31-492-7Z" fill="url(#edge)" />
+              <path
+                d="m322 87 249 428-54-7-210-360-7-61Z"
+                fill="url(#face-right)"
+              />
+              <path
+                d="m300 87 68 119-157 264-166 43L300 87Z"
+                fill="url(#face-left)"
+              />
+              <path
+                d="m45 513 166-43h232l-75-126 90-2 113 173-526-2Z"
+                fill="url(#face-bottom)"
+              />
+              <path
+                d="m300 87 11 26-226 378-40 22L300 87Z"
+                fill="url(#sheen)"
+                opacity=".85"
+              />
+              <path
+                d="m322 87 249 428-15 2-240-414Z"
+                fill="#ff8d9a"
+                opacity=".65"
+              />
+              <path d="m211 470 157-264 32 54-112 187-77 23Z" fill="#6d0015" />
+              <path
+                d="m288 447 155 23-75-126 32-84 115 208-227-21Z"
+                fill="#2b0009"
+              />
+              <path
+                d="m93 510 448 3"
+                stroke="#ffadad"
+                stroke-width="1.5"
+                opacity=".8"
+              />
+              <path d="m214 468 226 1" stroke="#ffd3d3" opacity=".6" />
+            </svg>
+            <span class="art-coordinate coordinate-top">[ T — 03 ]</span>
+            <span class="art-coordinate coordinate-bottom"
+              >CRIATIVIDADE × CÓDIGO</span
+            >
+            <div class="artifact-caption">
+              <span class="caption-rule"></span
+              ><span>TRÊS PERSPECTIVAS.<br />UMA NOVA FORMA.</span>
+            </div>
+            <div class="art-spark spark-one">+</div>
+            <div class="art-spark spark-two">+</div>
+          </div>
+        </div>
+        <div class="hero-bottom">
+          <p><span>01 / 06</span> IDEIAS QUE GANHAM FORMA</p>
+          <a href="#projetos"
+            >CONTINUE EXPLORANDO <span aria-hidden="true">↓</span></a
+          ><span class="hero-bottom-note"
+            >DESIGN COM INTENÇÃO. CÓDIGO COM DIREÇÃO.</span
+          >
+        </div>
+      </section>
+
+      <div
+        class="marquee"
+        aria-label="Design, desenvolvimento e novas perspectivas"
+      >
+        <div class="marquee-track" aria-hidden="true">
+          <span>DESIGN</span><b>✳</b><span>DESENVOLVIMENTO</span><b>✳</b
+          ><span>NOVAS PERSPECTIVAS</span><b>✳</b><span>DESIGN</span><b>✳</b
+          ><span>DESENVOLVIMENTO</span><b>✳</b><span>NOVAS PERSPECTIVAS</span
+          ><b>✳</b>
+        </div>
+      </div>
+
+      <!-- As imagens abaixo são composições ilustrativas dos projetos. -->
+      <section
+        class="projects section-shell section-space"
+        id="projetos"
+        aria-labelledby="projects-title"
+      >
+        <div class="section-topline">
+          <span class="mono-label"><i></i> 01 — TRABALHOS SELECIONADOS</span
+          ><span class="mono-label section-aside"
+            >UMA IDEIA. DIFERENTES POSSIBILIDADES.</span
+          >
+        </div>
+        <div class="section-heading project-heading">
+          <h2 id="projects-title">
+            Feito para<br /><span class="outline-text">fazer sentido.</span>
+          </h2>
+          <div class="project-heading-side">
+            <p>
+              Interfaces que conectam estética,<br />utilidade e a sua próxima
+              ideia.
+            </p>
+            <div
+              class="project-filters"
+              role="group"
+              aria-label="Filtrar projetos"
+            >
+              <button
+                type="button"
+                class="filter-button is-active"
+                data-filter="all"
+                aria-pressed="true"
+              >
+                Todos <sup>03</sup></button
+              ><button
+                type="button"
+                class="filter-button"
+                data-filter="sistema"
+                aria-pressed="false"
+              >
+                Sistemas <sup>02</sup></button
+              ><button
+                type="button"
+                class="filter-button"
+                data-filter="web"
+                aria-pressed="false"
+              >
+                Web <sup>01</sup>
+              </button>
+            </div>
+          </div>
+        </div>
+        <p class="sr-only" id="filter-status" aria-live="polite">
+          3 projetos exibidos.
+        </p>
+        <div class="project-grid">
+          <article
+            class="project-card project-featured reveal"
+            data-category="sistema"
+          >
+            <button
+              class="project-open"
+              type="button"
+              data-project="smart"
+              aria-label="Conhecer o projeto SENAI Smart Class"
+            >
+              <div class="project-visual smart-visual">
+                <span class="visual-label">SENAI SMART CLASS</span
+                ><span class="visual-label visual-label-right"
+                  >INTERFACE ILUSTRATIVA</span
+                >
+                <div class="smart-dashboard" aria-hidden="true">
+                  <div class="mock-sidebar">
+                    <span class="mock-logo">S<span>™</span></span
+                    ><i class="mock-nav active">▦</i><i class="mock-nav">◉</i
+                    ><i class="mock-nav">⌁</i><i class="mock-nav">⊕</i
+                    ><i class="mock-nav mock-nav-bottom">⚙</i>
+                  </div>
+                  <div class="mock-main">
+                    <div class="mock-top">
+                      <span>Smart Class <b>Visão geral</b></span
+                      ><span class="mock-avatar">SC</span>
+                    </div>
+                    <div class="mock-welcome">
+                      <small>AMBIENTE CONECTADO</small
+                      ><strong>Sua sala, mais inteligente.</strong
+                      ><span>Monitoramento e controle em um só lugar.</span>
+                    </div>
+                    <div class="mock-stats">
+                      <div>
+                        <small>TEMPERATURA</small
+                        ><strong>23<span>°C</span></strong
+                        ><em>● Ambiente agradável</em>
+                      </div>
+                      <div>
+                        <small>ILUMINAÇÃO</small
+                        ><strong>84<span>%</span></strong
+                        ><em>● Luzes ligadas</em>
+                      </div>
+                      <div>
+                        <small>STATUS DA SALA</small
+                        ><strong class="stat-online">Online</strong
+                        ><em>● Dispositivos conectados</em>
+                      </div>
+                    </div>
+                    <div class="mock-chart">
+                      <div>
+                        <strong>Visão do ambiente</strong
+                        ><span>Últimas horas <i>⌄</i></span>
+                      </div>
+                      <svg viewBox="0 0 500 120">
+                        <path
+                          d="M0 20H500M0 60H500M0 100H500"
+                          stroke="#e8e8ef"
+                          stroke-dasharray="4 5"
+                        />
+                        <path
+                          d="M0 90 45 78 84 85 130 45 165 58 207 30 250 55 290 22 330 38 370 15 410 34 455 12 500 25"
+                          fill="none"
+                          stroke="#7764ef"
+                          stroke-width="3"
+                        />
+                        <path
+                          d="m0 107 45-13 39 6 46-18 35 10 42-17 43 10 40-12 40 12 40-18 40 7 45-15 45 15"
+                          fill="none"
+                          stroke="#c0b5fd"
+                          stroke-width="2"
+                        />
+                      </svg>
+                      <div class="chart-times">
+                        <span>08:00</span><span>10:00</span><span>12:00</span
+                        ><span>14:00</span><span>16:00</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <span class="project-view"
+                  >Explorar projeto <span>↗</span></span
+                >
+              </div>
+              <div class="project-info">
+                <div>
+                  <span class="project-index">01 / SISTEMA WEB</span>
+                  <h3>SENAI Smart Class <span>↗</span></h3>
+                </div>
+                <p>Uma nova conexão entre<br />tecnologia e sala de aula.</p>
+              </div>
+            </button>
+          </article>
+          <article class="project-card reveal" data-category="sistema">
+            <button
+              class="project-open"
+              type="button"
+              data-project="gestao"
+              aria-label="Conhecer o projeto Gestão Comercial"
+            >
+              <div class="project-visual sales-visual">
+                <span class="visual-label">GESTÃO COMERCIAL</span
+                ><span class="visual-label visual-label-right"
+                  >INTERFACE ILUSTRATIVA</span
+                >
+                <div class="sales-composition" aria-hidden="true">
+                  <span class="sales-orbit"></span>
+                  <div class="sales-panel">
+                    <div class="sales-heading">
+                      <span class="sales-symbol">↗</span
+                      ><span
+                        >Visão de vendas<small
+                          >Seu negócio em movimento</small
+                        ></span
+                      ><span>•••</span>
+                    </div>
+                    <div class="sales-total">
+                      <small>PAINEL COMERCIAL</small
+                      ><strong>Próximo<br />objetivo<span>↗</span></strong>
+                    </div>
+                    <div class="bars">
+                      <i style="--bar: 33%"></i><i style="--bar: 50%"></i
+                      ><i style="--bar: 44%"></i><i style="--bar: 64%"></i
+                      ><i style="--bar: 57%"></i><i style="--bar: 81%"></i
+                      ><i style="--bar: 72%"></i><i style="--bar: 96%"></i>
+                    </div>
+                    <div class="sales-panel-footer">
+                      <span>Visão geral</span
+                      ><span>Vendas · Metas · Equipe</span>
+                    </div>
+                  </div>
+                  <div class="sales-badge">
+                    ✳<span>Mais clareza.<br />Mais direção.</span>
+                  </div>
+                </div>
+                <span class="project-view"
+                  >Explorar projeto <span>↗</span></span
+                >
+              </div>
+              <div class="project-info">
+                <div>
+                  <span class="project-index">02 / SISTEMA WEB</span>
+                  <h3>Gestão Comercial <span>↗</span></h3>
+                </div>
+                <p>Operação organizada.<br />Decisões mais claras.</p>
+              </div>
+            </button>
+          </article>
+          <article class="project-card reveal" data-category="web">
+            <button
+              class="project-open"
+              type="button"
+              data-project="tribyte"
+              aria-label="Conhecer o projeto de identidade digital TRIBYTE"
+            >
+              <div class="project-visual brand-visual">
+                <span class="visual-label">TRIBYTE / IDENTIDADE DIGITAL</span
+                ><span class="visual-label visual-label-right"
+                  >WEB EXPERIENCE</span
+                >
+                <div class="brand-poster" aria-hidden="true">
+                  <span class="poster-kicker"
+                    >TRÊS MENTES.<br />INFINITAS POSSIBILIDADES.</span
+                  ><span class="poster-symbol">✳</span
+                  ><strong>TRI<br />BYTE<span>™</span></strong
+                  ><span class="poster-bottom"
+                    >DESIGN × CÓDIGO × IDENTIDADE</span
+                  ><span class="poster-lines"></span>
+                </div>
+                <span class="project-view"
+                  >Explorar projeto <span>↗</span></span
+                >
+              </div>
+              <div class="project-info">
+                <div>
+                  <span class="project-index">03 / WEBSITE & IDENTIDADE</span>
+                  <h3>Nosso próprio universo <span>↗</span></h3>
+                </div>
+                <p>A identidade da TRIBYTE<br />traduzida para a web.</p>
+              </div>
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="studio section-shell section-space"
+        id="estudio"
+        aria-labelledby="studio-title"
+      >
+        <div class="section-topline">
+          <span class="mono-label"><i></i> 02 — QUEM ESTÁ POR TRÁS</span
+          ><span class="mono-label section-aside"
+            >DE GOIÁS PARA NOVAS IDEIAS.</span
+          >
+        </div>
+        <div class="studio-intro">
+          <h2 id="studio-title" class="reveal">
+            Três mentes.<br />Diferentes olhares.<br /><span
+              >O mesmo impulso.</span
+            >
+          </h2>
+          <div class="studio-story reveal">
+            <span class="studio-asterisk" aria-hidden="true">✳</span>
+            <p>
+              A TRIBYTE nasce do encontro entre Gustavo, Márcio e Lucas. Três
+              desenvolvedores que compartilham a vontade de transformar ideias
+              em experiências digitais com identidade.
+            </p>
+            <p>
+              Unimos o cuidado com a interface à lógica por trás de cada
+              interação. Nosso ponto de partida é entender o que precisa existir
+              — e encontrar a melhor forma de construir.
+            </p>
+            <span class="studio-signature">PENSAR. CONSTRUIR. EVOLUIR.</span>
+          </div>
+        </div>
+        <div class="team-grid">
+          <article class="team-card reveal">
+            <div class="team-art gustavo-art" aria-hidden="true">
+              <span class="team-number">01 / GBV</span
+              ><span class="team-monogram">G.</span
+              ><span class="team-shape shape-g"></span
+              ><span class="team-art-caption">CRIATIVIDADE EM CONSTRUÇÃO</span>
+            </div>
+            <div class="team-info">
+              <h3>Gustavo de<br />Brito Vieira</h3>
+              <span>Desenvolvimento web</span>
+            </div>
+            <div class="team-footer">
+              <span>TRIBYTE / EQUIPE</span
+              ><a
+                href="https://github.com/GustavobritoTDS"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub de Gustavo de Brito Vieira, abre em nova aba"
+                >GitHub ↗</a
+              >
+            </div>
+          </article>
+          <article class="team-card reveal">
+            <div class="team-art marcio-art" aria-hidden="true">
+              <span class="team-number">02 / MA</span
+              ><span class="team-monogram">M.</span
+              ><span class="team-shape shape-m"></span
+              ><span class="team-art-caption">IDEIAS GANHAM ESTRUTURA</span>
+            </div>
+            <div class="team-info">
+              <h3>Márcio<br />Andrey</h3>
+              <span>Desenvolvimento web</span>
+            </div>
+            <div class="team-footer">
+              <span>TRIBYTE / EQUIPE</span
+              ><span class="team-small-symbol" aria-hidden="true">↗</span>
+            </div>
+          </article>
+          <article class="team-card reveal">
+            <div class="team-art lucas-art" aria-hidden="true">
+              <span class="team-number">03 / LDC</span
+              ><span class="team-monogram">L.</span
+              ><span class="team-shape shape-l"></span
+              ><span class="team-art-caption">NOVAS FORMAS DE CONECTAR</span>
+            </div>
+            <div class="team-info">
+              <h3>Lucas Duarte<br />Costa</h3>
+              <span>Desenvolvimento web</span>
+            </div>
+            <div class="team-footer">
+              <span>TRIBYTE / EQUIPE</span
+              ><a
+                href="https://github.com/lucasduartecosta09"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub de Lucas Duarte Costa, abre em nova aba"
+                >GitHub ↗</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="services section-shell section-space"
+        id="servicos"
+        aria-labelledby="services-title"
+      >
+        <div class="section-topline">
+          <span class="mono-label"><i></i> 03 — O QUE FAZEMOS</span
+          ><span class="mono-label section-aside">DA IDEIA À INTERAÇÃO.</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="services-title">
+            Seu próximo passo.<br /><span class="outline-text"
+              >Nosso próximo projeto.</span
+            >
+          </h2>
+          <p>
+            Escolhemos a tecnologia a partir da ideia.<br />E cuidamos da
+            experiência em cada etapa.
+          </p>
+        </div>
+        <div class="service-list">
+          <details class="service-item reveal" open>
+            <summary>
+              <span class="service-number">01</span>
+              <h3>Sites com identidade</h3>
+              <span class="service-tags">PORTFÓLIOS / INSTITUCIONAIS</span
+              ><span class="service-expand" aria-hidden="true">+</span>
+            </summary>
+            <div class="service-body">
+              <p>
+                Uma presença digital que mostra quem você é. Sites
+                institucionais, portfólios e páginas de apresentação com uma
+                linguagem visual própria e atenção a cada tela.
+              </p>
+              <div class="service-chips">
+                <span>Design responsivo</span><span>Navegação intuitiva</span
+                ><span>Conteúdo bem organizado</span>
+              </div>
+              <a href="#contato" data-service="Site institucional"
+                >Quero tirar meu site do papel <span>↗</span></a
+              >
+            </div>
+          </details>
+          <details class="service-item reveal">
+            <summary>
+              <span class="service-number">02</span>
+              <h3>Sistemas que simplificam</h3>
+              <span class="service-tags">DASHBOARDS / APLICAÇÕES WEB</span
+              ><span class="service-expand" aria-hidden="true">+</span>
+            </summary>
+            <div class="service-body">
+              <p>
+                Transformamos processos em fluxos mais claros. Desenvolvemos
+                interfaces para painéis, áreas de gestão e aplicações web a
+                partir das necessidades da sua operação.
+              </p>
+              <div class="service-chips">
+                <span>Painéis de controle</span><span>Fluxos de trabalho</span
+                ><span>Organização de dados</span>
+              </div>
+              <a href="#contato" data-service="Sistema web"
+                >Vamos pensar no seu sistema <span>↗</span></a
+              >
+            </div>
+          </details>
+          <details class="service-item reveal">
+            <summary>
+              <span class="service-number">03</span>
+              <h3>Landing pages que conectam</h3>
+              <span class="service-tags">CAMPANHAS / PRODUTOS</span
+              ><span class="service-expand" aria-hidden="true">+</span>
+            </summary>
+            <div class="service-body">
+              <p>
+                Uma página com foco no que precisa ser comunicado. Apresentamos
+                sua oferta com hierarquia, uma narrativa direta e caminhos
+                claros para o próximo contato.
+              </p>
+              <div class="service-chips">
+                <span>Apresentação de produtos</span
+                ><span>Chamadas para ação</span><span>Experiência mobile</span>
+              </div>
+              <a href="#contato" data-service="Landing page"
+                >Vamos apresentar sua ideia <span>↗</span></a
+              >
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section
+        class="process section-shell section-space"
+        id="processo"
+        aria-labelledby="process-title"
+      >
+        <div class="section-topline">
+          <span class="mono-label"><i></i> 04 — COMO ACONTECE</span>
+        </div>
+        <div class="process-layout">
+          <div class="process-heading">
+            <h2 id="process-title">
+              Ideia boa<br />merece<br /><em>movimento.</em>
+            </h2>
+            <p>
+              Uma conversa abre o caminho.<br />O processo dá forma ao que vem
+              depois.
+            </p>
+            <span class="process-arrow" aria-hidden="true">↳</span>
+          </div>
+          <ol class="process-steps">
+            <li class="reveal">
+              <span>01 / ESCUTA</span>
+              <h3>Entender antes de criar.</h3>
+              <p>
+                Conversamos sobre o seu objetivo, seu público e o problema que o
+                projeto precisa resolver.
+              </p>
+            </li>
+            <li class="reveal">
+              <span>02 / DIREÇÃO</span>
+              <h3>Dar forma às possibilidades.</h3>
+              <p>
+                Organizamos conteúdo, navegação e referências para construir uma
+                direção visual com você.
+              </p>
+            </li>
+            <li class="reveal">
+              <span>03 / CONSTRUÇÃO</span>
+              <h3>Conectar design e código.</h3>
+              <p>
+                Desenvolvemos a experiência com atenção à responsividade, às
+                interações e à clareza de uso.
+              </p>
+            </li>
+            <li class="reveal">
+              <span>04 / EVOLUÇÃO</span>
+              <h3>Revisar. Ajustar. Colocar no ar.</h3>
+              <p>
+                Validamos os detalhes juntos e preparamos a entrega para o
+                próximo passo do projeto.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Sem um contato comercial fornecido, o briefing pode ser copiado ou baixado. -->
+      <section
+        class="contact section-shell section-space"
+        id="contato"
+        aria-labelledby="contact-title"
+      >
+        <div class="section-topline">
+          <span class="mono-label"
+            ><i></i> 05 — A PRÓXIMA IDEIA PODE SER A SUA</span
+          ><span class="mono-label section-aside">VAMOS CONSTRUIR JUNTOS.</span>
+        </div>
+        <div class="contact-layout">
+          <div class="contact-copy">
+            <h2 id="contact-title">
+              Tem uma<br />ideia<span>?</span><br /><span
+                class="contact-outline"
+                >Dê o primeiro</span
+              ><br />passo<span>↗</span>
+            </h2>
+            <p>
+              Conte o que você tem em mente.<br />Todo projeto começa com uma
+              boa conversa.
+            </p>
+            <div class="contact-note">
+              <span>✳</span>
+              <p>O primeiro rascunho<br />de algo que pode ser incrível.</p>
+            </div>
+          </div>
+          <form class="contact-form" id="briefing-form">
+            <div class="form-heading">
+              <span>SEU PROJETO COMEÇA AQUI</span><span>↗</span>
+            </div>
+            <div class="form-row">
+              <label for="name"
+                >Como podemos te chamar?<input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  placeholder="Seu nome"
+                  required
+                  minlength="2"
+                  maxlength="100" /></label
+              ><label for="email"
+                >Seu e-mail<input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="voce@exemplo.com"
+                  required
+                  maxlength="180"
+              /></label>
+            </div>
+            <fieldset>
+              <legend>O que você quer construir?</legend>
+              <div class="service-options">
+                <label
+                  ><input
+                    type="radio"
+                    name="service"
+                    value="Site institucional"
+                    checked
+                  /><span>Um site</span></label
+                ><label
+                  ><input
+                    type="radio"
+                    name="service"
+                    value="Sistema web"
+                  /><span>Um sistema</span></label
+                ><label
+                  ><input
+                    type="radio"
+                    name="service"
+                    value="Landing page"
+                  /><span>Landing page</span></label
+                ><label
+                  ><input
+                    type="radio"
+                    name="service"
+                    value="Vamos descobrir juntos"
+                  /><span>Ainda não sei</span></label
+                >
+              </div>
+            </fieldset>
+            <label for="message"
+              >Um pouco sobre a sua ideia<textarea
+                id="message"
+                name="message"
+                placeholder="Qual problema você quer resolver? O que imagina para o projeto?"
+                required
+                minlength="10"
+                maxlength="3000"
+                rows="3"
+              ></textarea>
+            </label>
+            <div class="form-bottom">
+              <p id="contact-help">
+                Prepare seu briefing para copiar ou baixar.<br />Seus dados não
+                são enviados por este formulário.
+              </p>
+              <button class="button button-primary" type="submit">
+                Montar briefing <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+            <p
+              class="form-status"
+              id="form-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer section-shell">
+      <div class="footer-top">
+        <a
+          class="footer-wordmark"
+          href="#inicio"
+          aria-label="TRIBYTE, voltar ao início"
+          >TRIBYTE<span>™</span
+          ><svg viewBox="0 0 40 38" aria-hidden="true">
+            <path
+              d="M20 2 39 35H1Zm0 13L10 31h20Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            /></svg></a
+        ><a class="back-top" href="#inicio" aria-label="Voltar ao início">↑</a>
+      </div>
+      <div class="footer-bottom">
+        <span
+          >© <span id="current-year">2026</span> TRIBYTE. FEITO POR TRÊS.
+          PENSADO PARA VOCÊ.</span
+        ><span
+          >GOIÁS, BRASIL <span class="footer-dot">●</span>
+          <time class="local-time">--:--</time></span
+        ><button type="button" class="privacy-button" data-open-privacy>
+          Privacidade
+        </button>
+      </div>
+    </footer>
+
+    <!-- Modais nativos: Escape, foco e navegação por teclado. -->
+    <dialog
+      class="project-dialog"
+      id="project-dialog"
+      aria-labelledby="project-dialog-title"
+    >
+      <button
+        class="dialog-close icon-button"
+        type="button"
+        aria-label="Fechar detalhes do projeto"
+      >
+        ×
+      </button>
+      <div class="dialog-project-art" aria-hidden="true">
+        <span class="dialog-art-index">01</span
+        ><span class="dialog-art-symbol">↗</span
+        ><strong class="dialog-art-name">SMART<br />CLASS</strong>
+      </div>
+      <div class="dialog-content">
+        <span class="mono-label" id="project-dialog-category"></span>
+        <h2 id="project-dialog-title"></h2>
+        <p class="dialog-lead" id="project-dialog-description"></p>
+        <div class="dialog-facts" id="project-dialog-facts"></div>
+        <h3>O projeto em foco</h3>
+        <ul class="project-features" id="project-dialog-features"></ul>
+        <p class="dialog-note" id="project-dialog-note"></p>
+        <a
+          class="button button-primary"
+          id="project-dialog-link"
+          href="#contato"
+          >Conversar sobre algo assim <span>↗</span></a
+        >
+      </div>
+    </dialog>
+    <dialog
+      class="briefing-dialog"
+      id="briefing-dialog"
+      aria-labelledby="briefing-title"
+    >
+      <button
+        class="dialog-close icon-button"
+        type="button"
+        aria-label="Fechar briefing"
+      >
+        ×</button
+      ><span class="mono-label"><i></i> PRIMEIRO PASSO, FEITO.</span>
+      <h2 id="briefing-title">Sua ideia já<br />tem um começo<span>.</span></h2>
+      <p>
+        Revise seu briefing e guarde uma cópia. Nenhuma mensagem foi enviada.
+      </p>
+      <textarea
+        id="briefing-output"
+        readonly
+        aria-label="Texto do briefing"
+      ></textarea>
+      <div class="briefing-actions">
+        <button class="button button-primary" id="copy-briefing" type="button">
+          Copiar briefing <span>↗</span></button
+        ><button
+          class="button button-outline"
+          id="download-briefing"
+          type="button"
+        >
+          Baixar .txt <span>↓</span></button
+        ><button
+          class="button button-primary"
+          id="send-briefing"
+          type="button"
+          hidden
+        >
+          Enviar mensagem <span>↗</span>
+        </button>
+      </div>
+      <p id="briefing-status" role="status" aria-live="polite"></p>
+    </dialog>
+    <dialog
+      class="privacy-dialog"
+      id="privacy-dialog"
+      aria-labelledby="privacy-title"
+    >
+      <button
+        class="dialog-close icon-button"
+        type="button"
+        aria-label="Fechar privacidade"
+      >
+        ×</button
+      ><span class="mono-label">TRIBYTE / PRIVACIDADE</span>
+      <h2 id="privacy-title">Seus dados,<br />com clareza.</h2>
+      <p>
+        Este portfólio não usa ferramentas de análise nem cookies de
+        publicidade. Sua preferência de tema é salva apenas neste navegador.
+      </p>
+      <p>
+        O briefing é preparado localmente. Nome, e-mail e mensagem não são
+        enviados nem salvos por este site. Você decide se quer copiar ou baixar
+        o texto.
+      </p>
+      <p>
+        Ao visitar um link externo, passam a valer as práticas de privacidade do
+        serviço de destino.
+      </p>
+    </dialog>
+    <noscript
+      ><div class="noscript-note">
+        Você pode explorar o portfólio e os serviços. Ative o JavaScript para
+        usar filtros, detalhes dos projetos e o briefing.
+      </div></noscript
+    >
+  </body>
+</html>
