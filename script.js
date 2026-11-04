@@ -3,13 +3,14 @@
 /* Edite aqui os contatos comerciais quando estiverem definidos.
    WhatsApp: código do país + DDD + número, apenas dígitos.
    Sem contatos, o formulário funciona como um gerador local de briefing. */
-const CONTACT = Object.freeze({ whatsapp: "", email: "" });
+const CONTACT = Object.freeze({ whatsapp: "5562992106861", email: "" });
 
 /* Conteúdo centralizado para facilitar a manutenção dos estudos de caso. */
 const PROJECTS = Object.freeze({
   smart: {
     index: "01",
     title: "SENAI Smart Class",
+    liveUrl: "https://smart-sala.vercel.app/",
     art: "SMART\nCLASS",
     category: "SISTEMA WEB / EDUCAÇÃO",
     description:
@@ -210,6 +211,10 @@ $$("[data-project]").forEach((button) =>
     $("#project-dialog-category").textContent = project.category;
     $("#project-dialog-description").textContent = project.description;
     $("#project-dialog-note").textContent = project.note;
+    const liveLink = $("#project-dialog-live");
+    liveLink.hidden = !project.liveUrl;
+    if (project.liveUrl) liveLink.href = project.liveUrl;
+    else liveLink.removeAttribute("href");
     $(".dialog-art-index").textContent = project.index;
     $(".dialog-art-name").textContent = project.art;
     $(".dialog-art-name").style.whiteSpace = "pre-line";
