@@ -290,7 +290,6 @@ briefingForm.addEventListener("submit", (event) => {
     `E-mail: ${String(data.get("email")).trim()}`,
     `Projeto: ${data.get("service")}`,
     `Objetivo: ${String(data.get("goal")).trim()}`,
-    `Prazo: ${String(data.get("deadline")).trim()}`,
     "",
     "SOBRE A IDEIA",
     String(data.get("message")).trim(),
@@ -565,7 +564,7 @@ wizardPrev.addEventListener("click", () => {
 });
 function updateBriefingSummary() {
   const data = new FormData(briefingForm);
-  ["service", "goal", "deadline", "message"].forEach((key) => {
+  ["service", "goal", "message"].forEach((key) => {
     const value = String(data.get(key) || "").trim();
     const target = $("[data-summary='" + key + "']");
     target.textContent = value ? (key === "message" ? value.slice(0, 150) : value) : "A definir";
