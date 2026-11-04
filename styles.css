@@ -3630,3 +3630,58 @@ dialog[open] {
     max-width: 210px;
   }
 }
+
+/* Capturas HQ: proporção original, sem rotação ou crop que embaçam o texto. */
+.smart-photo-gallery {
+  inset: 10% 4% 13%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 1.75vw, 26px);
+}
+.smart-photo,
+.smart-photo-primary,
+.smart-photo-secondary {
+  transform: none;
+  border-radius: 10px;
+}
+.smart-photo img,
+.smart-modal-gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1280 / 699;
+  object-fit: contain;
+  image-rendering: auto;
+  max-height: none;
+}
+.smart-photo figcaption { font-size: 10px; }
+.smart-modal-gallery a {
+  display: block;
+  cursor: zoom-in;
+}
+.smart-modal-gallery a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .project-card:hover .smart-photo-primary,
+  .project-card:hover .smart-photo-secondary {
+    transform: none;
+  }
+}
+@media (max-width: 540px) {
+  .smart-photo-gallery {
+    inset: 12% 6% 16%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Uma prévia maior no cartão; as duas imagens permanecem no diálogo. */
+  .smart-photo-primary { width: 100%; }
+  .smart-photo-secondary { display: none; }
+  .smart-photo img {
+    aspect-ratio: 1280 / 699;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+  .smart-photo figcaption { font-size: 9px; padding: 7px 10px; }
+}
