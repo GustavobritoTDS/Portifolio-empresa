@@ -12,6 +12,7 @@ const PROJECTS = Object.freeze({
     title: "SENAI Smart Class",
     liveUrl: "https://smart-sala.vercel.app/",
     art: "SMART\nCLASS",
+    image: "assets/smart-class-sensores-hq.webp",
     category: "SISTEMA WEB / EDUCAÇÃO",
     description:
       "Um projeto acadêmico que aproxima a tecnologia do ambiente de aprendizagem. A proposta reúne monitoramento e controles da sala em uma interface acessível.",
@@ -217,11 +218,24 @@ $$("[data-project]").forEach((button) =>
     liveLink.hidden = !project.liveUrl;
     if (project.liveUrl) liveLink.href = project.liveUrl;
     else liveLink.removeAttribute("href");
+    const artBox = $(".dialog-project-art");
+    const artImg = $("#project-dialog-art-img");
+    if (project.image) {
+      artImg.src = project.image;
+      artImg.alt = project.title || "";
+      artBox.classList.add("has-image");
+    } else {
+      if (artImg) {
+        artImg.removeAttribute("src");
+        artImg.alt = "";
+      }
+      artBox.classList.remove("has-image");
+    }
     $(".dialog-art-index").textContent = project.index;
     $(".dialog-art-name").textContent = project.art;
     $(".dialog-art-name").style.whiteSpace = "pre-line";
-    $(".dialog-project-art").style.background = project.color;
-    $(".dialog-project-art").style.color = project.ink;
+    artBox.style.background = project.color;
+    artBox.style.color = project.ink;
     const facts = $("#project-dialog-facts");
     facts.replaceChildren();
     [
