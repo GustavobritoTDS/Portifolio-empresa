@@ -3490,3 +3490,18 @@ dialog[open] {
 .wizard-actions button { min-height:44px; }
 @media (max-width:800px) { .briefing-layout { grid-template-columns:1fr; } .briefing-summary { padding:16px; } }
 @media (max-width:380px) { .wizard-actions .button { width:100%; } }
+
+/* Ajustes de finalização: ícones temáticos e hit areas em telas pequenas. */
+.footer-wordmark > .footer-lettering { margin: 0; font-size: inherit; }
+.tb-motion-button:not([hidden]) { position:absolute; right:4%; bottom:4%; z-index:5; display:block; color:var(--text); background:var(--surface); border:1px solid var(--line); padding:10px 14px; min-height:44px; font:11px var(--mono); }
+.tb-motion-button:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+@media (max-width:540px) {
+  .tb-hero-art { pointer-events:none; }
+  .tb-hero-svg, .tb-motion-button { pointer-events:auto; }
+  .tb-motion-button:not([hidden]) { bottom:1%; }
+  .brand-icon { width:24px; height:24px; }
+  .brand-lettering { width:clamp(94px,31vw,122px); }
+  .footer-wordmark { gap:8px; }
+  .footer-mark { width:clamp(30px,10vw,47px); }
+  .footer-lettering { width:min(58vw,330px); }
+}
