@@ -3409,3 +3409,21 @@ dialog[open] {
     font-size: 45px;
   }
 }
+
+/* Acesso direto ao projeto real, separado do botão que abre os detalhes. */
+.project-live-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 44px;
+  margin: 0 0 1.25rem 1.25rem;
+  padding: .65rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: .875rem;
+  transition: border-color .2s, color .2s;
+}
+.project-live-link:hover, .project-live-link:focus-visible { border-color: var(--accent); color: var(--accent-ink); }
+#project-dialog-live:not([hidden]) { display: inline-flex; margin: 0 .75rem .75rem 0; min-height: 44px; }
