@@ -573,3 +573,36 @@ function updateBriefingSummary() {
 briefingForm.addEventListener("input", updateBriefingSummary);
 briefingForm.addEventListener("change", updateBriefingSummary);
 updateBriefingSummary();
+
+/* Sensor opcional: só começa após ação explícita e nunca pede permissão sozinho. */
+if ("DeviceOrientationEvent" in window && window.matchMedia("(pointer:coarse)").matches && !reducedMotion.matches) {
+  const enableMotion = $("#tb-motion-enable");
+  const motionStage = $(".tb-hero-stage");
+  enableMotion.hidden = false;
+  enableMotion.addEventListener("click", async () => {
+    try {
+      if (typeof DeviceOrientationEvent.requestPermission === "function") {
+        const permission = await DeviceOrientationEvent.requestPermission();
+        if (permission !== "granted") { enableMotion.textContent = "Movimento indisponível"; return; }
+      }
+      let scheduled = false, beta = 0, gamma = 0;
+      const onOrientation = (event) => {
+        if (!Number.isFinite(event.beta) || !Number.isFinite(event.gamma)) return;
+        beta = Math.max(-8, Math.min(8, event.beta / 8));
+        gamma = Math.max(-8, Math.min(8, event.gamma / 5));
+        if (!scheduled) {
+          scheduled = true;
+          requestAnimationFrame(() => {
+            motionStage.style.setProperty("--tilt-x", beta.toFixed(1) + "deg");
+            motionStage.style.setProperty("--tilt-y", gamma.toFixed(1) + "deg");
+            scheduled = false;
+          });
+        }
+      };
+      window.addEventListener("deviceorientation", onOrientation, {passive:true});
+      enableMotion.hidden = true;
+    } catch (_) {
+      enableMotion.textContent = "Movimento indisponível";
+    }
+  });
+}
