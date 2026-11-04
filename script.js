@@ -524,7 +524,8 @@ try {
     sessionStorage.setItem("tribyte-intro", "seen");
     const intro = $("#brand-intro");
     intro.hidden = false;
-    const closeIntro = () => { intro.hidden = true; };
+    intro.removeAttribute("aria-hidden");
+    const closeIntro = () => { intro.hidden = true; intro.setAttribute("aria-hidden", "true"); };
     $("#skip-intro").addEventListener("click", closeIntro, {once:true});
     window.setTimeout(closeIntro, 1100);
   }
