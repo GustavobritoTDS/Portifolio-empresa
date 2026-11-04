@@ -24,7 +24,7 @@ const PROJECTS = Object.freeze({
       "Interface para iluminação e climatização.",
       "Experiências de acesso para diferentes perfis.",
     ],
-    note: "A prévia do portfólio é uma composição ilustrativa. O projeto é desenvolvido no contexto do curso de Desenvolvimento de Sistemas do SENAI.",
+    note: "Imagens reais da interface do projeto acadêmico SENAI Smart Class. Os valores exibidos correspondem às capturas e podem variar no sistema ao vivo.",
   },
   gestao: {
     index: "02",
@@ -212,6 +212,7 @@ $$("[data-project]").forEach((button) =>
     $("#project-dialog-category").textContent = project.category;
     $("#project-dialog-description").textContent = project.description;
     $("#project-dialog-note").textContent = project.note;
+    $("#smart-modal-gallery").hidden = button.dataset.project !== "smart";
     const liveLink = $("#project-dialog-live");
     liveLink.hidden = !project.liveUrl;
     if (project.liveUrl) liveLink.href = project.liveUrl;
