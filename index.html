@@ -14,11 +14,14 @@
       content="Três desenvolvedores. Diferentes perspectivas. Uma nova dimensão para sua ideia."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="TRIBYTE — Ideias em outra dimensão." />
+    <meta name="twitter:description" content="Desenvolvimento de sites e sistemas com identidade." />
     <title>TRIBYTE™ — Ideias em outra dimensão.</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0b'/%3E%3Cpath d='M32 9 58 54H6Zm0 17L19 48h26Z' fill='%23ff3547' fill-rule='evenodd'/%3E%3C/svg%3E"
-    />
+    <link rel="icon" href="assets/logo-tribyte-mark.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/space-grotesk.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="stylesheet" href="styles.css" />
     <script>
       // Evita uma troca de tema visível ao recarregar a página.
@@ -38,14 +41,7 @@
     <!-- Navegação: acessível com teclado e adaptada ao toque. -->
     <header class="site-header">
       <a class="wordmark" href="#inicio" aria-label="TRIBYTE, início">
-        <svg class="brand-icon" viewBox="0 0 40 38" aria-hidden="true">
-          <path
-            d="M20 2 39 35H1Zm0 13L10 31h20Z"
-            fill="currentColor"
-            fill-rule="evenodd"
-          />
-        </svg>
-        TRIBYTE<span class="brand-dot">™</span>
+        <img class="brand-icon" src="assets/logo-tribyte-mark.svg" width="40" height="36" alt="" /><span class="brand-lettering" aria-hidden="true"></span>
       </a>
       <nav class="desktop-nav" aria-label="Navegação principal">
         <a href="#projetos">Projetos<span>03</span></a>
@@ -146,135 +142,10 @@
               >Explore nosso trabalho <span aria-hidden="true">↗</span></a
             >
           </div>
-          <div class="hero-art" aria-hidden="true">
-            <div class="art-grid"></div>
-            <div class="art-orbit orbit-one"></div>
-            <div class="art-orbit orbit-two"></div>
-            <div class="artifact-shadow"></div>
-            <svg class="artifact" viewBox="0 0 660 660" fill="none">
-              <defs>
-                <linearGradient
-                  id="face-left"
-                  x1="180"
-                  y1="150"
-                  x2="340"
-                  y2="500"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#ff9d9d" />
-                  <stop offset=".18" stop-color="#ff3849" />
-                  <stop offset=".58" stop-color="#ff102c" />
-                  <stop offset="1" stop-color="#8a0013" />
-                </linearGradient>
-                <linearGradient
-                  id="face-right"
-                  x1="350"
-                  y1="90"
-                  x2="550"
-                  y2="510"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#ff7080" />
-                  <stop offset=".35" stop-color="#e10020" />
-                  <stop offset="1" stop-color="#550010" />
-                </linearGradient>
-                <linearGradient
-                  id="face-bottom"
-                  x1="100"
-                  y1="430"
-                  x2="500"
-                  y2="535"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#ff1937" />
-                  <stop offset=".5" stop-color="#ff6e77" />
-                  <stop offset="1" stop-color="#e90028" />
-                </linearGradient>
-                <linearGradient
-                  id="edge"
-                  x1="80"
-                  y1="490"
-                  x2="570"
-                  y2="540"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#a0001a" />
-                  <stop offset=".4" stop-color="#f52b44" />
-                  <stop offset="1" stop-color="#4a0011" />
-                </linearGradient>
-                <linearGradient
-                  id="sheen"
-                  x1="320"
-                  y1="100"
-                  x2="100"
-                  y2="510"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#ffd7d7" />
-                  <stop offset=".5" stop-color="#ff6d83" />
-                  <stop offset="1" stop-color="#ff455f" stop-opacity="0" />
-                </linearGradient>
-                <filter id="red-glow">
-                  <feGaussianBlur stdDeviation="18" />
-                </filter>
-              </defs>
-              <path
-                d="m332 115 239 405H94L332 115Z"
-                stroke="#ff1835"
-                stroke-width="12"
-                opacity=".14"
-                filter="url(#red-glow)"
-              />
-              <path
-                d="m322 87 249 428-16 31-492-7-18-26L300 87Z"
-                fill="#3d0010"
-              />
-              <path d="m45 513 492 3 34-1-16 31-492-7Z" fill="url(#edge)" />
-              <path
-                d="m322 87 249 428-54-7-210-360-7-61Z"
-                fill="url(#face-right)"
-              />
-              <path
-                d="m300 87 68 119-157 264-166 43L300 87Z"
-                fill="url(#face-left)"
-              />
-              <path
-                d="m45 513 166-43h232l-75-126 90-2 113 173-526-2Z"
-                fill="url(#face-bottom)"
-              />
-              <path
-                d="m300 87 11 26-226 378-40 22L300 87Z"
-                fill="url(#sheen)"
-                opacity=".85"
-              />
-              <path
-                d="m322 87 249 428-15 2-240-414Z"
-                fill="#ff8d9a"
-                opacity=".65"
-              />
-              <path d="m211 470 157-264 32 54-112 187-77 23Z" fill="#6d0015" />
-              <path
-                d="m288 447 155 23-75-126 32-84 115 208-227-21Z"
-                fill="#2b0009"
-              />
-              <path
-                d="m93 510 448 3"
-                stroke="#ffadad"
-                stroke-width="1.5"
-                opacity=".8"
-              />
-              <path d="m214 468 226 1" stroke="#ffd3d3" opacity=".6" />
-            </svg>
-            <span class="art-coordinate coordinate-top">[ T — 03 ]</span>
-            <span class="art-coordinate coordinate-bottom"
-              >CRIATIVIDADE × CÓDIGO</span
-            >
-            <div class="artifact-caption">
-              <span class="caption-rule"></span
-              ><span>TRÊS PERSPECTIVAS.<br />UMA NOVA FORMA.</span>
-            </div>
-            <div class="art-spark spark-one">+</div>
-            <div class="art-spark spark-two">+</div>
+          <div class="hero-art tb-hero-art">
+            <div class="art-grid" aria-hidden="true"></div>
+            <div class="tb-hero-stage"><svg class="tb-hero-svg" viewBox="550 145 440 395" role="group" aria-label="Monograma TB: três perspectivas"><path class="tb-piece tb-piece-1" d="M834 201 772 163 761 163 568 250 568 317Z" tabindex="0" role="button" aria-label="Sites" data-piece="1"/><path class="tb-piece tb-piece-2" d="M730 261 661 291 661 400 728 441Z M749 277 748 475 813 516 814 316Z" tabindex="0" role="button" aria-label="Sistemas" data-piece="2"/><path class="tb-piece tb-piece-3" d="M851 210 773 245 869 300 826 324 826 379 896 420 826 457 826 524 966 452 967 392 895 351 936 329 936 261Z" tabindex="0" role="button" aria-label="Landing pages" data-piece="3"/></svg></div>
+            <p class="tb-piece-caption" id="tb-piece-caption" aria-live="polite">Três perspectivas. Uma marca.</p>
           </div>
         </div>
         <div class="hero-bottom">
@@ -904,13 +775,7 @@
           class="footer-wordmark"
           href="#inicio"
           aria-label="TRIBYTE, voltar ao início"
-          >TRIBYTE<span>™</span
-          ><svg viewBox="0 0 40 38" aria-hidden="true">
-            <path
-              d="M20 2 39 35H1Zm0 13L10 31h20Z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            /></svg></a
+          ><img class="footer-mark" src="assets/logo-tribyte-mark.svg" alt="" width="100" height="90"/><span class="footer-lettering" aria-hidden="true"></span></a
         ><a class="back-top" href="#inicio" aria-label="Voltar ao início">↑</a>
       </div>
       <div class="footer-bottom">
@@ -1029,6 +894,7 @@
         serviço de destino.
       </p>
     </dialog>
+    <div class="brand-intro" id="brand-intro" hidden aria-hidden="true"><img src="assets/logo-tribyte-mark.svg" alt="" width="132" height="119"/><button type="button" id="skip-intro">Pular abertura</button></div>
     <noscript
       ><div class="noscript-note">
         Você pode explorar o portfólio e os serviços. Ative o JavaScript para
