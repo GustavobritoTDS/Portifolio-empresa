@@ -3473,3 +3473,20 @@ dialog[open] {
   .tb-piece, .tb-hero-stage, .project-card, .team-card { transform:none !important; animation:none !important; transition:none !important; }
   .brand-intro { display:none !important; }
 }
+
+/* Briefing progressivo: empilha no celular e mantém resumo sempre legível. */
+.briefing-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(210px,.55fr); gap:clamp(20px,3vw,46px); align-items:start; min-width:0; }
+.briefing-layout > * { min-width:0; }
+.briefing-summary { border:1px solid var(--line); background:var(--surface); padding:clamp(16px,2vw,28px); overflow-wrap:anywhere; }
+.briefing-summary p { margin:0; padding:15px 0; display:flex; flex-direction:column; gap:6px; border-bottom:1px solid var(--line); }
+.briefing-summary strong { color:var(--muted); font:11px var(--mono); }
+.briefing-summary p span { font-size:14px; }
+.briefing-step { min-width:0; }
+.briefing-step label { display:block; margin-block:18px 24px; }
+.briefing-step select { display:block; width:100%; min-height:44px; margin-top:12px; padding:12px; border:1px solid var(--line); background:var(--surface); color:var(--text); border-radius:0; }
+.briefing-step select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.wizard-progress { color:var(--muted); font:12px var(--mono); }
+.wizard-actions { display:flex; flex-wrap:wrap; gap:12px; margin:20px 0; }
+.wizard-actions button { min-height:44px; }
+@media (max-width:800px) { .briefing-layout { grid-template-columns:1fr; } .briefing-summary { padding:16px; } }
+@media (max-width:380px) { .wizard-actions .button { width:100%; } }
