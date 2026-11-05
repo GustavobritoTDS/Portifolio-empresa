@@ -214,21 +214,25 @@ $$("[data-project]").forEach((button) =>
     $("#project-dialog-description").textContent = project.description;
     $("#project-dialog-note").textContent = project.note;
     $("#smart-modal-gallery").hidden = button.dataset.project !== "smart";
+    $("#project-dialog-side-gallery").hidden = button.dataset.project !== "smart";
     const liveLink = $("#project-dialog-live");
     liveLink.hidden = !project.liveUrl;
     if (project.liveUrl) liveLink.href = project.liveUrl;
     else liveLink.removeAttribute("href");
     const artBox = $(".dialog-project-art");
     const artImg = $("#project-dialog-art-img");
+    artBox.classList.toggle("has-side-gallery", button.dataset.project === "smart");
     if (project.image) {
       artImg.src = project.image;
       artImg.alt = project.title || "";
+      artBox.style.setProperty("--dialog-art-image", `url("${project.image}")`);
       artBox.classList.add("has-image");
     } else {
       if (artImg) {
         artImg.removeAttribute("src");
         artImg.alt = "";
       }
+      artBox.style.removeProperty("--dialog-art-image");
       artBox.classList.remove("has-image");
     }
     $(".dialog-art-index").textContent = project.index;
@@ -266,6 +270,25 @@ $("#project-dialog-link").addEventListener("click", () => {
 });
 $$("[data-open-privacy]").forEach((button) =>
   button.addEventListener("click", () => openDialog($("#privacy-dialog"))),
+);
+
+/* Perfis da equipe: abre a biografia completa em um diálogo. */
+const profileDialog = $("#profile-dialog");
+$$("[data-profile]").forEach((button) =>
+  button.addEventListener("click", () => {
+    const card = button.closest(".team-card");
+    const name = $(".team-info h3", card);
+    const bio = $(".team-bio", card);
+    const photo = $(".team-photo", card);
+    if (!name || !bio || !photo) return;
+
+    $("#profile-dialog-title").textContent = name.textContent.replace(/\s+/g, " ").trim();
+    $("#profile-dialog-bio").textContent = bio.textContent.trim();
+    const dialogPhoto = $("#profile-dialog-photo");
+    dialogPhoto.src = photo.getAttribute("src");
+    dialogPhoto.alt = photo.alt;
+    openDialog(profileDialog);
+  }),
 );
 
 /* Uma escolha nos serviços chega preenchida ao briefing. */
