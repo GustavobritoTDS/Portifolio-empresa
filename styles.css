@@ -3713,3 +3713,206 @@ dialog[open] {
   }
   .smart-photo figcaption { font-size: 9px; padding: 7px 10px; }
 }
+
+/* Retratos reais da equipe na seção de apresentação. */
+.team-art .team-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.team-art { background-color: #151515; }
+.team-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .35), transparent 28%, transparent 72%, rgba(0, 0, 0, .2));
+}
+.team-art .team-number {
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .8);
+}
+.team-bio {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+@media (max-width: 800px) {
+  .team-bio {
+    margin-top: 14px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}
+.team-info .profile-open {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 16px;
+  font-size: 10px;
+}
+.profile-dialog .dialog-content {
+  min-height: 0;
+  overflow-y: auto;
+}
+.profile-dialog-art {
+  padding: 0;
+  min-height: 550px;
+  background: #151515 !important;
+}
+.profile-dialog-art::after {
+  display: none;
+}
+.profile-dialog-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.profile-dialog-art .dialog-art-index {
+  z-index: 1;
+  margin: 22px;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .8);
+}
+.profile-dialog-bio {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.dialog-art-image {
+  object-fit: contain;
+  background: #070b14;
+}
+@media (max-width: 540px) {
+  .profile-dialog {
+    overflow-y: auto;
+  }
+  .profile-dialog-art {
+    height: min(38svh, 300px);
+    min-height: 210px;
+  }
+  .profile-dialog-bio {
+    font-size: 11px;
+  }
+}
+
+/* CartÃµes da equipe com resumos e alturas consistentes. */
+.team-grid {
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+}
+.team-card {
+  display: flex;
+  flex-direction: column;
+}
+.team-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.team-bio {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+.team-info .profile-open {
+  margin-top: auto;
+}
+.dialog-project-art.has-image {
+  isolation: isolate;
+}
+.dialog-project-art.has-image::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -18px;
+  background-image: var(--dialog-art-image);
+  background-position: center;
+  background-size: cover;
+  filter: blur(20px) saturate(1.2);
+  opacity: .55;
+  transform: scale(1.04);
+}
+.dialog-project-art.has-image .dialog-art-image {
+  z-index: 1;
+  object-position: center;
+  padding: 18px;
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, .55));
+}
+.project-dialog[open] {
+  grid-template-columns: .95fr 1.05fr;
+}
+.dialog-project-art.has-side-gallery .dialog-art-image {
+  display: none !important;
+}
+.project-side-gallery:not([hidden]) {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 30px 24px;
+}
+.project-side-gallery figure {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 8px;
+  min-height: 0;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(5, 11, 24, .72);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .25);
+}
+.project-side-gallery img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+.project-side-gallery figcaption {
+  color: #e5e9f2;
+  font: 9px var(--mono);
+  letter-spacing: .06em;
+}
+@media (max-width: 800px) {
+  .team-card {
+    display: grid;
+  }
+  .team-info {
+    min-height: 290px;
+  }
+}
+@media (max-width: 540px) {
+  .dialog-project-art.has-side-gallery {
+    height: 380px;
+    min-height: 380px;
+    padding: 0;
+  }
+  .project-side-gallery:not([hidden]) {
+    gap: 8px;
+    padding: 14px;
+  }
+  .project-side-gallery figure {
+    gap: 5px;
+    padding: 6px;
+  }
+  .project-side-gallery figcaption {
+    font-size: 7px;
+  }
+}
