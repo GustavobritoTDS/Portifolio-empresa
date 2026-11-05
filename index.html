@@ -385,15 +385,16 @@
         </div>
         <div class="team-grid">
           <article class="team-card reveal">
-            <div class="team-art gustavo-art" aria-hidden="true">
-              <span class="team-number">01 / GBV</span
-              ><span class="team-monogram">G.</span
-              ><span class="team-shape shape-g"></span
-              ><span class="team-art-caption">CRIATIVIDADE EM CONSTRUÇÃO</span>
+            <div class="team-art gustavo-art">
+              <img class="team-photo" src="assets/gustavo-perfil.svg" alt="Gustavo de terno" loading="lazy" decoding="async" />
+              <span class="team-number">01 / GBV</span>
             </div>
             <div class="team-info">
               <h3>Gustavo de<br />Brito Vieira</h3>
               <span>Desenvolvimento web</span>
+              <p class="team-bio">Sou estudante de Desenvolvimento de Sistemas pelo SENAI e gosto de transformar ideias em soluções digitais. Tenho experiência prática com suporte técnico, infraestrutura e gerenciamento de sistemas, além de desenvolver projetos com HTML, CSS, JavaScript, Python e bancos de dados. Gosto de aprofundar meus conhecimentos em tecnologia e explorar novas ferramentas. Quero atuar como desenvolvedor Full Stack, com maior afinidade por Back-End: gosto de trabalhar com lógica, integrações, bancos de dados e com o funcionamento interno das aplicações. Também me interessa construir interfaces claras e responsivas, entendendo o produto de ponta a ponta. Na TRIBYTE, colaboro no desenvolvimento de sites e sistemas e participei do SENAI Smart Class, projeto de automação inteligente de ambientes escolares. Estou sempre estudando e praticando para transformar ideias em soluções digitais reais.</p>
+              <button class="button button-primary profile-open" type="button" data-profile aria-haspopup="dialog" aria-controls="profile-dialog">Explorar perfil <span aria-hidden="true">↗</span></button>
+              
             </div>
             <div class="team-footer">
               <span>TRIBYTE / EQUIPE</span
@@ -407,15 +408,16 @@
             </div>
           </article>
           <article class="team-card reveal">
-            <div class="team-art marcio-art" aria-hidden="true">
-              <span class="team-number">02 / MA</span
-              ><span class="team-monogram">M.</span
-              ><span class="team-shape shape-m"></span
-              ><span class="team-art-caption">IDEIAS GANHAM ESTRUTURA</span>
+            <div class="team-art marcio-art">
+              <img class="team-photo" src="assets/marcio-perfil.svg" alt="Márcio em frente a um mural colorido" loading="lazy" decoding="async" />
+              <span class="team-number">02 / MA</span>
             </div>
             <div class="team-info">
               <h3>Márcio<br />Andrey</h3>
               <span>Desenvolvimento web</span>
+              <p class="team-bio">Sou estudante de Desenvolvimento de Sistemas pelo SENAI e tenho interesse em tecnologia, programação e criação de soluções digitais. Desenvolvo projetos web com HTML, CSS e JavaScript, buscando criar interfaces responsivas e fáceis de usar. Também uso GitHub para organizar o código, Vercel para publicar aplicações e Supabase para integrar bancos de dados. Participei do SENAI Smart Class, que conecta um painel web à automação com Arduino, e desenvolvo o Vio Finanças, voltado à organização financeira pessoal. Quero crescer como desenvolvedor web, aprender com a prática e transformar meus conhecimentos em ferramentas úteis para as pessoas.</p>
+              <button class="button button-primary profile-open" type="button" data-profile aria-haspopup="dialog" aria-controls="profile-dialog">Explorar perfil <span aria-hidden="true">↗</span></button>
+              
             </div>
             <div class="team-footer">
               <span>TRIBYTE / EQUIPE</span
@@ -423,15 +425,16 @@
             </div>
           </article>
           <article class="team-card reveal">
-            <div class="team-art lucas-art" aria-hidden="true">
-              <span class="team-number">03 / LDC</span
-              ><span class="team-monogram">L.</span
-              ><span class="team-shape shape-l"></span
-              ><span class="team-art-caption">NOVAS FORMAS DE CONECTAR</span>
+            <div class="team-art lucas-art">
+              <img class="team-photo" src="assets/lucas-perfil.svg" alt="Lucas usando casaco marrom" loading="lazy" decoding="async" />
+              <span class="team-number">03 / LDC</span>
             </div>
             <div class="team-info">
               <h3>Lucas Duarte<br />Costa</h3>
               <span>Desenvolvimento web</span>
+              <p class="team-bio">Sou estudante de Desenvolvimento de Sistemas pelo SENAI e minha curiosidade por tecnologia vem desde a infância. Gosto de entender como computadores e sistemas funcionam, do hardware à lógica e às aplicações. Tenho conhecimentos intermediários em Java e JavaScript, familiaridade com o Prompt de Comando e experiência usando ferramentas de desenvolvimento e inteligência artificial para apoiar tarefas e criar soluções. Meu principal objetivo é atuar em Back-End, trabalhando com lógica, arquitetura, testes e melhoria dos sistemas. Na TRIBYTE, participei do SENAI Smart Class e de um sistema básico de gerenciamento financeiro. Busco evoluir continuamente e acredito que organização, comunicação clara e facilidade de uso fazem parte de uma boa solução tecnológica.</p>
+              <button class="button button-primary profile-open" type="button" data-profile aria-haspopup="dialog" aria-controls="profile-dialog">Explorar perfil <span aria-hidden="true">↗</span></button>
+              
             </div>
             <div class="team-footer">
               <span>TRIBYTE / EQUIPE</span
@@ -707,6 +710,16 @@
       </button>
       <div class="dialog-project-art" aria-hidden="true">
         <img class="dialog-art-image" id="project-dialog-art-img" alt="" loading="lazy" decoding="async" />
+        <div class="project-side-gallery" id="project-dialog-side-gallery" hidden>
+          <figure>
+            <img src="assets/smart-class-sensores-hq.webp" alt="Painel de monitoramento dos sensores do SENAI Smart Class" loading="lazy" decoding="async" />
+            <figcaption>01 / MONITORAMENTO</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/smart-class-controles-hq.webp" alt="Painel de controles do SENAI Smart Class" loading="lazy" decoding="async" />
+            <figcaption>02 / CONTROLES</figcaption>
+          </figure>
+        </div>
         <span class="dialog-art-index">01</span
         ><span class="dialog-art-symbol">↗</span
         ><strong class="dialog-art-name">SMART<br />CLASS</strong>
@@ -730,6 +743,29 @@
           href="#contato"
           >Conversar sobre algo assim <span>↗</span></a
         >
+      </div>
+    </dialog>
+    <dialog
+      class="project-dialog profile-dialog"
+      id="profile-dialog"
+      aria-labelledby="profile-dialog-title"
+    >
+      <button
+        class="dialog-close icon-button"
+        type="button"
+        aria-label="Fechar perfil"
+      >
+        Ã—
+      </button>
+      <div class="dialog-project-art profile-dialog-art" aria-hidden="true">
+        <img class="profile-dialog-photo" id="profile-dialog-photo" alt="" />
+        <span class="dialog-art-index">TRIBYTE / EQUIPE</span>
+      </div>
+      <div class="dialog-content profile-dialog-content">
+        <span class="mono-label" id="profile-dialog-category">PERFIL / DESENVOLVIMENTO WEB</span>
+        <h2 id="profile-dialog-title"></h2>
+        <h3>Sobre mim</h3>
+        <p class="profile-dialog-bio" id="profile-dialog-bio"></p>
       </div>
     </dialog>
     <dialog
