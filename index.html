@@ -30,6 +30,17 @@
         if (savedTheme === "light" || savedTheme === "dark")
           document.documentElement.dataset.theme = savedTheme;
       } catch (_) {}
+      // Executa a montagem do TB só na primeira visita desta sessão.
+      // A classe é aplicada antes da primeira pintura, sem cobrir os controles.
+      try {
+        if (
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+          sessionStorage.getItem("tribyte-intro") !== "seen"
+        ) {
+          document.documentElement.classList.add("tb-first-visit");
+          sessionStorage.setItem("tribyte-intro", "seen");
+        }
+      } catch (_) {}
     </script>
     <script src="script.js" defer></script>
   </head>
@@ -836,7 +847,6 @@
         serviço de destino.
       </p>
     </dialog>
-    <div class="brand-intro" id="brand-intro" hidden aria-hidden="true"><img src="assets/logo-tribyte-mark.svg" alt="" width="132" height="119"/><button type="button" id="skip-intro">Pular abertura</button></div>
     <noscript
       ><div class="noscript-note">
         Você pode explorar o portfólio e os serviços. Ative o JavaScript para

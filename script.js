@@ -555,18 +555,8 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches && !reducedMot
     });
   });
 }
-/* Introdução curta, pulável, uma única vez por sessão; nunca impede uso sem JS. */
-try {
-  if (!reducedMotion.matches && sessionStorage.getItem("tribyte-intro") !== "seen") {
-    sessionStorage.setItem("tribyte-intro", "seen");
-    const intro = $("#brand-intro");
-    intro.hidden = false;
-    intro.removeAttribute("aria-hidden");
-    const closeIntro = () => { intro.hidden = true; intro.setAttribute("aria-hidden", "true"); };
-    $("#skip-intro").addEventListener("click", closeIntro, {once:true});
-    window.setTimeout(closeIntro, 1100);
-  }
-} catch (_) { /* Sem armazenamento, o site funciona normalmente. */ }
+/* A abertura do TB é ativada no <head>, sem overlay nem bloqueio.
+   O efeito tem 650 ms e não se repete durante a sessão. */
 
 /* Aprimoramento progressivo do formulário: sem JS, todas as etapas são visíveis. */
 const wizardSteps = $$(".briefing-step");

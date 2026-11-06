@@ -3427,15 +3427,36 @@ dialog[open] {
   .project-card, .team-card { transform: perspective(1200px) rotateX(var(--card-x,0deg)) rotateY(var(--card-y,0deg)); transition: transform .23s ease; }
   .project-card::after, .team-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 4; background: radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(251,16,35,.13),transparent 44%); opacity: var(--shine-opacity,0); transition: opacity .22s; }
 }
-@media (prefers-reduced-motion:no-preference) {
-  .tb-piece { animation: tb-in .8s cubic-bezier(.2,.8,.2,1) both; }
-  .tb-piece-2 { animation-delay: .12s; }
-  .tb-piece-3 { animation-delay: .24s; }
-  @keyframes tb-in { from { opacity:0; transform:translate3d(0,-35px,0) scale(.94); } to { opacity:1; transform:translate3d(0,0,0) scale(1); } }
+/* As três faces montam o monograma em 650 ms, apenas na primeira visita.
+   A página continua navegável desde o primeiro instante. */
+@media (prefers-reduced-motion: no-preference) {
+  html.tb-first-visit .tb-hero-svg .tb-piece {
+    animation: tb-assemble 650ms cubic-bezier(.22, 1, .36, 1) both;
+  }
+  html.tb-first-visit .tb-piece-1 {
+    --tb-entry-x: -62px;
+    --tb-entry-y: -36px;
+    --tb-entry-angle: -8deg;
+  }
+  html.tb-first-visit .tb-piece-2 {
+    --tb-entry-x: 0px;
+    --tb-entry-y: 50px;
+    --tb-entry-angle: 6deg;
+  }
+  html.tb-first-visit .tb-piece-3 {
+    --tb-entry-x: 64px;
+    --tb-entry-y: -26px;
+    --tb-entry-angle: 9deg;
+  }
+  @keyframes tb-assemble {
+    from {
+      opacity: .16;
+      transform: translate(var(--tb-entry-x), var(--tb-entry-y))
+        rotate(var(--tb-entry-angle)) scale(.92);
+    }
+    to { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+  }
 }
-.brand-intro:not([hidden]) { position:fixed; inset:0; background:var(--bg); z-index:200; display:grid; place-items:center; }
-.brand-intro img { width:min(37vw,150px); height:auto; }
-.brand-intro button { position:absolute; bottom:10%; left:50%; transform:translateX(-50%); padding:12px; border:1px solid var(--line); color:var(--text); background:var(--surface); }
 @media (max-width:800px) {
   .tb-hero-stage { width:min(94%,440px); right:2%; top:14%; }
   .tb-piece-caption { bottom:9%; font-size:10px; }
@@ -3451,7 +3472,6 @@ dialog[open] {
 }
 @media (prefers-reduced-motion:reduce) {
   .tb-piece, .tb-hero-stage, .project-card, .team-card { transform:none !important; animation:none !important; transition:none !important; }
-  .brand-intro { display:none !important; }
 }
 
 /* Briefing progressivo: empilha no celular e mantém resumo sempre legível. */
