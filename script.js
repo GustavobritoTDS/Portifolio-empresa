@@ -179,6 +179,8 @@ filterButtons.forEach((button) =>
     });
     $("#filter-status").textContent =
       `${count} ${count === 1 ? "projeto exibido" : "projetos exibidos"}.`;
+    // Atualiza o destaque após ocultar/exibir os cartões filtrados.
+    requestAnimationFrame(updateScroll);
   }),
 );
 
@@ -415,42 +417,103 @@ updateClock();
 setInterval(updateClock, 30000);
 $("#current-year").textContent = String(new Date().getFullYear());
 
-/* Rolagem sem trabalho excessivo: uma atualização por frame. */
+/* Abertura progressiva dos títulos: usa IntersectionObserver e não esconde
+   conteúdo quando o navegador não oferece a API ou prefere menos movimento. */
+if ("IntersectionObserver" in window && !reducedMotion.matches) {
+  const headings = $$(
+    "main > .section-space > .section-topline, " +
+    "#projetos .section-heading, #servicos .section-heading, " +
+    "#processo .process-heading, #contato .contact-copy > h2",
+  );
+  const headingObserver = new IntersectionObserver(
+    (entries) => entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-entered");
+      headingObserver.unobserve(entry.target);
+    }),
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.04 },
+  );
+  headings.forEach((heading) => {
+    heading.classList.add("scroll-enter");
+    headingObserver.observe(heading);
+  });
+  document.documentElement.classList.add("scroll-enhanced");
+}
+
+/* Barra de avanço, navegação lateral e foco do projeto compartilham
+   uma só leitura de geometria por frame (sem bibliotecas externas). */
 const progress = $(".scroll-progress");
+const sectionIds = ["inicio", "projetos", "estudio", "servicos", "processo", "contato"];
+const scrollSections = sectionIds.map((id) => document.getElementById(id));
+const sectionLinks = $$(".scroll-rail-link");
+const desktopLinks = $$(".desktop-nav a");
+const spotlightCards = $$(".project-card");
+let currentSection = "";
+let spotlightCard = null;
 let scrollQueued = false;
+
 function updateScroll() {
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+  const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const fraction = max ? Math.max(0, Math.min(1, window.scrollY / max)) : 0;
+  progress.style.transform = `scaleX(${fraction})`;
+
+  // A seção ativa é a última que passou por 38% da altura visível.
+  const guideLine = window.innerHeight * 0.38;
+  let nextSection = "inicio";
+  scrollSections.forEach((section) => {
+    if (section && section.getBoundingClientRect().top <= guideLine)
+      nextSection = section.id;
+  });
+  if (max > 0 && window.scrollY >= max - 3) nextSection = "contato";
+
+  if (nextSection !== currentSection) {
+    currentSection = nextSection;
+    sectionLinks.forEach((link) => {
+      const active = link.getAttribute("href") === `#${currentSection}`;
+      link.classList.toggle("is-current", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+    desktopLinks.forEach((link) => {
+      link.classList.toggle(
+        "is-active",
+        link.getAttribute("href") === `#${currentSection}`,
+      );
+    });
+  }
+
+  // Um projeto por vez recebe um destaque discreto, sem escurecer os demais.
+  if (!reducedMotion.matches) {
+    const center = window.innerHeight * 0.52;
+    let bestCard = null;
+    let nearest = Infinity;
+    spotlightCards.forEach((card) => {
+      if (card.hidden) return;
+      const rect = card.getBoundingClientRect();
+      if (rect.bottom < window.innerHeight * 0.15 ||
+          rect.top > window.innerHeight * 0.85) return;
+      const distance = Math.abs((rect.top + rect.bottom) / 2 - center);
+      if (distance < nearest) {
+        nearest = distance;
+        bestCard = card;
+      }
+    });
+    if (bestCard !== spotlightCard) {
+      if (spotlightCard) spotlightCard.classList.remove("is-spotlight");
+      if (bestCard) bestCard.classList.add("is-spotlight");
+      spotlightCard = bestCard;
+    }
+  }
   scrollQueued = false;
 }
-window.addEventListener(
-  "scroll",
-  () => {
-    if (!scrollQueued) {
-      scrollQueued = true;
-      requestAnimationFrame(updateScroll);
-    }
-  },
-  { passive: true },
-);
-window.addEventListener("resize", updateScroll, { passive: true });
-updateScroll();
-if ("IntersectionObserver" in window) {
-  const navObserver = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((entry) => {
-        if (entry.isIntersecting)
-          $$(".desktop-nav a").forEach((link) =>
-            link.classList.toggle(
-              "is-active",
-              link.getAttribute("href") === `#${entry.target.id}`,
-            ),
-          );
-      }),
-    { rootMargin: "-20% 0px -55% 0px", threshold: 0 },
-  );
-  $$("section[id]").forEach((section) => navObserver.observe(section));
+function queueScrollUpdate() {
+  if (scrollQueued) return;
+  scrollQueued = true;
+  requestAnimationFrame(updateScroll);
 }
+window.addEventListener("scroll", queueScrollUpdate, { passive: true });
+window.addEventListener("resize", queueScrollUpdate, { passive: true });
+updateScroll();
 
 /* Cursor complementar: mantém o cursor nativo e não roda em telas de toque. */
 if (
