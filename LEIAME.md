@@ -3,6 +3,8 @@
 Portfólio de Gustavo de Brito Vieira, Márcio Andrey e Lucas Duarte Costa.
 Desenvolvido com HTML, CSS e JavaScript puros, sem framework, instalação ou etapa de build.
 
+**Site publicado:** https://portifolio-empresa.vercel.app/
+
 ## Abrir e editar
 
 Extraia o ZIP e abra `index.html` no navegador. Para editar, abra a pasta no VS Code.
@@ -72,5 +74,6 @@ Hospede o conteúdo desta pasta em um serviço de arquivos estáticos. Não é n
 instalar dependências nem definir um comando de build. A pasta publicada deve conter
 `index.html`, `styles.css`, `script.js` e `assets/` no mesmo nível.
 
-Para uma publicação pública definitiva, revise os nomes, contatos comerciais,
-fotografias, descrições e links dos projetos. O acesso da prévia hospedada é privado.
+A versão de produção está em https://portifolio-empresa.vercel.app/.
+Ela foi publicada na Vercel a partir dos arquivos deste repositório. A integração
+GitHub–Vercel ainda não está configurada; novos commits não entram no ar automaticamente.
