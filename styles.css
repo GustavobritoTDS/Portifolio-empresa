@@ -247,7 +247,7 @@ textarea:focus-visible {
   margin-left: 80px;
 }
 .desktop-nav a {
-  font-size: 12px;
+  font-size: 14px;
   position: relative;
 }
 .desktop-nav a::after {
@@ -388,7 +388,7 @@ textarea:focus-visible {
 }
 .hero-intro p {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.8;
 }
 .button {
@@ -926,7 +926,7 @@ h2 {
   transform: translate(3px, -3px);
 }
 .project-info > p {
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.6;
   color: var(--muted);
 }
@@ -1396,7 +1396,7 @@ h2 {
 }
 .service-body > p {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.85;
 }
 .service-chips {
@@ -1977,9 +1977,6 @@ dialog[open] {
   .hero-art {
     height: 730px;
   }
-  .hero-intro p {
-    font-size: 16px;
-  }
   .hero .button {
     margin-top: 32px;
   }
@@ -2030,9 +2027,6 @@ dialog[open] {
   }
   .section-space {
     padding-block: 85px;
-  }
-  .project-info > p {
-    font-size: 10px;
   }
   .project-info h3 {
     font-size: 20px;
@@ -2228,9 +2222,6 @@ dialog[open] {
     margin-top: 34px;
     gap: 17px;
   }
-  .hero-intro p {
-    font-size: 12px;
-  }
   .mini-cross {
     font-size: 34px;
   }
@@ -2397,6 +2388,7 @@ dialog[open] {
   }
   .project-info {
     align-items: flex-start;
+    flex-wrap: wrap;
     gap: 5px;
   }
   .project-index {
@@ -2404,9 +2396,6 @@ dialog[open] {
   }
   .project-info h3 {
     font-size: 18px;
-  }
-  .project-info > p {
-    display: none;
   }
   .project-view {
     padding: 7px 10px;
@@ -2593,9 +2582,6 @@ dialog[open] {
   .service-body {
     padding: 0 30px 28px 40px;
   }
-  .service-body p {
-    font-size: 12px;
-  }
   .service-chips span {
     font-size: 7px;
   }
@@ -2735,7 +2721,6 @@ dialog[open] {
     gap: 14px;
   }
   .hero-intro p {
-    font-size: 11px;
     line-height: 1.7;
   }
   .desktop-break {
@@ -2901,9 +2886,7 @@ dialog[open] {
     font-size: 7px;
   }
   .project-info > p {
-    display: block;
-    font-size: 9px;
-    max-width: 122px;
+    max-width: 45%;
     align-self: center;
   }
   .sales-panel {
@@ -3090,9 +3073,6 @@ dialog[open] {
   }
   .service-body {
     padding: 0 0 27px 28px;
-  }
-  .service-body p {
-    font-size: 11px;
   }
   .service-chips {
     gap: 6px;
