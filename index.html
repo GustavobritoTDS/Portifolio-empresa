@@ -22,6 +22,8 @@
     <title>TRIBYTE™ — Ideias em outra dimensão.</title>
     <link rel="icon" href="assets/logo-tribyte-mark.svg" type="image/svg+xml" />
     <link rel="preload" href="assets/space-grotesk.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="assets/logo-tribyte-mark.svg" as="image" />
+    <link rel="preload" href="assets/logo-tribyte-wordmark.svg" as="image" />
     <link rel="stylesheet" href="styles.css" />
     <script>
       // Evita uma troca de tema visível ao recarregar a página.
@@ -30,21 +32,47 @@
         if (savedTheme === "light" || savedTheme === "dark")
           document.documentElement.dataset.theme = savedTheme;
       } catch (_) {}
-      // Executa a montagem do TB só na primeira visita desta sessão.
-      // A classe é aplicada antes da primeira pintura, sem cobrir os controles.
+      // Prepara a abertura cinematográfica antes da primeira pintura.
+      // A chave v2 garante que quem viu a abertura antiga conheça a nova.
       try {
         if (
           !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
-          sessionStorage.getItem("tribyte-intro") !== "seen"
+          sessionStorage.getItem("tribyte-intro-v2") !== "seen"
         ) {
           document.documentElement.classList.add("tb-first-visit");
-          sessionStorage.setItem("tribyte-intro", "seen");
+          sessionStorage.setItem("tribyte-intro-v2", "seen");
         }
       } catch (_) {}
     </script>
     <script src="script.js" defer></script>
   </head>
   <body>
+    <!-- Apresentação da marca: visível apenas na primeira visita da sessão.
+         Não precisa de JavaScript para ser ocultada por padrão. -->
+    <div class="tribyte-intro" id="tribyte-intro" role="dialog" aria-modal="true"
+      aria-label="Apresentação da marca TRIBYTE" hidden>
+      <div class="tribyte-intro__ambient" aria-hidden="true"></div>
+      <span class="tribyte-intro__corner tribyte-intro__corner--left" aria-hidden="true">TRIBYTE / DIGITAL STUDIO</span>
+      <span class="tribyte-intro__corner tribyte-intro__corner--right" aria-hidden="true">GOIÁS · BRASIL</span>
+      <div class="tribyte-intro__center">
+        <div class="tribyte-intro__mark-frame">
+          <img class="tribyte-intro__mark" src="assets/logo-tribyte-mark.svg" alt=""
+            width="220" height="198" fetchpriority="high" />
+        </div>
+        <div class="tribyte-intro__name-mask">
+          <span class="tribyte-intro__name" role="img" aria-label="TRIBYTE"></span>
+        </div>
+        <p class="tribyte-intro__tagline">TRÊS MENTES. UMA NOVA PERSPECTIVA.</p>
+      </div>
+      <div class="tribyte-intro__bottom" aria-hidden="true">
+        <span>IDEIAS EM OUTRA DIMENSÃO.</span>
+        <span class="tribyte-intro__progress"><span></span></span>
+        <span>EST. 2026</span>
+      </div>
+      <button class="tribyte-intro__skip" id="skip-tribyte-intro" type="button">
+        Pular abertura <span aria-hidden="true">↗</span>
+      </button>
+    </div>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <div class="scroll-progress" aria-hidden="true"></div>
     <!-- Navegação opcional pelo scroll: atalhos para todas as seções. -->

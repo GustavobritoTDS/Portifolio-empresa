@@ -71,6 +71,54 @@ const $$ = (selector, context = document) => [
 ];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+/* Intro cinematográfica: curta, pulável e sem dependências.
+   A animação termina sozinha mesmo se o evento animationend não chegar. */
+const introOverlay = document.getElementById("tribyte-intro");
+if (introOverlay && document.documentElement.classList.contains("tb-first-visit")) {
+  const introSkip = document.getElementById("skip-tribyte-intro");
+  const returnFocus = document.querySelector(".wordmark");
+  let introFinished = false;
+  let introRescue;
+
+  function finalizeIntro() {
+    if (introFinished) return;
+    introFinished = true;
+    window.clearTimeout(introRescue);
+    const focusWasInside = introOverlay.contains(document.activeElement);
+    introOverlay.hidden = true;
+    document.documentElement.classList.remove("tb-first-visit");
+    if (focusWasInside && returnFocus) returnFocus.focus({ preventScroll: true });
+  }
+
+  function skipIntro() {
+    if (introFinished || introOverlay.classList.contains("is-skipping")) return;
+    introOverlay.classList.add("is-skipping");
+    window.setTimeout(finalizeIntro, 330);
+  }
+
+  introOverlay.hidden = false;
+  introOverlay.addEventListener("animationend", (event) => {
+    if (
+      event.target === introOverlay &&
+      event.animationName === "tribyte-intro-curtain"
+    ) finalizeIntro();
+  });
+  introSkip.addEventListener("click", skipIntro);
+  introOverlay.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      skipIntro();
+    } else if (event.key === "Tab") {
+      // Apenas um controle de teclado na abertura.
+      event.preventDefault();
+      introSkip.focus({ preventScroll: true });
+    }
+  });
+  // O foco não deve alcançar os links que estão atrás da abertura.
+  introSkip.focus({ preventScroll: true });
+  introRescue = window.setTimeout(finalizeIntro, 3700);
+}
+
 /* Tema persistente, sem depender de serviços externos. */
 const themeToggle = $(".theme-toggle");
 function updateThemeButton() {
