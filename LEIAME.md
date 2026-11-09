@@ -3,7 +3,7 @@
 Portfólio de Gustavo de Brito Vieira, Márcio Andrey e Lucas Duarte Costa.
 Desenvolvido com HTML, CSS e JavaScript puros, sem framework, instalação ou etapa de build.
 
-**Site publicado:** https://tribyte-portifolio.vercel.app/
+**Site publicado:** https://portifolio-tribyte.vercel.app/
 
 ## Abrir e editar
 
@@ -109,6 +109,6 @@ Na Vercel, inclua `vercel.json` para aplicar os cabeçalhos de segurança e o ca
 arquivos de mídia e fontes. A Vercel exige Pro ou Enterprise para uso comercial.
 [Política de uso da Vercel](https://vercel.com/docs/limits/fair-use-guidelines#commercial-usage).
 
-A versão de produção está em https://tribyte-portifolio.vercel.app/.
+A versão de produção está em https://portifolio-tribyte.vercel.app/.
 Ela foi publicada na Vercel a partir dos arquivos deste repositório. A integração
 GitHub–Vercel ainda não está configurada; novos commits não entram no ar automaticamente.
