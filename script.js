@@ -332,7 +332,15 @@ $$("[data-profile]").forEach((button) =>
     const photo = $(".team-photo", card);
     if (!name || !bio || !photo) return;
 
-    $("#profile-dialog-title").textContent = name.textContent.replace(/\s+/g, " ").trim();
+    // Uma tag <br> não adiciona espaços em textContent. Preserve a separação
+    // entre nome e sobrenome antes de exibir o título no modal.
+    const fullName = Array.from(name.childNodes, (node) =>
+      node.nodeName === "BR" ? " " : node.textContent,
+    )
+      .join("")
+      .replace(/\s+/g, " ")
+      .trim();
+    $("#profile-dialog-title").textContent = fullName;
     $("#profile-dialog-bio").textContent = bio.textContent.trim();
     const dialogPhoto = $("#profile-dialog-photo");
     dialogPhoto.src = photo.getAttribute("src");
