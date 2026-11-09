@@ -68,6 +68,38 @@ requisições a provedores de fontes. As licenças devem acompanhar a redistribu
 - Preferência de movimento reduzido, foco visível, link de salto e rótulos acessíveis.
 - Relógio do estúdio com horário de Brasília.
 
+## Publicar no Cloudflare Pages
+
+O repositório está pronto para hospedar em **Cloudflare Pages**, sem dependências,
+framework ou compilação. A configuração específica do Cloudflare está no arquivo
+`_headers`, na raiz. Ela ativa CSP, proteção contra incorporação por iframe,
+políticas de permissões, proteção de tipos de conteúdo e cache de mídias/fontes.
+O arquivo `vercel.json` continua exclusivo da Vercel e não configura o Cloudflare.
+
+Passos para conectar o deploy contínuo pelo GitHub:
+
+1. Abra [Cloudflare > Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages).
+2. Crie uma aplicação **Pages** e escolha **Importar repositório Git**.
+3. Autorize o GitHub e selecione `GustavobritoTDS/Portifolio-empresa`.
+4. Nome sugerido para o projeto: `tribyte-portifolio` (se disponível).
+5. Configure a branch de produção `main`, sem preset de framework.
+6. Não é necessário executar build. Deixe o comando vazio (ou use `exit 0`).
+   Escolha como diretório de saída a **raiz do repositório** (`.`),
+   pois `index.html` e `_headers` estão na raiz.
+7. Clique em **Salvar e implantar**. Depois do primeiro deploy, o painel informa
+   o endereço `*.pages.dev` real. Novos commits na `main` serão publicados
+   automaticamente; pull requests poderão receber visualizações de prévia.
+
+Confira no endereço publicado: abertura, menus, mobile, modo claro/escuro,
+detalhes dos projetos, formulário e link de WhatsApp. Verifique também no
+DevTools > Network se as respostas enviam os cabeçalhos de `_headers`.
+
+**Importante:** o repositório estar preparado não significa que o projeto já
+foi criado no Cloudflare. A primeira conexão com o GitHub e o primeiro deploy
+precisam ser concluídos na conta Cloudflare. Nenhuma política ou CDN garante
+proteção absoluta contra ataques ou suspensão; mantenha conteúdo e uso em
+conformidade com os termos da plataforma.
+
 ## Publicar
 
 Hospede o conteúdo desta pasta em um serviço de arquivos estáticos. Não é necessário
