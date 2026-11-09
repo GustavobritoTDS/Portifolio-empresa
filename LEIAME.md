@@ -3,11 +3,9 @@
 Portfólio de Gustavo de Brito Vieira, Márcio Andrey e Lucas Duarte Costa.
 Desenvolvido com HTML, CSS e JavaScript puros, sem framework, instalação ou etapa de build.
 
-**Hospedagem escolhida:** Cloudflare Pages. A migração ainda precisa do primeiro deploy de Pages.
+**Site oficial:** https://portifolio-tribyte.vercel.app/
 
-**Publicação Cloudflare já existente (Workers, não Pages):** https://portifolio-empresa.gubritovieira.workers.dev/
-
-A versão antiga na Vercel continua disponível somente durante a migração. Desative-a depois de verificar a versão de produção no Pages.
+**Hospedagem escolhida:** Vercel (projeto `portifolio-tribyte`). O repositório GitHub é a origem do código.
 
 ## Abrir e editar
 
@@ -72,55 +70,34 @@ requisições a provedores de fontes. As licenças devem acompanhar a redistribu
 - Preferência de movimento reduzido, foco visível, link de salto e rótulos acessíveis.
 - Relógio do estúdio com horário de Brasília.
 
-## Hospedagem definitiva: Cloudflare Pages
+## Hospedagem definitiva: Vercel
 
-O portfólio é estático (HTML, CSS, JavaScript e imagens). Os arquivos
-`index.html`, `styles.css`, `script.js`, `site-init.js`, `_headers` e
-`assets/` estão na raiz. Não é necessário instalar dependências nem compilar.
+A hospedagem de produção do portfólio TRIBYTE é a **Vercel**, no projeto
+`portifolio-tribyte`, endereço: https://portifolio-tribyte.vercel.app/.
 
-O arquivo `_headers` configura a Content Security Policy (CSP), proteção
-contra clickjacking, restrições do navegador e cache de recursos estáticos.
-Na Cloudflare Pages, esse arquivo precisa estar junto dos arquivos publicados.
+Os arquivos estáticos estão na raiz do repositório GitHub
+`GustavobritoTDS/Portifolio-empresa`, branch `main`.
+O site utiliza HTML, CSS e JavaScript puros, sem etapa de compilação.
 
-### Conectar à Cloudflare Pages
+O arquivo `vercel.json` define cabeçalhos de segurança, Content Security
+Policy (CSP), prevenção de incorporação em iframes e cache curto para arquivos
+de mídia e fontes. O arquivo `_headers` era usado na tentativa de hospedagem
+no Cloudflare Pages e não é utilizado pela Vercel.
 
-1. Entre em [Cloudflare → Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages).
-2. Selecione **Criar aplicação → Pages → Importar repositório Git**.
-3. Autorize o GitHub, caso seja necessário, e escolha
-   `GustavobritoTDS/Portifolio-empresa`.
-4. Escolha o nome `portifolio-tribyte` caso esteja disponível.
-5. Configure os campos:
+### Atualizar o portfólio
 
-   | Campo | Valor |
-   | --- | --- |
-   | Production branch | `main` |
-   | Framework preset | Nenhum |
-   | Build command | vazio ou `exit 0` |
-   | Build output directory | `.` (raiz do repositório) |
-   | Root directory | padrão / raiz |
+1. Envie as alterações para a branch `main` no GitHub.
+2. Publique o commit no projeto `portifolio-tribyte` na Vercel.
+3. Confirme o status `READY` no painel e teste a página em computador
+   e celular: navegação, abertura, perfis da equipe, imagens e formulário.
 
-6. Inicie o deploy e copie o **endereço real** `*.pages.dev` exibido pela
-   Cloudflare. Nunca presuma que o subdomínio escolhido esteja disponível.
-7. Valide no Pages os arquivos, as fotos, o menu no celular, o formulário,
-   os nomes dos três integrantes, a abertura e os cabeçalhos de segurança.
+### Publicações antigas na Cloudflare
 
-### Encerramento da migração
+Durante testes anteriores foram criados Workers na Cloudflare. Eles **não são**
+o endereço oficial do portfólio. Para ter uma única hospedagem pública,
+esses Workers podem ser desativados no painel Cloudflare depois de confirmar
+que o endereço da Vercel está funcionando. A exclusão não é necessária
+para o funcionamento do site na Vercel.
 
-**Somente depois de confirmar o endereço de produção no Pages:**
-
-- Desative o projeto legado `portifolio-tribyte` na Vercel.
-- Retire `vercel.json` do repositório (ele não é usado no Pages).
-- Se a publicação `portifolio-empresa.gubritovieira.workers.dev` não for mais
-  necessária, desative o Worker antigo no painel Cloudflare para que apenas
-  o projeto Cloudflare Pages continue atendendo a TRIBYTE.
-- Atualize aqui o endereço definitivo do Pages.
-
-**Atenção:** existe uma publicação anterior no **Cloudflare Workers**. Ela foi
-criada antes dos commits de correção mobile e nomes e não substitui um deploy
-confirmado no Cloudflare Pages. Evite desligar a publicação atual antes dessa
-verificação para não interromper o acesso ao site.
-
-Nenhuma hospedagem impede totalmente abusos ou indisponibilidade. Mantenha
-as dependências, políticas e configurações de segurança atualizadas.
-
-Documentação: [Publicar HTML estático no Pages](https://developers.cloudflare.com/pages/framework-guides/deploy-anything/).
+Nenhuma configuração de segurança garante proteção absoluta; mantenha
+conteúdo, acessos e políticas da hospedagem em conformidade com o serviço.
