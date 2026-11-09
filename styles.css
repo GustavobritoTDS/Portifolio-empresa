@@ -1025,11 +1025,18 @@ h2 {
   padding-bottom: 0;
 }
 .bars i {
-  height: var(--bar);
   flex: 1;
   border-radius: 3px 3px 0 0;
   background: linear-gradient(#cbff9c, #729a62);
 }
+.bars i:nth-child(1) { height: 33%; }
+.bars i:nth-child(2) { height: 50%; }
+.bars i:nth-child(3) { height: 44%; }
+.bars i:nth-child(4) { height: 64%; }
+.bars i:nth-child(5) { height: 57%; }
+.bars i:nth-child(6) { height: 81%; }
+.bars i:nth-child(7) { height: 72%; }
+.bars i:nth-child(8) { height: 96%; }
 .bars i:nth-child(even) {
   background: #557e57;
 }

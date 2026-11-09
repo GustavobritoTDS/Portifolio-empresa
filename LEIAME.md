@@ -72,7 +72,10 @@ requisições a provedores de fontes. As licenças devem acompanhar a redistribu
 
 Hospede o conteúdo desta pasta em um serviço de arquivos estáticos. Não é necessário
 instalar dependências nem definir um comando de build. A pasta publicada deve conter
-`index.html`, `styles.css`, `script.js` e `assets/` no mesmo nível.
+`index.html`, `styles.css`, `site-init.js`, `script.js` e `assets/` no mesmo nível.
+Na Vercel, inclua `vercel.json` para aplicar os cabeçalhos de segurança e o cache dos
+arquivos de mídia e fontes. A Vercel exige Pro ou Enterprise para uso comercial.
+[Política de uso da Vercel](https://vercel.com/docs/limits/fair-use-guidelines#commercial-usage).
 
 A versão de produção está em https://tribyte-portifolio.vercel.app/.
 Ela foi publicada na Vercel a partir dos arquivos deste repositório. A integração

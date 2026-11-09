@@ -316,7 +316,7 @@ $$("[data-project]").forEach((button) =>
 );
 $("#project-dialog-link").addEventListener("click", () => {
   projectDialog.close();
-  setTimeout(() => $("#name").focus({ preventScroll: true }), 0);
+  setTimeout(() => showWizardStep(wizardIndex, true), 0);
 });
 $$("[data-open-privacy]").forEach((button) =>
   button.addEventListener("click", () => openDialog($("#privacy-dialog"))),
@@ -356,19 +356,7 @@ let briefingText = "";
 let senderName = "";
 briefingForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const nameInput = $("#name");
-  const messageInput = $("#message");
-  nameInput.setCustomValidity(
-    nameInput.value.trim().length < 2
-      ? "Informe um nome com pelo menos 2 caracteres."
-      : "",
-  );
-  messageInput.setCustomValidity(
-    messageInput.value.trim().length < 10
-      ? "Conte um pouco mais sobre a ideia, com pelo menos 10 caracteres."
-      : "",
-  );
-  if (!briefingForm.reportValidity()) return;
+  if (!wizardSteps.every((_, index) => validateWizardStep(index))) return;
   const data = new FormData(briefingForm);
   senderName = String(data.get("name")).trim();
   briefingText = [
@@ -388,7 +376,8 @@ briefingForm.addEventListener("submit", (event) => {
   $("#briefing-status").textContent = "";
   openDialog($("#briefing-dialog"));
 });
-["name", "message"].forEach((id) =>
+briefingForm.noValidate = true;
+["goal", "message", "name"].forEach((id) =>
   $(`#${id}`).addEventListener("input", (event) =>
     event.target.setCustomValidity(""),
   ),
@@ -433,11 +422,12 @@ $("#download-briefing").addEventListener("click", () => {
 /* Integração opcional: só aparece quando um contato real for configurado. */
 const hasWhatsApp = /^\d{10,15}$/.test(CONTACT.whatsapp);
 const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(CONTACT.email);
+$("#contact-help").textContent = hasWhatsApp || hasEmail
+  ? "Prepare seu briefing e revise a mensagem antes de enviar."
+  : "Prepare seu briefing para copiar ou baixar. Nenhuma mensagem é enviada automaticamente.";
 if (hasWhatsApp || hasEmail) {
   const sendButton = $("#send-briefing");
   sendButton.hidden = false;
-  $("#contact-help").textContent =
-    "Prepare seu briefing e revise a mensagem antes de enviar.";
   sendButton.addEventListener("click", () => {
     const target = hasWhatsApp
       ? `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(briefingText)}`
@@ -666,10 +656,7 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches && !reducedMot
     });
   });
 }
-/* A abertura do TB é ativada no <head>, sem overlay nem bloqueio.
-   O efeito tem 650 ms e não se repete durante a sessão. */
-
-/* Aprimoramento progressivo do formulário: sem JS, todas as etapas são visíveis. */
+/* O briefing é processado no navegador. O envio nativo fica desativado. */
 const wizardSteps = $$(".briefing-step");
 const wizardControls = $("#wizard-actions");
 const wizardNext = $("#wizard-next");
@@ -678,25 +665,37 @@ const wizardSubmit = $("#briefing-submit");
 let wizardIndex = 0;
 function showWizardStep(index, moveFocus = false) {
   wizardIndex = index;
+  const isLastStep = index === wizardSteps.length - 1;
   wizardSteps.forEach((section, i) => { section.hidden = i !== index; });
   $("#wizard-progress").hidden = false;
   $("#wizard-progress").textContent = "Etapa " + (index + 1) + " de " + wizardSteps.length;
   wizardPrev.hidden = index === 0;
-  wizardNext.hidden = index === wizardSteps.length - 1;
-  wizardSubmit.hidden = index !== wizardSteps.length - 1;
+  wizardNext.hidden = isLastStep;
+  wizardSubmit.hidden = !isLastStep;
+  wizardSubmit.disabled = !isLastStep;
   if (moveFocus) {
-    const first = $("input:not([type=hidden]), textarea, select", wizardSteps[index]);
+    const step = wizardSteps[index];
+    const first = $("input:checked", step) || $("input, textarea", step);
     first?.focus({preventScroll:true});
   }
+}
+function validateWizardStep(index) {
+  const invalidField = $$("input, textarea", wizardSteps[index]).find((field) => {
+    if (field.minLength > 0) {
+      const tooShort = field.value && field.value.trim().length < field.minLength;
+      field.setCustomValidity(tooShort ? `Informe pelo menos ${field.minLength} caracteres.` : "");
+    }
+    return !field.validity.valid;
+  });
+  if (!invalidField) return true;
+  if (index !== wizardIndex) showWizardStep(index);
+  invalidField.reportValidity();
+  return false;
 }
 wizardControls.hidden = false;
 showWizardStep(0);
 wizardNext.addEventListener("click", () => {
-  const inputs = $$("input, select, textarea", wizardSteps[wizardIndex]);
-  for (const input of inputs) {
-    if (!input.checkValidity()) { input.reportValidity(); return; }
-  }
-  showWizardStep(Math.min(wizardIndex + 1, wizardSteps.length - 1), true);
+  if (validateWizardStep(wizardIndex)) showWizardStep(wizardIndex + 1, true);
 });
 wizardPrev.addEventListener("click", () => {
   showWizardStep(Math.max(0, wizardIndex - 1), true);

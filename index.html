@@ -24,26 +24,8 @@
     <link rel="preload" href="assets/space-grotesk.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="assets/logo-tribyte-mark.svg" as="image" />
     <link rel="preload" href="assets/logo-tribyte-wordmark.svg" as="image" />
+    <script src="site-init.js"></script>
     <link rel="stylesheet" href="styles.css" />
-    <script>
-      // Evita uma troca de tema visível ao recarregar a página.
-      try {
-        const savedTheme = localStorage.getItem("tribyte-theme");
-        if (savedTheme === "light" || savedTheme === "dark")
-          document.documentElement.dataset.theme = savedTheme;
-      } catch (_) {}
-      // Prepara a abertura cinematográfica antes da primeira pintura.
-      // A chave v2 garante que quem viu a abertura antiga conheça a nova.
-      try {
-        if (
-          !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
-          sessionStorage.getItem("tribyte-intro-v2") !== "seen"
-        ) {
-          document.documentElement.classList.add("tb-first-visit");
-          sessionStorage.setItem("tribyte-intro-v2", "seen");
-        }
-      } catch (_) {}
-    </script>
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -341,10 +323,7 @@
                       ><strong>Próximo<br />objetivo<span>↗</span></strong>
                     </div>
                     <div class="bars">
-                      <i style="--bar: 33%"></i><i style="--bar: 50%"></i
-                      ><i style="--bar: 44%"></i><i style="--bar: 64%"></i
-                      ><i style="--bar: 57%"></i><i style="--bar: 81%"></i
-                      ><i style="--bar: 72%"></i><i style="--bar: 96%"></i>
+                      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
                     </div>
                     <div class="sales-panel-footer">
                       <span>Visão geral</span
@@ -723,8 +702,8 @@
               <button class="button button-primary" id="wizard-next" type="button">Próxima etapa <span aria-hidden="true">↗</span></button>
             </div>
             <div class="form-bottom">
-              <p id="contact-help">Prepare seu briefing para copiar ou baixar. Nenhuma mensagem é enviada automaticamente.</p>
-              <button class="button button-primary" id="briefing-submit" type="submit">Montar briefing <span aria-hidden="true">↗</span></button>
+              <p id="contact-help">O formulário precisa de JavaScript para montar o briefing.</p>
+              <button class="button button-primary" id="briefing-submit" type="submit" disabled>Montar briefing <span aria-hidden="true">↗</span></button>
             </div>
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           </form>
@@ -821,7 +800,7 @@
         type="button"
         aria-label="Fechar perfil"
       >
-        Ã—
+        ×
       </button>
       <div class="dialog-project-art profile-dialog-art" aria-hidden="true">
         <img class="profile-dialog-photo" id="profile-dialog-photo" alt="" />
@@ -890,12 +869,13 @@
       <h2 id="privacy-title">Seus dados,<br />com clareza.</h2>
       <p>
         Este portfólio não usa ferramentas de análise nem cookies de
-        publicidade. Sua preferência de tema é salva apenas neste navegador.
+        publicidade. A preferência de tema e o registro de que você já viu a
+        abertura ficam neste navegador.
       </p>
       <p>
-        O briefing é preparado localmente. Nome, e-mail e mensagem não são
-        enviados nem salvos por este site. Você decide se quer copiar ou baixar
-        o texto.
+        O briefing é montado no seu navegador. Você pode copiar ou baixar o
+        texto. Se escolher enviar, o serviço de contato recebe os dados para
+        preencher a mensagem. Você confirma o envio no aplicativo.
       </p>
       <p>
         Ao visitar um link externo, passam a valer as práticas de privacidade do
