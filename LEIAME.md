@@ -3,7 +3,11 @@
 Portfólio de Gustavo de Brito Vieira, Márcio Andrey e Lucas Duarte Costa.
 Desenvolvido com HTML, CSS e JavaScript puros, sem framework, instalação ou etapa de build.
 
-**Site publicado:** https://portifolio-tribyte.vercel.app/
+**Hospedagem escolhida:** Cloudflare Pages. A migração ainda precisa do primeiro deploy de Pages.
+
+**Publicação Cloudflare já existente (Workers, não Pages):** https://portifolio-empresa.gubritovieira.workers.dev/
+
+A versão antiga na Vercel continua disponível somente durante a migração. Desative-a depois de verificar a versão de produção no Pages.
 
 ## Abrir e editar
 
@@ -68,47 +72,55 @@ requisições a provedores de fontes. As licenças devem acompanhar a redistribu
 - Preferência de movimento reduzido, foco visível, link de salto e rótulos acessíveis.
 - Relógio do estúdio com horário de Brasília.
 
-## Publicar no Cloudflare Pages
+## Hospedagem definitiva: Cloudflare Pages
 
-O repositório está pronto para hospedar em **Cloudflare Pages**, sem dependências,
-framework ou compilação. A configuração específica do Cloudflare está no arquivo
-`_headers`, na raiz. Ela ativa CSP, proteção contra incorporação por iframe,
-políticas de permissões, proteção de tipos de conteúdo e cache de mídias/fontes.
-O arquivo `vercel.json` continua exclusivo da Vercel e não configura o Cloudflare.
+O portfólio é estático (HTML, CSS, JavaScript e imagens). Os arquivos
+`index.html`, `styles.css`, `script.js`, `site-init.js`, `_headers` e
+`assets/` estão na raiz. Não é necessário instalar dependências nem compilar.
 
-Passos para conectar o deploy contínuo pelo GitHub:
+O arquivo `_headers` configura a Content Security Policy (CSP), proteção
+contra clickjacking, restrições do navegador e cache de recursos estáticos.
+Na Cloudflare Pages, esse arquivo precisa estar junto dos arquivos publicados.
 
-1. Abra [Cloudflare > Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages).
-2. Crie uma aplicação **Pages** e escolha **Importar repositório Git**.
-3. Autorize o GitHub e selecione `GustavobritoTDS/Portifolio-empresa`.
-4. Nome sugerido para o projeto: `tribyte-portifolio` (se disponível).
-5. Configure a branch de produção `main`, sem preset de framework.
-6. Não é necessário executar build. Deixe o comando vazio (ou use `exit 0`).
-   Escolha como diretório de saída a **raiz do repositório** (`.`),
-   pois `index.html` e `_headers` estão na raiz.
-7. Clique em **Salvar e implantar**. Depois do primeiro deploy, o painel informa
-   o endereço `*.pages.dev` real. Novos commits na `main` serão publicados
-   automaticamente; pull requests poderão receber visualizações de prévia.
+### Conectar à Cloudflare Pages
 
-Confira no endereço publicado: abertura, menus, mobile, modo claro/escuro,
-detalhes dos projetos, formulário e link de WhatsApp. Verifique também no
-DevTools > Network se as respostas enviam os cabeçalhos de `_headers`.
+1. Entre em [Cloudflare → Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages).
+2. Selecione **Criar aplicação → Pages → Importar repositório Git**.
+3. Autorize o GitHub, caso seja necessário, e escolha
+   `GustavobritoTDS/Portifolio-empresa`.
+4. Escolha o nome `portifolio-tribyte` caso esteja disponível.
+5. Configure os campos:
 
-**Importante:** o repositório estar preparado não significa que o projeto já
-foi criado no Cloudflare. A primeira conexão com o GitHub e o primeiro deploy
-precisam ser concluídos na conta Cloudflare. Nenhuma política ou CDN garante
-proteção absoluta contra ataques ou suspensão; mantenha conteúdo e uso em
-conformidade com os termos da plataforma.
+   | Campo | Valor |
+   | --- | --- |
+   | Production branch | `main` |
+   | Framework preset | Nenhum |
+   | Build command | vazio ou `exit 0` |
+   | Build output directory | `.` (raiz do repositório) |
+   | Root directory | padrão / raiz |
 
-## Publicar
+6. Inicie o deploy e copie o **endereço real** `*.pages.dev` exibido pela
+   Cloudflare. Nunca presuma que o subdomínio escolhido esteja disponível.
+7. Valide no Pages os arquivos, as fotos, o menu no celular, o formulário,
+   os nomes dos três integrantes, a abertura e os cabeçalhos de segurança.
 
-Hospede o conteúdo desta pasta em um serviço de arquivos estáticos. Não é necessário
-instalar dependências nem definir um comando de build. A pasta publicada deve conter
-`index.html`, `styles.css`, `site-init.js`, `script.js` e `assets/` no mesmo nível.
-Na Vercel, inclua `vercel.json` para aplicar os cabeçalhos de segurança e o cache dos
-arquivos de mídia e fontes. A Vercel exige Pro ou Enterprise para uso comercial.
-[Política de uso da Vercel](https://vercel.com/docs/limits/fair-use-guidelines#commercial-usage).
+### Encerramento da migração
 
-A versão de produção está em https://portifolio-tribyte.vercel.app/.
-Ela foi publicada na Vercel a partir dos arquivos deste repositório. A integração
-GitHub–Vercel ainda não está configurada; novos commits não entram no ar automaticamente.
+**Somente depois de confirmar o endereço de produção no Pages:**
+
+- Desative o projeto legado `portifolio-tribyte` na Vercel.
+- Retire `vercel.json` do repositório (ele não é usado no Pages).
+- Se a publicação `portifolio-empresa.gubritovieira.workers.dev` não for mais
+  necessária, desative o Worker antigo no painel Cloudflare para que apenas
+  o projeto Cloudflare Pages continue atendendo a TRIBYTE.
+- Atualize aqui o endereço definitivo do Pages.
+
+**Atenção:** existe uma publicação anterior no **Cloudflare Workers**. Ela foi
+criada antes dos commits de correção mobile e nomes e não substitui um deploy
+confirmado no Cloudflare Pages. Evite desligar a publicação atual antes dessa
+verificação para não interromper o acesso ao site.
+
+Nenhuma hospedagem impede totalmente abusos ou indisponibilidade. Mantenha
+as dependências, políticas e configurações de segurança atualizadas.
+
+Documentação: [Publicar HTML estático no Pages](https://developers.cloudflare.com/pages/framework-guides/deploy-anything/).
