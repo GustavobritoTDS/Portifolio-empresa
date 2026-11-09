@@ -1,0 +1,12 @@
+# Segurança do portfólio TRIBYTE (Cloudflare Pages).
+# Compatível com o CSP que já é aplicado pela hospedagem Vercel.
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+# Imagens e fontes mantêm cache curto porque os nomes não possuem hash de versão.
+/assets/*
+  Cache-Control: public, max-age=3600
