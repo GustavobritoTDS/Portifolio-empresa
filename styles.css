@@ -4022,3 +4022,480 @@ html.tb-intro-on { overflow: hidden; }
     transform: none !important;
   }
 }
+
+
+/* ===== TRIBYTE / AWARDS EDITORIAL — direção visual autoral =====
+   Referência de princípios: Awwwards / Viens-là; implementação própria sem framework.
+   Prioridades: impacto editorial, leitura, movimento intencional e baixa sobrecarga. */
+
+:root {
+  --editorial-ease: cubic-bezier(.22,1,.36,1);
+  --statement-red: #ef1732;
+}
+
+/* Índice vertical: capítulos clicáveis, sem interceptar a navegação habitual. */
+.chapter-rail {
+  position: fixed;
+  top: 50%;
+  right: clamp(9px, 1.5vw, 28px);
+  z-index: 40;
+  display: grid;
+  gap: 9px;
+  align-content: center;
+  justify-items: end;
+  transform: translateY(-50%);
+  isolation: isolate;
+}
+.chapter-rail-label,
+.chapter-rail-bottom {
+  font: 8px/1.3 var(--mono);
+  letter-spacing: .09em;
+  writing-mode: vertical-rl;
+  color: var(--muted);
+  opacity: .76;
+  margin-right: 11px;
+}
+.chapter-rail-label { margin-bottom: 14px; }
+.chapter-rail-bottom { margin-top: 14px; }
+.chapter-rail a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 58px;
+  min-height: 29px;
+  padding-right: 8px;
+  color: var(--muted);
+  font: 9px var(--mono);
+  transition: color .25s var(--editorial-ease);
+}
+.chapter-rail a > span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.chapter-rail a > span::after {
+  content: "";
+  height: 1px;
+  width: 12px;
+  background: currentColor;
+  transition: width .4s var(--editorial-ease), background .3s;
+}
+.chapter-rail a.is-current,
+.chapter-rail a[aria-current="location"],
+.chapter-rail a:hover {
+  color: var(--accent-ink);
+}
+.chapter-rail a.is-current > span::after,
+.chapter-rail a:hover > span::after {
+  width: 27px;
+  background: var(--accent);
+}
+.chapter-rail a::before {
+  content: attr(data-label);
+  position: absolute;
+  right: calc(100% + 10px);
+  white-space: nowrap;
+  padding: 5px 9px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 2px;
+  font: 9px var(--mono);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity .2s, transform .2s;
+}
+.chapter-rail a:hover::before,
+.chapter-rail a:focus-visible::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+body.modal-open .chapter-rail,
+body.menu-open .chapter-rail,
+html.tb-intro-on .chapter-rail { visibility: hidden; }
+
+/* Primeiro intervalo editorial: a marca não depende de imagens externas. */
+.tribyte-manifesto {
+  position: relative;
+  overflow: clip;
+  isolation: isolate;
+  width: 100%;
+  min-height: min(105svh, 1140px);
+  background: var(--statement-red);
+  color: #151010;
+  padding: clamp(34px, 3.9vw, 74px) clamp(22px, 5vw, 95px) clamp(26px, 3.4vw, 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.manifesto-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: linear-gradient(to right, rgba(0,0,0,.085) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,.07) 1px, transparent 1px);
+  background-size: 8.333% 100%, 100% 11%;
+  mask-image: linear-gradient(to right, transparent, black 13%, black 87%, transparent);
+}
+.manifesto-top,
+.manifesto-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 9px/1.5 var(--mono);
+  letter-spacing: .085em;
+  font-weight: 700;
+}
+.manifesto-top {
+  border-bottom: 1px solid rgba(16,0,0,.32);
+  padding-bottom: 16px;
+}
+.manifesto-bottom {
+  border-top: 1px solid rgba(16,0,0,.32);
+  padding-top: 16px;
+}
+.manifesto-layout {
+  width: 100%;
+  max-width: 1620px;
+  margin: 6vh auto 8vh;
+  display: grid;
+  grid-template-columns: minmax(90px, .14fr) minmax(0, 1fr);
+  gap: clamp(12px, 3vw, 65px);
+  align-items: stretch;
+}
+.manifesto-aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 24px 0;
+}
+.manifesto-coordinate {
+  writing-mode: vertical-rl;
+  font: 9px var(--mono);
+  letter-spacing: .14em;
+}
+.manifesto-seal {
+  position: relative;
+  width: clamp(58px, 7vw, 118px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(14,0,0,.45);
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  font: 700 clamp(24px, 3.4vw, 55px) var(--display);
+  letter-spacing: -.13em;
+  transform: rotate(var(--seal-spin, -14deg));
+  transition: transform .12s linear;
+}
+.manifesto-seal span { color: #f7efe5; }
+.manifesto-seal i {
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  font: 24px var(--display);
+  font-style: normal;
+}
+.manifesto-counter { font: 9px var(--mono); letter-spacing: .15em; }
+.manifesto-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.manifesto-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(14px, 2.5vh, 38px);
+  font: 10px var(--mono);
+  letter-spacing: .1em;
+}
+.manifesto-kicker-dot { width: 7px; height: 7px; border-radius: 50%; background: #f4f3ee; }
+.manifesto-title {
+  display: grid;
+  gap: 0;
+  font: 700 clamp(65px, 10.7vw, 210px)/.82 var(--display);
+  letter-spacing: -.089em;
+  text-transform: uppercase;
+}
+.manifesto-line {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  opacity: var(--line-opacity, 1);
+  transform: translate3d(var(--line-x, 0px), var(--line-y, 0px), 0);
+  will-change: auto;
+}
+.manifesto-line:nth-child(2),
+.manifesto-line:nth-child(4) { text-align: right; }
+.manifesto-outline {
+  color: transparent;
+  -webkit-text-stroke: clamp(1px, .15vw, 2px) #171011;
+}
+.manifesto-line-accent { color: #f4f3ee; }
+.manifesto-ending {
+  margin-top: clamp(25px, 5.4vw, 80px);
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+}
+.manifesto-ending p {
+  max-width: 380px;
+  font: 400 clamp(14px, 1.45vw, 19px)/1.5 var(--display);
+  letter-spacing: -.015em;
+}
+.manifesto-link {
+  min-height: 54px;
+  border-radius: 80px;
+  padding: 12px 14px 12px 22px;
+  background: #161011;
+  color: #f8f2ef;
+  display: inline-flex;
+  flex: none;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  font: 10px var(--mono);
+  transition: transform .4s var(--editorial-ease), background .3s;
+}
+.manifesto-link span {
+  height: 29px;
+  width: 29px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #1b1011;
+  background: #f7f0eb;
+  font: 20px var(--display);
+}
+.manifesto-link:hover,
+.manifesto-link:focus-visible { transform: translateY(-5px); background: #302124; }
+
+/* A passagem entre capítulos conta a história sem trocar o tema da marca. */
+.type-bridge {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  background: var(--surface);
+  padding-block: clamp(15px, 2.6vw, 30px);
+  user-select: none;
+}
+.type-bridge-track {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  width: max-content;
+  animation: tribyte-type-slide 36s linear infinite;
+  font: 700 clamp(20px, 3.6vw, 55px)/1 var(--display);
+  letter-spacing: -.05em;
+  white-space: nowrap;
+}
+.type-bridge-track span { display: block; }
+.type-bridge-track i { color: var(--accent); font-style: normal; padding-inline: .3em; }
+@keyframes tribyte-type-slide { to { transform: translateX(-50%); } }
+
+/* Projetos: enquadramento de museu digital, sem sacrificar as imagens reais. */
+.project-card { position: relative; isolation: isolate; }
+.project-card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  border: 1px solid transparent;
+  transition: border-color .35s, box-shadow .5s;
+  z-index: 4;
+}
+.project-card:hover::after,
+.project-card:focus-within::after { border-color: rgba(251,16,35,.5); box-shadow: inset 0 0 0 1px rgba(251,16,35,.06); }
+.project-visual::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: clamp(42px, 5vw, 75px);
+  height: 1px;
+  background: var(--accent);
+  z-index: 6;
+  transform: scaleX(var(--visual-line, 1));
+  transform-origin: left;
+}
+.project-card .project-index { letter-spacing: .09em; }
+.studio .team-card { position: relative; }
+.team-card .team-art { transform-origin: center; }
+.team-card .team-info h3 { transition: letter-spacing .5s var(--editorial-ease); }
+.team-card:hover .team-info h3 { letter-spacing: -.07em; }
+
+/* Serviços: cada interação deixa uma impressão na composição. */
+.service-item { position: relative; isolation: isolate; }
+.service-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleY(var(--service-progress, 0));
+  transform-origin: top;
+  transition: transform .2s linear;
+  pointer-events: none;
+}
+.service-item summary {
+  position: relative;
+  padding-left: clamp(0px, 1.7vw, 26px);
+  transition: padding-left .4s var(--editorial-ease), background .4s;
+}
+.service-item[open] summary,
+.service-item summary:hover,
+.service-item summary:focus-visible {
+  padding-left: clamp(14px, 2.7vw, 40px);
+}
+.service-item summary h3 { transition: color .35s, transform .4s var(--editorial-ease); }
+.service-item[open] summary h3 { color: var(--accent-ink); }
+.service-item summary:hover h3 { transform: translateX(6px); }
+.service-number { transition: transform .3s; }
+.service-item[open] .service-number { transform: translateY(-3px); }
+.service-item .service-body { border-left: 1px solid var(--line); }
+
+/* Processo: a linha fica vermelha enquanto a história daquela etapa é contada. */
+.process-steps li { position: relative; }
+.process-steps li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 100%;
+  height: 2px;
+  background: #ec2540;
+  transform: scaleX(var(--step-progress, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+.process-steps li.is-current > span {
+  color: #ef2542;
+  font-weight: 700;
+}
+.process-steps li.is-current h3 { letter-spacing: -.045em; }
+.process-heading h2 em {
+  display: inline-block;
+  transform: translateY(var(--process-title-y, 0px));
+}
+.process .process-heading > p { max-width: 37ch; }
+
+/* Contato: o formulário segue familiar, mas o gesto final ganha presença. */
+.contact-copy { position: relative; }
+.contact-copy::after {
+  content: "↗";
+  position: absolute;
+  right: 8%;
+  top: -8%;
+  width: clamp(66px, 11vw, 170px);
+  aspect-ratio: 1;
+  border: 1px solid var(--accent-ink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--accent-ink);
+  font: 400 clamp(32px, 6vw, 95px) var(--display);
+  opacity: .76;
+  pointer-events: none;
+  transform: rotate(var(--contact-rotation, 0deg));
+  transition: transform .1s linear;
+}
+.contact-form.letter-form {
+  position: relative;
+  padding: clamp(18px, 2.5vw, 40px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 70px rgba(0,0,0,.09);
+  transition: border-color .4s, transform .6s var(--editorial-ease);
+}
+.contact-form.letter-form:focus-within { border-color: var(--accent-ink); }
+.contact-form.letter-form .form-heading { font-size: 10px; }
+.contact-form.letter-form .form-bottom .button {
+  transition: transform .3s var(--editorial-ease), background .3s;
+}
+.contact-form.letter-form .form-bottom .button:hover { transform: translateY(-3px); }
+.contact-form.letter-form .letter-label { max-width: none; }
+.contact-form.letter-form textarea { background: var(--bg); }
+
+/* O rodapé entra como a assinatura, não como outra vitrine repetida. */
+.site-footer { position: relative; overflow: hidden; }
+.footer-top { position: relative; }
+.scroll-motion .site-footer .footer-wordmark {
+  transform: translate3d(0, var(--footer-rise, 0px), 0);
+  opacity: var(--footer-opacity, 1);
+  transition: none;
+}
+.site-footer .back-top {
+  transition: transform .45s var(--editorial-ease), background .25s, color .25s;
+}
+.site-footer .back-top:hover { transform: translateY(-7px) rotate(45deg); }
+.scroll-motion .contact-copy h2 { transform: translateY(var(--contact-title-y, 0px)); }
+
+/* Capítulos em telas intermediárias e mobile sem encolher os textos. */
+@media (max-width: 1260px) {
+  .chapter-rail { display: none; }
+  .tribyte-manifesto { min-height: 82svh; }
+  .manifesto-title { font-size: clamp(58px, 10.8vw, 139px); }
+  .manifesto-layout { grid-template-columns: 75px 1fr; }
+}
+@media (max-width: 800px) {
+  .tribyte-manifesto {
+    min-height: 0;
+    padding: 29px var(--gutter) 25px;
+  }
+  .manifesto-layout {
+    margin: clamp(70px, 11vh, 120px) 0 clamp(60px, 9vh, 100px);
+    grid-template-columns: 1fr;
+  }
+  .manifesto-aside { display: none; }
+  .manifesto-title { font-size: clamp(49px, 12.3vw, 100px); letter-spacing: -.085em; }
+  .manifesto-ending { margin-top: 55px; align-items: flex-start; }
+  .manifesto-top,
+  .manifesto-bottom { font-size: 8px; }
+  .manifesto-bottom span:last-child { display: none; }
+  .service-item summary { padding-left: 0; }
+  .service-item[open] summary,
+  .service-item summary:hover,
+  .service-item summary:focus-visible { padding-left: 13px; }
+  .contact-copy::after { top: -16px; right: 3%; width: 68px; font-size: 34px; opacity: .35; }
+  .contact-form.letter-form { padding: clamp(20px, 4vw, 32px); }
+}
+@media (max-width: 540px) {
+  .manifesto-top span:last-child { display: none; }
+  .manifesto-title { font-size: clamp(43px, 12.5vw, 68px); }
+  .manifesto-ending { display: grid; gap: 27px; }
+  .manifesto-ending p { max-width: 31ch; font-size: 14px; }
+  .manifesto-link { width: fit-content; }
+  .type-bridge-track { font-size: 25px; }
+  .contact-copy::after { display: none; }
+  .contact-form.letter-form { padding: 18px; }
+  .contact-form.letter-form textarea { padding-inline: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .type-bridge-track { animation: none !important; }
+  .manifesto-line,
+  .manifesto-seal,
+  .scroll-motion .site-footer .footer-wordmark,
+  .scroll-motion .contact-copy h2,
+  .process-heading h2 em {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .service-item::before { transform: none; opacity: 0; }
+}
+@media print {
+  .chapter-rail, .type-bridge, .manifesto-grid { display: none !important; }
+  .tribyte-manifesto { min-height: 0; color: #111; background: white; }
+  .manifesto-outline { -webkit-text-stroke: 0; color: #111; }
+  .manifesto-line-accent { color: #111; }
+}
