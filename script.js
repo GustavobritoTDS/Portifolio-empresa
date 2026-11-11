@@ -71,54 +71,6 @@ const $$ = (selector, context = document) => [
 ];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-/* Intro cinematográfica: curta, pulável e sem dependências.
-   A animação termina sozinha mesmo se o evento animationend não chegar. */
-const introOverlay = document.getElementById("tribyte-intro");
-if (introOverlay && document.documentElement.classList.contains("tb-first-visit")) {
-  const introSkip = document.getElementById("skip-tribyte-intro");
-  const returnFocus = document.querySelector(".wordmark");
-  let introFinished = false;
-  let introRescue;
-
-  function finalizeIntro() {
-    if (introFinished) return;
-    introFinished = true;
-    window.clearTimeout(introRescue);
-    const focusWasInside = introOverlay.contains(document.activeElement);
-    introOverlay.hidden = true;
-    document.documentElement.classList.remove("tb-first-visit");
-    if (focusWasInside && returnFocus) returnFocus.focus({ preventScroll: true });
-  }
-
-  function skipIntro() {
-    if (introFinished || introOverlay.classList.contains("is-skipping")) return;
-    introOverlay.classList.add("is-skipping");
-    window.setTimeout(finalizeIntro, 330);
-  }
-
-  introOverlay.hidden = false;
-  introOverlay.addEventListener("animationend", (event) => {
-    if (
-      event.target === introOverlay &&
-      event.animationName === "tribyte-intro-curtain"
-    ) finalizeIntro();
-  });
-  introSkip.addEventListener("click", skipIntro);
-  introOverlay.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      event.preventDefault();
-      skipIntro();
-    } else if (event.key === "Tab") {
-      // Apenas um controle de teclado na abertura.
-      event.preventDefault();
-      introSkip.focus({ preventScroll: true });
-    }
-  });
-  // O foco não deve alcançar os links que estão atrás da abertura.
-  introSkip.focus({ preventScroll: true });
-  introRescue = window.setTimeout(finalizeIntro, 3700);
-}
-
 /* Tema persistente, sem depender de serviços externos. */
 const themeToggle = $(".theme-toggle");
 function updateThemeButton() {
@@ -227,8 +179,6 @@ filterButtons.forEach((button) =>
     });
     $("#filter-status").textContent =
       `${count} ${count === 1 ? "projeto exibido" : "projetos exibidos"}.`;
-    // Atualiza o destaque após ocultar/exibir os cartões filtrados.
-    requestAnimationFrame(updateScroll);
   }),
 );
 
@@ -290,20 +240,6 @@ $$("[data-project]").forEach((button) =>
     $(".dialog-art-name").style.whiteSpace = "pre-line";
     artBox.style.background = project.color;
     artBox.style.color = project.ink;
-    const facts = $("#project-dialog-facts");
-    facts.replaceChildren();
-    [
-      ["CONTEXTO", project.type],
-      ["FOCO", project.focus],
-    ].forEach(([label, value]) => {
-      const container = document.createElement("div");
-      const small = document.createElement("small");
-      small.textContent = label;
-      const span = document.createElement("span");
-      span.textContent = value;
-      container.append(small, span);
-      facts.append(container);
-    });
     const features = $("#project-dialog-features");
     features.replaceChildren();
     project.features.forEach((text) => {
@@ -316,7 +252,7 @@ $$("[data-project]").forEach((button) =>
 );
 $("#project-dialog-link").addEventListener("click", () => {
   projectDialog.close();
-  setTimeout(() => showWizardStep(wizardIndex, true), 0);
+  setTimeout(() => $("#message").focus({ preventScroll: true }), 0);
 });
 $$("[data-open-privacy]").forEach((button) =>
   button.addEventListener("click", () => openDialog($("#privacy-dialog"))),
@@ -332,8 +268,7 @@ $$("[data-profile]").forEach((button) =>
     const photo = $(".team-photo", card);
     if (!name || !bio || !photo) return;
 
-    // Uma tag <br> não adiciona espaços em textContent. Preserve a separação
-    // entre nome e sobrenome antes de exibir o título no modal.
+    // Uma tag <br> não adiciona espaços em textContent.
     const fullName = Array.from(name.childNodes, (node) =>
       node.nodeName === "BR" ? " " : node.textContent,
     )
@@ -349,31 +284,65 @@ $$("[data-profile]").forEach((button) =>
   }),
 );
 
-/* Uma escolha nos serviços chega preenchida ao briefing. */
+/* Um serviço escolhido abre a conversa já com a primeira frase escrita. */
+const SERVICE_OPENERS = Object.freeze({
+  "Site institucional": "Quero um site institucional para ",
+  "Sistema web": "Quero um sistema web para ",
+  "Landing page": "Quero uma landing page para ",
+});
+const briefingForm = $("#briefing-form");
+const messageField = $("#message");
 $$("[data-service]").forEach((link) =>
   link.addEventListener("click", () => {
-    const radio = $$('input[name="service"]').find(
-      (input) => input.value === link.dataset.service,
-    );
-    if (radio) radio.checked = true;
+    $("#service").value = link.dataset.service;
+    if (!messageField.value.trim()) messageField.value = SERVICE_OPENERS[link.dataset.service] || "";
+    setTimeout(() => {
+      messageField.focus({ preventScroll: true });
+      messageField.setSelectionRange(messageField.value.length, messageField.value.length);
+      growMessage();
+    }, 400);
   }),
 );
 
-const briefingForm = $("#briefing-form");
+/* O campo cresce com o texto e sugere, aos poucos, o que o cliente pode contar. */
+function growMessage() {
+  messageField.style.height = "auto";
+  messageField.style.height = `${Math.min(messageField.scrollHeight, 520)}px`;
+}
+messageField.addEventListener("input", growMessage);
+const IDEAS = [
+  "Tenho uma clínica e quero que meus pacientes me encontrem e agendem pelo celular…",
+  "Preciso de um sistema para controlar as vendas e o estoque da minha loja…",
+  "Quero um site que mostre meu trabalho do jeito que eu imagino…",
+  "Vou lançar um produto e preciso de uma página que convença quem chegar…",
+];
+if (!reducedMotion.matches) {
+  let idea = 0;
+  setInterval(() => {
+    if (document.activeElement === messageField || messageField.value) return;
+    messageField.placeholder = IDEAS[idea++ % IDEAS.length];
+  }, 3800);
+}
+
 let briefingText = "";
 let senderName = "";
+const isValidContact = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || value.replace(/\D/g, "").length >= 10;
 briefingForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (!wizardSteps.every((_, index) => validateWizardStep(index))) return;
+  const nameInput = $("#name");
+  const contactInput = $("#contact");
+  nameInput.setCustomValidity(nameInput.value.trim().length < 2 ? "Informe um nome com pelo menos 2 caracteres." : "");
+  contactInput.setCustomValidity(isValidContact(contactInput.value.trim()) ? "" : "Informe um e-mail válido ou um WhatsApp com DDD.");
+  if (!briefingForm.reportValidity()) return;
   const data = new FormData(briefingForm);
+  const contact = String(data.get("contact")).trim();
   senderName = String(data.get("name")).trim();
   briefingText = [
     "TRIBYTE — BRIEFING DE PROJETO",
     "",
     `Nome: ${senderName}`,
-    `E-mail: ${String(data.get("email")).trim()}`,
-    `Projeto: ${data.get("service")}`,
-    `Objetivo: ${String(data.get("goal")).trim()}`,
+    `${contact.includes("@") ? "E-mail" : "WhatsApp"}: ${contact}`,
+    ...(data.get("service") ? [`Projeto: ${data.get("service")}`] : []),
     "",
     "SOBRE A IDEIA",
     String(data.get("message")).trim(),
@@ -384,11 +353,8 @@ briefingForm.addEventListener("submit", (event) => {
   $("#briefing-status").textContent = "";
   openDialog($("#briefing-dialog"));
 });
-briefingForm.noValidate = true;
-["goal", "message", "name"].forEach((id) =>
-  $(`#${id}`).addEventListener("input", (event) =>
-    event.target.setCustomValidity(""),
-  ),
+["name", "contact"].forEach((id) =>
+  $(`#${id}`).addEventListener("input", (event) => event.target.setCustomValidity("")),
 );
 $("#copy-briefing").addEventListener("click", async () => {
   try {
@@ -430,12 +396,11 @@ $("#download-briefing").addEventListener("click", () => {
 /* Integração opcional: só aparece quando um contato real for configurado. */
 const hasWhatsApp = /^\d{10,15}$/.test(CONTACT.whatsapp);
 const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(CONTACT.email);
-$("#contact-help").textContent = hasWhatsApp || hasEmail
-  ? "Prepare seu briefing e revise a mensagem antes de enviar."
-  : "Prepare seu briefing para copiar ou baixar. Nenhuma mensagem é enviada automaticamente.";
 if (hasWhatsApp || hasEmail) {
   const sendButton = $("#send-briefing");
   sendButton.hidden = false;
+  $("#contact-help").textContent =
+    "Prepare seu briefing e revise a mensagem antes de enviar.";
   sendButton.addEventListener("click", () => {
     const target = hasWhatsApp
       ? `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(briefingText)}`
@@ -463,142 +428,72 @@ updateClock();
 setInterval(updateClock, 30000);
 $("#current-year").textContent = String(new Date().getFullYear());
 
-/* Abertura progressiva dos títulos: usa IntersectionObserver e não esconde
-   conteúdo quando o navegador não oferece a API ou prefere menos movimento. */
-if ("IntersectionObserver" in window && !reducedMotion.matches) {
-  const headings = $$(
-    "main > .section-space > .section-topline, " +
-    "#projetos .section-heading, #servicos .section-heading, " +
-    "#processo .process-heading, #contato .contact-copy > h2",
-  );
-  const headingObserver = new IntersectionObserver(
-    (entries) => entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-entered");
-      headingObserver.unobserve(entry.target);
-    }),
-    { rootMargin: "0px 0px -8% 0px", threshold: 0.04 },
-  );
-  headings.forEach((heading) => {
-    heading.classList.add("scroll-enter");
-    headingObserver.observe(heading);
-  });
-  document.documentElement.classList.add("scroll-enhanced");
-}
-
-/* Barra de avanço, navegação lateral e foco do projeto compartilham
-   uma só leitura de geometria por frame (sem bibliotecas externas). */
+/* Rolagem sem trabalho excessivo: uma atualização por frame. */
 const progress = $(".scroll-progress");
-const sectionIds = ["inicio", "projetos", "estudio", "servicos", "processo", "contato"];
-const scrollSections = sectionIds.map((id) => document.getElementById(id));
-const sectionLinks = $$(".scroll-rail-link");
-const desktopLinks = $$(".desktop-nav a");
-const spotlightCards = $$(".project-card");
-let currentSection = "";
-let spotlightCard = null;
 let scrollQueued = false;
-
 function updateScroll() {
-  const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-  const fraction = max ? Math.max(0, Math.min(1, window.scrollY / max)) : 0;
-  progress.style.transform = `scaleX(${fraction})`;
-
-  // A seção ativa é a última que passou por 38% da altura visível.
-  const guideLine = window.innerHeight * 0.38;
-  let nextSection = "inicio";
-  scrollSections.forEach((section) => {
-    if (section && section.getBoundingClientRect().top <= guideLine)
-      nextSection = section.id;
-  });
-  if (max > 0 && window.scrollY >= max - 3) nextSection = "contato";
-
-  if (nextSection !== currentSection) {
-    currentSection = nextSection;
-    sectionLinks.forEach((link) => {
-      const active = link.getAttribute("href") === `#${currentSection}`;
-      link.classList.toggle("is-current", active);
-      if (active) link.setAttribute("aria-current", "location");
-      else link.removeAttribute("aria-current");
-    });
-    desktopLinks.forEach((link) => {
-      link.classList.toggle(
-        "is-active",
-        link.getAttribute("href") === `#${currentSection}`,
-      );
-    });
-  }
-
-  // Um projeto por vez recebe um destaque discreto, sem escurecer os demais.
-  if (!reducedMotion.matches) {
-    const center = window.innerHeight * 0.52;
-    let bestCard = null;
-    let nearest = Infinity;
-    spotlightCards.forEach((card) => {
-      if (card.hidden) return;
-      const rect = card.getBoundingClientRect();
-      if (rect.bottom < window.innerHeight * 0.15 ||
-          rect.top > window.innerHeight * 0.85) return;
-      const distance = Math.abs((rect.top + rect.bottom) / 2 - center);
-      if (distance < nearest) {
-        nearest = distance;
-        bestCard = card;
-      }
-    });
-    if (bestCard !== spotlightCard) {
-      if (spotlightCard) spotlightCard.classList.remove("is-spotlight");
-      if (bestCard) bestCard.classList.add("is-spotlight");
-      spotlightCard = bestCard;
-    }
-  }
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
   scrollQueued = false;
 }
-function queueScrollUpdate() {
-  if (scrollQueued) return;
-  scrollQueued = true;
-  requestAnimationFrame(updateScroll);
-}
-window.addEventListener("scroll", queueScrollUpdate, { passive: true });
-window.addEventListener("resize", queueScrollUpdate, { passive: true });
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!scrollQueued) {
+      scrollQueued = true;
+      requestAnimationFrame(updateScroll);
+    }
+  },
+  { passive: true },
+);
+window.addEventListener("resize", updateScroll, { passive: true });
 updateScroll();
+if ("IntersectionObserver" in window) {
+  const navObserver = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((entry) => {
+        if (entry.isIntersecting)
+          $$(".desktop-nav a").forEach((link) =>
+            link.classList.toggle(
+              "is-active",
+              link.getAttribute("href") === `#${entry.target.id}`,
+            ),
+          );
+      }),
+    { rootMargin: "-20% 0px -55% 0px", threshold: 0 },
+  );
+  $$("section[id]").forEach((section) => navObserver.observe(section));
+}
+
+/* Ponteiro: uma atualização por frame, compartilhada por cursor, hero e cartões. */
+function onPointerFrame(el, update, reset) {
+  let queued = false, last;
+  el.addEventListener("pointermove", (event) => {
+    last = event;
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { update(last); queued = false; });
+  }, { passive: true });
+  if (reset) el.addEventListener("pointerleave", reset);
+}
+const finePointer = window.matchMedia("(hover:hover) and (pointer:fine)").matches && !reducedMotion.matches;
+const relPos = (el, event) => {
+  const box = el.getBoundingClientRect();
+  return [(event.clientX - box.left) / box.width - 0.5, (event.clientY - box.top) / box.height - 0.5];
+};
 
 /* Cursor complementar: mantém o cursor nativo e não roda em telas de toque. */
-if (
-  window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
-  !reducedMotion.matches
-) {
+if (finePointer) {
   const halo = $(".cursor-halo");
-  let cursorFrame = false;
-  let cursorX = 0;
-  let cursorY = 0;
-  document.addEventListener(
-    "pointermove",
-    (event) => {
-      cursorX = event.clientX;
-      cursorY = event.clientY;
-      if (!cursorFrame) {
-        cursorFrame = true;
-        requestAnimationFrame(() => {
-          halo.style.left = `${cursorX}px`;
-          halo.style.top = `${cursorY}px`;
-          halo.style.opacity = "1";
-          cursorFrame = false;
-        });
-      }
-    },
-    { passive: true },
-  );
+  onPointerFrame(document, (event) => {
+    halo.style.left = `${event.clientX}px`;
+    halo.style.top = `${event.clientY}px`;
+    halo.style.opacity = "1";
+  });
   document.addEventListener("pointerover", (event) =>
-    halo.classList.toggle(
-      "is-hovering",
-      Boolean(event.target.closest("a,button,summary,label")),
-    ),
-  );
-  document.addEventListener("pointerout", (event) => {
-    if (!event.relatedTarget) halo.style.opacity = "0";
-  });
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) halo.style.opacity = "0";
-  });
+    halo.classList.toggle("is-hovering", Boolean(event.target.closest("a,button,summary,label"))));
+  document.addEventListener("pointerout", (event) => { if (!event.relatedTarget) halo.style.opacity = "0"; });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) halo.style.opacity = "0"; });
 }
 
 /* As três faces da marca têm significado e são operáveis com teclado. */
@@ -617,108 +512,28 @@ $$(".tb-piece").forEach((piece, index) => {
     }
   });
 });
-if (window.matchMedia("(hover:hover) and (pointer:fine)").matches && !reducedMotion.matches) {
+if (finePointer) {
   const heroArt = $(".tb-hero-art");
   const stage = $(".tb-hero-stage");
-  let heroFrame = false;
-  let heroX = 0, heroY = 0;
-  heroArt.addEventListener("pointermove", (event) => {
-    const bounds = heroArt.getBoundingClientRect();
-    heroX = (event.clientX - bounds.left) / bounds.width - .5;
-    heroY = (event.clientY - bounds.top) / bounds.height - .5;
-    if (!heroFrame) {
-      heroFrame = true;
-      requestAnimationFrame(() => {
-        stage.style.setProperty("--tilt-x", (-heroY * 8).toFixed(2) + "deg");
-        stage.style.setProperty("--tilt-y", (heroX * 8).toFixed(2) + "deg");
-        heroFrame = false;
-      });
-    }
-  }, {passive:true});
-  heroArt.addEventListener("pointerleave", () => {
-    stage.style.removeProperty("--tilt-x");
-    stage.style.removeProperty("--tilt-y");
-  });
-  $$(".project-card, .team-card").forEach((card) => {
-    let pending = false, px = 0, py = 0;
-    card.addEventListener("pointermove", (event) => {
-      const bounds = card.getBoundingClientRect();
-      px = (event.clientX - bounds.left) / bounds.width - .5;
-      py = (event.clientY - bounds.top) / bounds.height - .5;
-      if (!pending) {
-        pending = true;
-        requestAnimationFrame(() => {
-          card.style.setProperty("--card-x", (-py * 3).toFixed(2) + "deg");
-          card.style.setProperty("--card-y", (px * 3).toFixed(2) + "deg");
-          card.style.setProperty("--shine-x", ((px + .5) * 100) + "%");
-          card.style.setProperty("--shine-y", ((py + .5) * 100) + "%");
-          card.style.setProperty("--shine-opacity", "1");
-          pending = false;
-        });
-      }
-    }, {passive:true});
-    card.addEventListener("pointerleave", () => {
+  onPointerFrame(heroArt, (event) => {
+    const [x, y] = relPos(heroArt, event);
+    stage.style.setProperty("--tilt-x", (-y * 8).toFixed(2) + "deg");
+    stage.style.setProperty("--tilt-y", (x * 8).toFixed(2) + "deg");
+  }, () => { stage.style.removeProperty("--tilt-x"); stage.style.removeProperty("--tilt-y"); });
+  $$(".project-card, .team-card").forEach((card) =>
+    onPointerFrame(card, (event) => {
+      const [x, y] = relPos(card, event);
+      card.style.setProperty("--card-x", (-y * 3).toFixed(2) + "deg");
+      card.style.setProperty("--card-y", (x * 3).toFixed(2) + "deg");
+      card.style.setProperty("--shine-x", (x + 0.5) * 100 + "%");
+      card.style.setProperty("--shine-y", (y + 0.5) * 100 + "%");
+      card.style.setProperty("--shine-opacity", "1");
+    }, () => {
       card.style.removeProperty("--card-x");
       card.style.removeProperty("--card-y");
       card.style.setProperty("--shine-opacity", "0");
-    });
-  });
+    }));
 }
-/* O briefing é processado no navegador. O envio nativo fica desativado. */
-const wizardSteps = $$(".briefing-step");
-const wizardControls = $("#wizard-actions");
-const wizardNext = $("#wizard-next");
-const wizardPrev = $("#wizard-prev");
-const wizardSubmit = $("#briefing-submit");
-let wizardIndex = 0;
-function showWizardStep(index, moveFocus = false) {
-  wizardIndex = index;
-  const isLastStep = index === wizardSteps.length - 1;
-  wizardSteps.forEach((section, i) => { section.hidden = i !== index; });
-  $("#wizard-progress").hidden = false;
-  $("#wizard-progress").textContent = "Etapa " + (index + 1) + " de " + wizardSteps.length;
-  wizardPrev.hidden = index === 0;
-  wizardNext.hidden = isLastStep;
-  wizardSubmit.hidden = !isLastStep;
-  wizardSubmit.disabled = !isLastStep;
-  if (moveFocus) {
-    const step = wizardSteps[index];
-    const first = $("input:checked", step) || $("input, textarea", step);
-    first?.focus({preventScroll:true});
-  }
-}
-function validateWizardStep(index) {
-  const invalidField = $$("input, textarea", wizardSteps[index]).find((field) => {
-    if (field.minLength > 0) {
-      const tooShort = field.value && field.value.trim().length < field.minLength;
-      field.setCustomValidity(tooShort ? `Informe pelo menos ${field.minLength} caracteres.` : "");
-    }
-    return !field.validity.valid;
-  });
-  if (!invalidField) return true;
-  if (index !== wizardIndex) showWizardStep(index);
-  invalidField.reportValidity();
-  return false;
-}
-wizardControls.hidden = false;
-showWizardStep(0);
-wizardNext.addEventListener("click", () => {
-  if (validateWizardStep(wizardIndex)) showWizardStep(wizardIndex + 1, true);
-});
-wizardPrev.addEventListener("click", () => {
-  showWizardStep(Math.max(0, wizardIndex - 1), true);
-});
-function updateBriefingSummary() {
-  const data = new FormData(briefingForm);
-  ["service", "goal", "message"].forEach((key) => {
-    const value = String(data.get(key) || "").trim();
-    const target = $("[data-summary='" + key + "']");
-    target.textContent = value ? (key === "message" ? value.slice(0, 150) : value) : "A definir";
-  });
-}
-briefingForm.addEventListener("input", updateBriefingSummary);
-briefingForm.addEventListener("change", updateBriefingSummary);
-updateBriefingSummary();
 
 /* Sensor opcional: só começa após ação explícita e nunca pede permissão sozinho. */
 if ("DeviceOrientationEvent" in window && window.matchMedia("(pointer:coarse)").matches && !reducedMotion.matches) {

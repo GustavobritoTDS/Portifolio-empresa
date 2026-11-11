@@ -22,50 +22,15 @@
     <title>TRIBYTE™ — Ideias em outra dimensão.</title>
     <link rel="icon" href="assets/logo-tribyte-mark.svg" type="image/svg+xml" />
     <link rel="preload" href="assets/space-grotesk.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="preload" href="assets/logo-tribyte-mark.svg" as="image" />
-    <link rel="preload" href="assets/logo-tribyte-wordmark.svg" as="image" />
     <script src="site-init.js"></script>
     <link rel="stylesheet" href="styles.css" />
+    <script src="assets/gsap-3.12.5.min.js" defer></script>
+    <script src="intro.js" defer></script>
     <script src="script.js" defer></script>
   </head>
   <body>
-    <!-- Apresentação da marca: visível apenas na primeira visita da sessão.
-         Não precisa de JavaScript para ser ocultada por padrão. -->
-    <div class="tribyte-intro" id="tribyte-intro" role="dialog" aria-modal="true"
-      aria-label="Apresentação da marca TRIBYTE" hidden>
-      <div class="tribyte-intro__ambient" aria-hidden="true"></div>
-      <span class="tribyte-intro__corner tribyte-intro__corner--left" aria-hidden="true">TRIBYTE / DIGITAL STUDIO</span>
-      <span class="tribyte-intro__corner tribyte-intro__corner--right" aria-hidden="true">GOIÁS · BRASIL</span>
-      <div class="tribyte-intro__center">
-        <div class="tribyte-intro__mark-frame">
-          <img class="tribyte-intro__mark" src="assets/logo-tribyte-mark.svg" alt=""
-            width="220" height="198" fetchpriority="high" />
-        </div>
-        <div class="tribyte-intro__name-mask">
-          <span class="tribyte-intro__name" role="img" aria-label="TRIBYTE"></span>
-        </div>
-        <p class="tribyte-intro__tagline">TRÊS MENTES. UMA NOVA PERSPECTIVA.</p>
-      </div>
-      <div class="tribyte-intro__bottom" aria-hidden="true">
-        <span>IDEIAS EM OUTRA DIMENSÃO.</span>
-        <span class="tribyte-intro__progress"><span></span></span>
-        <span>EST. 2026</span>
-      </div>
-      <button class="tribyte-intro__skip" id="skip-tribyte-intro" type="button">
-        Pular abertura <span aria-hidden="true">↗</span>
-      </button>
-    </div>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <div class="scroll-progress" aria-hidden="true"></div>
-    <!-- Navegação opcional pelo scroll: atalhos para todas as seções. -->
-    <nav class="scroll-rail" aria-label="Navegação por seções">
-      <a class="scroll-rail-link is-current" href="#inicio" aria-label="Seção 1 de 6: Início" aria-current="location"><span class="scroll-rail-label" aria-hidden="true">Início</span><span class="scroll-rail-marker" aria-hidden="true"></span></a>
-      <a class="scroll-rail-link" href="#projetos" aria-label="Seção 2 de 6: Projetos"><span class="scroll-rail-label" aria-hidden="true">Projetos</span><span class="scroll-rail-marker" aria-hidden="true"></span></a>
-      <a class="scroll-rail-link" href="#estudio" aria-label="Seção 3 de 6: O estúdio"><span class="scroll-rail-label" aria-hidden="true">O estúdio</span><span class="scroll-rail-marker" aria-hidden="true"></span></a>
-      <a class="scroll-rail-link" href="#servicos" aria-label="Seção 4 de 6: Serviços"><span class="scroll-rail-label" aria-hidden="true">Serviços</span><span class="scroll-rail-marker" aria-hidden="true"></span></a>
-      <a class="scroll-rail-link" href="#processo" aria-label="Seção 5 de 6: Nosso processo"><span class="scroll-rail-label" aria-hidden="true">Processo</span><span class="scroll-rail-marker" aria-hidden="true"></span></a>
-      <a class="scroll-rail-link" href="#contato" aria-label="Seção 6 de 6: Contato"><span class="scroll-rail-label" aria-hidden="true">Contato</span><span class="scroll-rail-marker" aria-hidden="true"></span></a>
-    </nav>
     <div class="cursor-halo" aria-hidden="true"></div>
 
     <!-- Navegação: acessível com teclado e adaptada ao toque. -->
@@ -74,7 +39,7 @@
         <img class="brand-icon" src="assets/logo-tribyte-mark.svg" width="40" height="36" alt="" /><span class="brand-lettering" aria-hidden="true"></span>
       </a>
       <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="#projetos">Projetos<span>03</span></a>
+        <a href="#projetos">Projetos</a>
         <a href="#estudio">O estúdio</a>
         <a href="#servicos">O que fazemos</a>
       </nav>
@@ -129,10 +94,10 @@
       aria-label="Navegação móvel"
       hidden
     >
-      <a href="#projetos"><small>01</small>Projetos <span>↗</span></a>
-      <a href="#estudio"><small>02</small>O estúdio <span>↗</span></a>
-      <a href="#servicos"><small>03</small>Serviços <span>↗</span></a>
-      <a href="#contato"><small>04</small>Vamos conversar <span>↗</span></a>
+      <a href="#projetos">Projetos <span>↗</span></a>
+      <a href="#estudio">O estúdio <span>↗</span></a>
+      <a href="#servicos">Serviços <span>↗</span></a>
+      <a href="#contato">Vamos conversar <span>↗</span></a>
       <p>Três mentes. Uma nova perspectiva.</p>
     </nav>
 
@@ -152,8 +117,7 @@
               >
             </h1>
             <div class="hero-intro">
-              <span class="mini-cross" aria-hidden="true">✳</span>
-              <p>
+                            <p>
                 Transformamos ideias em sites e sistemas<br
                   class="desktop-break"
                 />
@@ -174,7 +138,7 @@
           </div>
         </div>
         <div class="hero-bottom">
-          <p><span>01 / 06</span> IDEIAS QUE GANHAM FORMA</p>
+          <p>IDEIAS QUE GANHAM FORMA</p>
           <a href="#projetos"
             >CONTINUE EXPLORANDO <span aria-hidden="true">↓</span></a
           ><span class="hero-bottom-note"
@@ -188,10 +152,10 @@
         aria-label="Design, desenvolvimento e novas perspectivas"
       >
         <div class="marquee-track" aria-hidden="true">
-          <span>DESIGN</span><b>✳</b><span>DESENVOLVIMENTO</span><b>✳</b
-          ><span>NOVAS PERSPECTIVAS</span><b>✳</b><span>DESIGN</span><b>✳</b
-          ><span>DESENVOLVIMENTO</span><b>✳</b><span>NOVAS PERSPECTIVAS</span
-          ><b>✳</b>
+          <span>DESIGN</span><b></b><span>DESENVOLVIMENTO</span><b></b
+          ><span>NOVAS PERSPECTIVAS</span><b></b><span>DESIGN</span><b></b
+          ><span>DESENVOLVIMENTO</span><b></b><span>NOVAS PERSPECTIVAS</span
+          ><b></b>
         </div>
       </div>
 
@@ -202,9 +166,7 @@
         aria-labelledby="projects-title"
       >
         <div class="section-topline">
-          <span class="mono-label"><i></i> 01 — TRABALHOS SELECIONADOS</span
-          ><span class="mono-label section-aside"
-            >UMA IDEIA. DIFERENTES POSSIBILIDADES.</span
+          <span class="mono-label">TRABALHOS SELECIONADOS</span
           >
         </div>
         <div class="section-heading project-heading">
@@ -227,21 +189,21 @@
                 data-filter="all"
                 aria-pressed="true"
               >
-                Todos <sup>03</sup></button
+                Todos</button
               ><button
                 type="button"
                 class="filter-button"
                 data-filter="sistema"
                 aria-pressed="false"
               >
-                Sistemas <sup>02</sup></button
+                Sistemas</button
               ><button
                 type="button"
                 class="filter-button"
                 data-filter="web"
                 aria-pressed="false"
               >
-                Web <sup>01</sup>
+                Web
               </button>
             </div>
           </div>
@@ -262,8 +224,6 @@
             >
               <div class="project-visual smart-visual">
                 <span class="visual-label">SENAI SMART CLASS</span
-                ><span class="visual-label visual-label-right"
-                  >CAPTURAS REAIS</span
                 >
                 <div class="smart-photo-gallery" aria-hidden="true">
                   <figure class="smart-photo smart-photo-primary">
@@ -275,20 +235,14 @@
                     <figcaption>02 / CONTROLES</figcaption>
                   </figure>
                 </div>
-                <div class="project-peek" aria-hidden="true">
-                  <span class="project-peek-kicker">PRÉVIA DO PROJETO <span>01 / 03</span></span>
-                  <strong>Uma sala mais conectada.</strong>
-                  <p>Sensores, acompanhamento do ambiente e controles digitais em uma interface real.</p>
-                  <span class="project-peek-footer">EXPLORAR DETALHES <span>↗</span></span>
-                </div>
                 <span class="project-view"
                   >Explorar projeto <span>↗</span></span
                 >
               </div>
               <div class="project-info">
                 <div>
-                  <span class="project-index">01 / SISTEMA WEB</span>
-                  <h3>SENAI Smart Class <span>↗</span></h3>
+                  <span class="project-index">SISTEMA WEB</span>
+                  <h3>SENAI Smart Class</h3>
                 </div>
                 <p>Uma nova conexão entre<br />tecnologia e sala de aula.</p>
               </div>
@@ -304,23 +258,20 @@
             >
               <div class="project-visual sales-visual">
                 <span class="visual-label">GESTÃO COMERCIAL</span
-                ><span class="visual-label visual-label-right"
-                  >INTERFACE ILUSTRATIVA</span
                 >
                 <div class="sales-composition" aria-hidden="true">
                   <span class="sales-orbit"></span>
                   <div class="sales-panel">
                     <div class="sales-heading">
-                      <span class="sales-symbol">↗</span
-                      ><span
+                      <span
                         >Visão de vendas<small
                           >Seu negócio em movimento</small
                         ></span
-                      ><span>•••</span>
+                      >
                     </div>
                     <div class="sales-total">
                       <small>PAINEL COMERCIAL</small
-                      ><strong>Próximo<br />objetivo<span>↗</span></strong>
+                      ><strong>Próximo<br />objetivo</strong>
                     </div>
                     <div class="bars">
                       <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -330,15 +281,7 @@
                       ><span>Vendas · Metas · Equipe</span>
                     </div>
                   </div>
-                  <div class="sales-badge">
-                    ✳<span>Mais clareza.<br />Mais direção.</span>
-                  </div>
-                </div>
-                <div class="project-peek" aria-hidden="true">
-                  <span class="project-peek-kicker">PRÉVIA ILUSTRATIVA <span>02 / 03</span></span>
-                  <strong>Informação para decidir.</strong>
-                  <p>Uma proposta de sistema para acompanhar vendas, metas e equipe em um só lugar.</p>
-                  <span class="project-peek-footer">EXPLORAR DETALHES <span>↗</span></span>
+
                 </div>
                 <span class="project-view"
                   >Explorar projeto <span>↗</span></span
@@ -346,8 +289,8 @@
               </div>
               <div class="project-info">
                 <div>
-                  <span class="project-index">02 / SISTEMA WEB</span>
-                  <h3>Gestão Comercial <span>↗</span></h3>
+                  <span class="project-index">SISTEMA WEB</span>
+                  <h3>Gestão Comercial</h3>
                 </div>
                 <p>Operação organizada.<br />Decisões mais claras.</p>
               </div>
@@ -362,23 +305,14 @@
             >
               <div class="project-visual brand-visual">
                 <span class="visual-label">TRIBYTE / IDENTIDADE DIGITAL</span
-                ><span class="visual-label visual-label-right"
-                  >WEB EXPERIENCE</span
                 >
                 <div class="brand-poster" aria-hidden="true">
                   <span class="poster-kicker"
                     >TRÊS MENTES.<br />INFINITAS POSSIBILIDADES.</span
-                  ><span class="poster-symbol">✳</span
                   ><strong>TRI<br />BYTE<span>™</span></strong
                   ><span class="poster-bottom"
                     >DESIGN × CÓDIGO × IDENTIDADE</span
                   ><span class="poster-lines"></span>
-                </div>
-                <div class="project-peek" aria-hidden="true">
-                  <span class="project-peek-kicker">PROJETO DO ESTÚDIO <span>03 / 03</span></span>
-                  <strong>A identidade que você navega.</strong>
-                  <p>Design autoral, projetos selecionados e uma experiência adaptada a cada tela.</p>
-                  <span class="project-peek-footer">EXPLORAR DETALHES <span>↗</span></span>
                 </div>
                 <span class="project-view"
                   >Explorar projeto <span>↗</span></span
@@ -386,8 +320,8 @@
               </div>
               <div class="project-info">
                 <div>
-                  <span class="project-index">03 / WEBSITE & IDENTIDADE</span>
-                  <h3>Nosso próprio universo <span>↗</span></h3>
+                  <span class="project-index">WEBSITE & IDENTIDADE</span>
+                  <h3>Nosso próprio universo</h3>
                 </div>
                 <p>A identidade da TRIBYTE<br />traduzida para a web.</p>
               </div>
@@ -402,9 +336,7 @@
         aria-labelledby="studio-title"
       >
         <div class="section-topline">
-          <span class="mono-label"><i></i> 02 — QUEM ESTÁ POR TRÁS</span
-          ><span class="mono-label section-aside"
-            >DE GOIÁS PARA NOVAS IDEIAS.</span
+          <span class="mono-label">QUEM ESTÁ POR TRÁS</span
           >
         </div>
         <div class="studio-intro">
@@ -414,8 +346,7 @@
             >
           </h2>
           <div class="studio-story reveal">
-            <span class="studio-asterisk" aria-hidden="true">✳</span>
-            <p>
+                        <p>
               A TRIBYTE nasce do encontro entre Gustavo, Márcio e Lucas. Três
               desenvolvedores que compartilham a vontade de transformar ideias
               em experiências digitais com identidade.
@@ -432,14 +363,14 @@
           <article class="team-card reveal">
             <div class="team-art gustavo-art">
               <img class="team-photo" src="assets/gustavo-perfil.svg" alt="Gustavo de terno" loading="lazy" decoding="async" />
-              <span class="team-number">01 / GBV</span>
+              <span class="team-number">GBV</span>
             </div>
             <div class="team-info">
-              <h3>Gustavo de <br />Brito Vieira</h3>
+              <h3>Gustavo de<br />Brito Vieira</h3>
               <span>Desenvolvimento web</span>
               <p class="team-bio">Sou estudante de Desenvolvimento de Sistemas pelo SENAI e gosto de transformar ideias em soluções digitais. Tenho experiência prática com suporte técnico, infraestrutura e gerenciamento de sistemas, além de desenvolver projetos com HTML, CSS, JavaScript, Python e bancos de dados. Gosto de aprofundar meus conhecimentos em tecnologia e explorar novas ferramentas. Quero atuar como desenvolvedor Full Stack, com maior afinidade por Back-End: gosto de trabalhar com lógica, integrações, bancos de dados e com o funcionamento interno das aplicações. Também me interessa construir interfaces claras e responsivas, entendendo o produto de ponta a ponta. Na TRIBYTE, colaboro no desenvolvimento de sites e sistemas e participei do SENAI Smart Class, projeto de automação inteligente de ambientes escolares. Estou sempre estudando e praticando para transformar ideias em soluções digitais reais.</p>
               <button class="button button-primary profile-open" type="button" data-profile aria-haspopup="dialog" aria-controls="profile-dialog">Explorar perfil <span aria-hidden="true">↗</span></button>
-              
+
             </div>
             <div class="team-footer">
               <span>TRIBYTE / EQUIPE</span
@@ -455,31 +386,31 @@
           <article class="team-card reveal">
             <div class="team-art marcio-art">
               <img class="team-photo" src="assets/marcio-perfil.svg" alt="Márcio em frente a um mural colorido" loading="lazy" decoding="async" />
-              <span class="team-number">02 / MA</span>
+              <span class="team-number">MA</span>
             </div>
             <div class="team-info">
-              <h3>Márcio <br />Andrey</h3>
+              <h3>Márcio<br />Andrey</h3>
               <span>Desenvolvimento web</span>
               <p class="team-bio">Sou estudante de Desenvolvimento de Sistemas pelo SENAI e tenho interesse em tecnologia, programação e criação de soluções digitais. Desenvolvo projetos web com HTML, CSS e JavaScript, buscando criar interfaces responsivas e fáceis de usar. Também uso GitHub para organizar o código, Vercel para publicar aplicações e Supabase para integrar bancos de dados. Participei do SENAI Smart Class, que conecta um painel web à automação com Arduino, e desenvolvo o Vio Finanças, voltado à organização financeira pessoal. Quero crescer como desenvolvedor web, aprender com a prática e transformar meus conhecimentos em ferramentas úteis para as pessoas.</p>
               <button class="button button-primary profile-open" type="button" data-profile aria-haspopup="dialog" aria-controls="profile-dialog">Explorar perfil <span aria-hidden="true">↗</span></button>
-              
+
             </div>
             <div class="team-footer">
               <span>TRIBYTE / EQUIPE</span
-              ><span class="team-small-symbol" aria-hidden="true">↗</span>
+              ><span aria-hidden="true"></span>
             </div>
           </article>
           <article class="team-card reveal">
             <div class="team-art lucas-art">
               <img class="team-photo" src="assets/lucas-perfil.svg" alt="Lucas usando casaco marrom" loading="lazy" decoding="async" />
-              <span class="team-number">03 / LDC</span>
+              <span class="team-number">LDC</span>
             </div>
             <div class="team-info">
-              <h3>Lucas Duarte <br />Costa</h3>
+              <h3>Lucas Duarte<br />Costa</h3>
               <span>Desenvolvimento web</span>
               <p class="team-bio">Sou estudante de Desenvolvimento de Sistemas pelo SENAI e minha curiosidade por tecnologia vem desde a infância. Gosto de entender como computadores e sistemas funcionam, do hardware à lógica e às aplicações. Tenho conhecimentos intermediários em Java e JavaScript, familiaridade com o Prompt de Comando e experiência usando ferramentas de desenvolvimento e inteligência artificial para apoiar tarefas e criar soluções. Meu principal objetivo é atuar em Back-End, trabalhando com lógica, arquitetura, testes e melhoria dos sistemas. Na TRIBYTE, participei do SENAI Smart Class e de um sistema básico de gerenciamento financeiro. Busco evoluir continuamente e acredito que organização, comunicação clara e facilidade de uso fazem parte de uma boa solução tecnológica.</p>
               <button class="button button-primary profile-open" type="button" data-profile aria-haspopup="dialog" aria-controls="profile-dialog">Explorar perfil <span aria-hidden="true">↗</span></button>
-              
+
             </div>
             <div class="team-footer">
               <span>TRIBYTE / EQUIPE</span
@@ -501,8 +432,8 @@
         aria-labelledby="services-title"
       >
         <div class="section-topline">
-          <span class="mono-label"><i></i> 03 — O QUE FAZEMOS</span
-          ><span class="mono-label section-aside">DA IDEIA À INTERAÇÃO.</span>
+          <span class="mono-label">O QUE FAZEMOS</span
+          >
         </div>
         <div class="section-heading">
           <h2 id="services-title">
@@ -520,8 +451,7 @@
             <summary>
               <span class="service-number">01</span>
               <h3>Sites com identidade</h3>
-              <span class="service-tags">PORTFÓLIOS / INSTITUCIONAIS</span
-              ><span class="service-expand" aria-hidden="true">+</span>
+              <span class="service-expand" aria-hidden="true">+</span>
             </summary>
             <div class="service-body">
               <p>
@@ -542,8 +472,7 @@
             <summary>
               <span class="service-number">02</span>
               <h3>Sistemas que simplificam</h3>
-              <span class="service-tags">DASHBOARDS / APLICAÇÕES WEB</span
-              ><span class="service-expand" aria-hidden="true">+</span>
+              <span class="service-expand" aria-hidden="true">+</span>
             </summary>
             <div class="service-body">
               <p>
@@ -564,8 +493,7 @@
             <summary>
               <span class="service-number">03</span>
               <h3>Landing pages que conectam</h3>
-              <span class="service-tags">CAMPANHAS / PRODUTOS</span
-              ><span class="service-expand" aria-hidden="true">+</span>
+              <span class="service-expand" aria-hidden="true">+</span>
             </summary>
             <div class="service-body">
               <p>
@@ -591,7 +519,7 @@
         aria-labelledby="process-title"
       >
         <div class="section-topline">
-          <span class="mono-label"><i></i> 04 — COMO ACONTECE</span>
+          <span class="mono-label">COMO ACONTECE</span>
         </div>
         <div class="process-layout">
           <div class="process-heading">
@@ -602,7 +530,7 @@
               Uma conversa abre o caminho.<br />O processo dá forma ao que vem
               depois.
             </p>
-            <span class="process-arrow" aria-hidden="true">↳</span>
+
           </div>
           <ol class="process-steps">
             <li class="reveal">
@@ -649,8 +577,8 @@
       >
         <div class="section-topline">
           <span class="mono-label"
-            ><i></i> 05 — A PRÓXIMA IDEIA PODE SER A SUA</span
-          ><span class="mono-label section-aside">VAMOS CONSTRUIR JUNTOS.</span>
+            >A PRÓXIMA IDEIA PODE SER A SUA</span
+          >
         </div>
         <div class="contact-layout">
           <div class="contact-copy">
@@ -664,56 +592,25 @@
               Conte o que você tem em mente.<br />Todo projeto começa com uma
               boa conversa.
             </p>
-            <div class="contact-note">
-              <span>✳</span>
-              <p>O primeiro rascunho<br />de algo que pode ser incrível.</p>
-            </div>
+
           </div>
-          <div class="briefing-layout">
-          <form class="contact-form" id="briefing-form">
-            <div class="form-heading"><span>SEU PROJETO COMEÇA AQUI</span><span aria-hidden="true">↗</span></div>
-            <p class="wizard-progress" id="wizard-progress" aria-live="polite" hidden>Etapa 1 de 4</p>
-            <section class="briefing-step" data-step="0" aria-label="Tipo de projeto">
-              <fieldset><legend>O que você quer construir?</legend><div class="service-options">
-                <label><input type="radio" name="service" value="Site institucional" checked /><span>Um site</span></label>
-                <label><input type="radio" name="service" value="Sistema web" /><span>Um sistema</span></label>
-                <label><input type="radio" name="service" value="Landing page" /><span>Landing page</span></label>
-                <label><input type="radio" name="service" value="Vamos descobrir juntos" /><span>Ainda não sei</span></label>
-              </div></fieldset>
-            </section>
-            <section class="briefing-step" data-step="1" aria-label="Objetivo do projeto">
-              <label for="goal">Qual é o principal objetivo?
-                <textarea id="goal" name="goal" rows="3" minlength="5" maxlength="500" placeholder="Ex.: apresentar meus serviços ou organizar vendas" required></textarea>
-              </label>
-            </section>
-            <section class="briefing-step" data-step="2" aria-label="Detalhes da ideia">
-              <label for="message">Conte um pouco mais sobre a sua ideia
-                <textarea id="message" name="message" rows="4" minlength="10" maxlength="3000" placeholder="O que imagina para o projeto?" required></textarea>
-              </label>
-            </section>
-            <section class="briefing-step" data-step="3" aria-label="Informações de contato">
-              <div class="form-row">
-                <label for="name">Como podemos te chamar?<input id="name" name="name" type="text" autocomplete="name" placeholder="Seu nome" required minlength="2" maxlength="100" /></label>
-                <label for="email">Seu e-mail<input id="email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required maxlength="180" /></label>
-              </div>
-            </section>
-            <div class="wizard-actions" id="wizard-actions" hidden>
-              <button class="button button-secondary" id="wizard-prev" type="button" hidden>Voltar</button>
-              <button class="button button-primary" id="wizard-next" type="button">Próxima etapa <span aria-hidden="true">↗</span></button>
+          <form class="contact-form letter-form" id="briefing-form">
+            <div class="form-heading"><span>CONTE COM SUAS PALAVRAS</span></div>
+            <input type="hidden" name="service" id="service" value="" />
+            <label class="letter-label" for="message">Qual é a sua ideia?
+              <textarea id="message" name="message" rows="8" minlength="10" maxlength="3000" required placeholder="Escreva como se estivesse falando com a gente."></textarea>
+            </label>
+            <p class="letter-hint">Pode ser bagunçado. Conte o que imagina, para quem é, o que você viu por aí e gostou, o prazo. Quanto mais você falar, melhor a gente entende.</p>
+            <div class="form-row">
+              <label for="name">Seu nome<input id="name" name="name" type="text" autocomplete="name" placeholder="Como podemos te chamar?" required minlength="2" maxlength="100" /></label>
+              <label for="contact">E-mail ou WhatsApp<input id="contact" name="contact" type="text" autocomplete="email" placeholder="Por onde falamos com você?" required minlength="5" maxlength="180" /></label>
             </div>
             <div class="form-bottom">
-              <p id="contact-help">O formulário precisa de JavaScript para montar o briefing.</p>
-              <button class="button button-primary" id="briefing-submit" type="submit" disabled>Montar briefing <span aria-hidden="true">↗</span></button>
+              <p id="contact-help">Prepare seu briefing para copiar ou baixar. Nenhuma mensagem é enviada automaticamente.</p>
+              <button class="button button-primary" id="briefing-submit" type="submit">Montar minha mensagem <span aria-hidden="true">↗</span></button>
             </div>
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           </form>
-          <aside class="briefing-summary" aria-label="Resumo do briefing">
-            <span class="mono-label">SEU BRIEFING / AO VIVO</span>
-            <p><strong>Projeto</strong><span data-summary="service">Site institucional</span></p>
-            <p><strong>Objetivo</strong><span data-summary="goal">A definir</span></p>
-            <p><strong>Mensagem</strong><span data-summary="message">A definir</span></p>
-          </aside>
-          </div>
         </div>
       </section>
     </main>
@@ -773,7 +670,7 @@
         <span class="mono-label" id="project-dialog-category"></span>
         <h2 id="project-dialog-title"></h2>
         <p class="dialog-lead" id="project-dialog-description"></p>
-        <div class="dialog-facts" id="project-dialog-facts"></div>
+
         <h3>O projeto em foco</h3>
         <ul class="project-features" id="project-dialog-features"></ul>
         <div class="smart-modal-gallery" id="smart-modal-gallery" hidden aria-label="Capturas reais do SENAI Smart Class">
@@ -869,19 +766,19 @@
       <h2 id="privacy-title">Seus dados,<br />com clareza.</h2>
       <p>
         Este portfólio não usa ferramentas de análise nem cookies de
-        publicidade. A preferência de tema e o registro de que você já viu a
-        abertura ficam neste navegador.
+        publicidade. Sua preferência de tema é salva apenas neste navegador.
       </p>
       <p>
-        O briefing é montado no seu navegador. Você pode copiar ou baixar o
-        texto. Se escolher enviar, o serviço de contato recebe os dados para
-        preencher a mensagem. Você confirma o envio no aplicativo.
+        O briefing é preparado localmente. Nome, e-mail e mensagem não são
+        enviados nem salvos por este site. Você decide se quer copiar ou baixar
+        o texto.
       </p>
       <p>
         Ao visitar um link externo, passam a valer as práticas de privacidade do
         serviço de destino.
       </p>
     </dialog>
+    <div class="tb-intro" id="brand-intro" aria-hidden="true"></div>
     <noscript
       ><div class="noscript-note">
         Você pode explorar o portfólio e os serviços. Ative o JavaScript para

@@ -18,7 +18,8 @@ Arquivos principais:
 - `index.html`: conteúdo, estrutura semântica e ilustrações vetoriais.
 - `styles.css`: identidade visual, temas, animações e adaptações para celular.
 - `script.js`: projetos, filtros, diálogos, menu, tema e formulário de briefing.
-- `assets/`: fontes locais e suas licenças SIL Open Font License.
+- `site-init.js` e `intro.js`: tema inicial e abertura 3D da marca.
+- `assets/`: imagens, fontes locais com suas licenças e a biblioteca GSAP.
 
 ## Personalizar
 
@@ -69,6 +70,17 @@ requisições a provedores de fontes. As licenças devem acompanhar a redistribu
 - Animações de entrada, símbolo flutuante e cursor complementar no computador.
 - Preferência de movimento reduzido, foco visível, link de salto e rótulos acessíveis.
 - Relógio do estúdio com horário de Brasília.
+
+## Abertura 3D
+
+A abertura aparece uma vez por sessão, tem botão para pular e respeita a
+preferência por movimento reduzido. Use `index.html?intro` para revê-la.
+Em `intro-teste.html`, ajuste camadas, profundidade e velocidade do modelo e
+abra a versão do site em outra aba.
+
+O GSAP 3.12.5 é servido a partir de `assets/gsap-3.12.5.min.js`. O arquivo
+mantém o aviso de licença original ([GSAP Standard License](https://gsap.com/standard-license/)).
+Se o GSAP estiver indisponível, a abertura usa a animação em CSS.
 
 ## Hospedagem definitiva: Vercel
 

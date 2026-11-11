@@ -8,13 +8,15 @@ try {
   }
 } catch (_) {}
 
-// A abertura atual aparece uma vez por sessão.
+// A abertura aparece uma vez por sessão. O parâmetro ?intro permite revê-la.
 try {
+  const replayIntro = new URLSearchParams(window.location.search).has("intro");
   if (
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
-    sessionStorage.getItem("tribyte-intro-v2") !== "seen"
+    (replayIntro || sessionStorage.getItem("tribyte-intro") !== "seen")
   ) {
-    document.documentElement.classList.add("tb-first-visit");
-    sessionStorage.setItem("tribyte-intro-v2", "seen");
+    sessionStorage.setItem("tribyte-intro", "seen");
+    document.documentElement.classList.add("tb-intro-on");
+    window.setTimeout(() => document.documentElement.classList.remove("tb-intro-on"), 8000);
   }
 } catch (_) {}
