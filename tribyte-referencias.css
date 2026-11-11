@@ -1,0 +1,84 @@
+/* TRIBYTE — capturas reais de referência, distintamente creditadas. */
+.project-card[data-project-reference] .sales-visual {isolation:isolate}
+.project-card[data-project-reference] .rb-real-project-shot {
+ position:absolute;inset:0;z-index:2;overflow:hidden;background:transparent;pointer-events:none;
+}
+.project-card[data-project-reference] .rb-real-project-shot:not(.rb-image-loaded){display:none}
+.project-card[data-project-reference] .rb-real-project-shot .rb-real-screenshot {
+ display:block;width:100%;height:100%;object-fit:cover;object-position:center top;filter:contrast(1.05);
+ transition:transform .65s cubic-bezier(.22,1,.36,1);
+}
+.project-card[data-project-reference]:hover .rb-real-project-shot .rb-real-screenshot {transform:scale(1.04)}
+.project-card[data-project-reference] .rb-project-source {
+ position:absolute;bottom:14px;left:14px;max-width:calc(100% - 110px);
+ padding:8px 11px;border-radius:4px;background:rgba(17,14,20,.93);
+ color:#fff;font:10px/1.5 var(--mono,monospace);letter-spacing:.03em;
+}
+/* O card de identidade nunca fica vazio: composição com o símbolo original. */
+.project-card[data-brand-repaired] .brand-visual {background:radial-gradient(circle at 58% 35%,#831b3b,#220f1c 72%);isolation:isolate}
+.project-card[data-brand-repaired] .brand-poster {opacity:0;pointer-events:none}
+.project-card[data-brand-repaired] .rb-brand-cover {
+ position:absolute;inset:0;z-index:3;pointer-events:none;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;
+ padding:clamp(24px,4vw,60px);text-align:center;
+ background:radial-gradient(ellipse at center,rgba(241,27,70,.18),transparent 70%);
+ color:#fff;
+}
+.project-card[data-brand-repaired] .rb-brand-cover img {
+ display:block;max-width:220px;width:clamp(85px,24%,175px);max-height:170px;object-fit:contain;
+ filter:drop-shadow(0 18px 20px #0008);
+ transition:transform .55s cubic-bezier(.22,1,.36,1);
+}
+.project-card[data-brand-repaired]:hover .rb-brand-cover img {transform:translateY(-8px) scale(1.05)}
+.project-card[data-brand-repaired] .rb-brand-cover strong {font:700 clamp(21px,2.45vw,36px)/1.08 var(--display,Arial,sans-serif);letter-spacing:-.06em}
+.project-card[data-brand-repaired] .rb-brand-cover small {font:10px/1.5 var(--mono,monospace);letter-spacing:.05em;color:#ffafbe}
+
+/* Distinct inspiration gallery: these are NOT TRIBYTE portfolio cases. */
+.system-references {
+ background:#f1ede6;color:#19171b;isolation:isolate;
+ border-block:1px solid #d7cfc8;
+ padding:clamp(80px,9vw,144px) var(--rx-margin,5vw);
+}
+.system-references .refs-header {display:flex;align-items:end;justify-content:space-between;gap:45px;margin-bottom:clamp(35px,4vw,64px)}
+.system-references .refs-eyebrow {font:11px/1.5 var(--mono,monospace);letter-spacing:.1em;color:#a21735;display:block;margin-bottom:18px}
+.system-references h2 {color:#151316;font:700 clamp(46px,6vw,96px)/.98 var(--display,Arial,sans-serif);letter-spacing:-.085em;max-width:14ch}
+.system-references .refs-header>p {font:clamp(14px,1.15vw,18px)/1.7 var(--display,Arial,sans-serif);max-width:34ch;color:#625b5e}
+.system-references .refs-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(15px,2vw,30px)}
+.system-references .ref-card {min-width:0;background:#fdfaf6;border:1px solid #d6ccc3;overflow:hidden;border-radius:17px;box-shadow:0 15px 38px #1b171111;transition:transform .35s ease,box-shadow .35s}
+.system-references .ref-card:hover {transform:translateY(-5px);box-shadow:0 25px 50px #1b171122}
+.system-references .ref-visual {position:relative;height:clamp(245px,29vw,430px);background:#1b1620;overflow:hidden;isolation:isolate}
+.system-references .ref-visual .rb-real-screenshot {display:none;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s}
+.system-references .ref-visual.rb-image-loaded .rb-real-screenshot {display:block}
+.system-references .ref-card:hover .rb-real-screenshot {transform:scale(1.04)}
+.system-references .ref-fallback {position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:35px;text-align:center;background:radial-gradient(circle,#991938,#241624 73%);color:#f8edf0}
+.system-references .ref-fallback strong {font:700 clamp(33px,4vw,61px)/1 var(--display,Arial,sans-serif)}
+.system-references .ref-fallback span {font:12px/1.5 var(--mono,monospace);max-width:30ch;color:#ffd6df}
+.system-references .ref-visual.rb-image-loaded .ref-fallback {display:none}
+.system-references .ref-caption {position:absolute;bottom:14px;left:14px;z-index:3;color:#fff;background:#181219ed;padding:9px 12px;border-radius:4px;font:10px var(--mono,monospace)}
+.system-references .ref-body {padding:clamp(23px,2.5vw,35px)}
+.system-references .ref-body h3 {color:#211b20;font:600 clamp(24px,2.2vw,34px)/1.16 var(--display,Arial,sans-serif);letter-spacing:-.035em;margin:0 0 13px}
+.system-references .ref-body p {font:clamp(14px,1vw,16px)/1.7 var(--display,Arial,sans-serif);color:#615b60;margin:0 0 25px}
+.system-references .ref-body a {color:#a21231;display:inline-flex;padding-bottom:8px;border-bottom:1px solid currentColor;font:11px/1.5 var(--mono,monospace);text-decoration:none}
+.system-references .refs-note {margin-top:25px;color:#696168;font:11px/1.65 var(--mono,monospace)}
+:root[data-theme="dark"] .system-references {background:#1c1920;color:#fff;border-color:#423640}
+:root[data-theme="dark"] .system-references h2 {color:#fff}
+:root[data-theme="dark"] .system-references .refs-header>p,:root[data-theme="dark"] .system-references .refs-note {color:#c3b8bd}
+:root[data-theme="dark"] .system-references .ref-card {background:#29252c;border-color:#514550}
+:root[data-theme="dark"] .system-references .ref-body h3 {color:#fff}
+:root[data-theme="dark"] .system-references .ref-body p {color:#cec0c7}
+@media(max-width:900px) {
+ .system-references .refs-header {display:block}
+ .system-references .refs-header>p {margin-top:24px;max-width:50ch}
+ .system-references .refs-grid {grid-template-columns:1fr}
+ .system-references .ref-visual {height:clamp(260px,56vw,470px)}
+}
+@media(max-width:540px) {
+ .system-references {padding-block:76px}
+ .system-references h2 {font-size:clamp(42px,10vw,62px)}
+ .system-references .ref-visual {height:270px}
+ .system-references .ref-body {padding:23px}
+ .project-card[data-brand-repaired] .rb-brand-cover img {max-width:110px}
+}
+@media(prefers-reduced-motion:reduce) {
+ .system-references .ref-card,.system-references .rb-real-screenshot,.project-card[data-brand-repaired] .rb-brand-cover img {transition:none!important;transform:none!important}
+}
