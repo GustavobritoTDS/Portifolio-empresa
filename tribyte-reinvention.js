@@ -184,4 +184,40 @@
     });
   },{passive:true});
  }
+
+ /* TEAM PROFILE CARDS V3: entire photo/card opens the existing profile
+    modal; buttons and external GitHub links retain their own click behavior.
+    Keyboard activation is explicit and does not nest interactive elements. */
+ const teamCards=qsa(".studio .team-card");
+ const profileDialog=qs("#profile-dialog");
+ const selectTeamCard=(card)=>{
+   teamCards.forEach(item=>item.classList.toggle("is-selected",item===card));
+ };
+ teamCards.forEach((card)=>{
+   const name=(qs(".team-info h3",card)?.innerText || qs(".team-info h3",card)?.textContent || "")
+     .replace(/\s+/g," ").trim();
+   const profileButton=qs(".profile-open",card);
+   if(!profileButton)return;
+   card.tabIndex=0;
+   card.setAttribute("aria-label","Ver o perfil de "+name+". Pressione Enter para abrir.");
+   // Keep article semantics and nested real links/buttons.
+   card.addEventListener("click",(event)=>{
+     if(event.target.closest("a,button,input,summary,[role='button']"))return;
+     selectTeamCard(card);
+     profileButton.click();
+   });
+   card.addEventListener("keydown",(event)=>{
+     if(event.target!==card || !["Enter"," "].includes(event.key))return;
+     event.preventDefault();
+     selectTeamCard(card);
+     profileButton.click();
+   });
+   profileButton.addEventListener("click",()=>selectTeamCard(card));
+ });
+ if(profileDialog) {
+   profileDialog.addEventListener("close",()=>{
+     teamCards.forEach(card=>card.classList.remove("is-selected"));
+   });
+ }
+
 })();
