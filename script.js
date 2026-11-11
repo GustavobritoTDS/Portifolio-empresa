@@ -439,6 +439,95 @@ const scrollVisuals = $$(".project-card, .team-card").map((card) => ({
 }));
 const processSteps = $$(".process-steps li");
 const clampProgress = (value) => Math.max(0, Math.min(1, value));
+
+/* Narrativa editorial TRIBYTE.
+   Uma só leitura por frame: sem bibliotecas adicionais e sem scroll hijacking. */
+const chapterAnchors = $(".chapter-rail a[data-chapter]");
+const chapterTargets = chapterAnchors.map((anchor) => ({
+  anchor,
+  section: document.getElementById(anchor.dataset.chapter),
+})).filter(({section}) => section);
+const statement = $("#manifesto");
+const statementLines = $("[data-story-line]");
+const statementSeal = $(".manifesto-seal");
+const serviceChapters = $(".service-item");
+const contactChapter = $(".contact-copy");
+const footerChapter = $(".site-footer");
+const processChapterHeading = $(".process-heading h2 em");
+let activeChapter = "";
+
+function updateStoryMotion(viewportHeight) {
+  let chosen = chapterTargets[0];
+  for (const entry of chapterTargets) {
+    if (entry.section.getBoundingClientRect().top <= viewportHeight * .43)
+      chosen = entry;
+  }
+  if (chosen && chosen.anchor.dataset.chapter !== activeChapter) {
+    activeChapter = chosen.anchor.dataset.chapter;
+    chapterTargets.forEach(({anchor}) => {
+      const current = anchor === chosen.anchor;
+      anchor.classList.toggle("is-current", current);
+      if (current) anchor.setAttribute("aria-current", "location");
+      else anchor.removeAttribute("aria-current");
+    });
+  }
+  if (reducedMotion.matches) return;
+
+  if (statement) {
+    const rect = statement.getBoundingClientRect();
+    if (rect.bottom > -viewportHeight * .3 && rect.top < viewportHeight * 1.4) {
+      const local = clampProgress((viewportHeight - rect.top) / (viewportHeight + rect.height));
+      statementLines.forEach((line, index) => {
+        const reveal = clampProgress((local - .09 - index * .065) * 3.8);
+        const direction = index % 2 ? 1 : -1;
+        line.style.setProperty("--line-y", Math.round((1 - reveal) * 48) + "px");
+        line.style.setProperty("--line-x", Math.round(direction * (1 - reveal) * 38) + "px");
+        line.style.setProperty("--line-opacity", (.26 + reveal * .74).toFixed(3));
+      });
+      if (statementSeal) statementSeal.style.setProperty("--seal-spin", Math.round(-14 + 105 * local) + "deg");
+    }
+  }
+
+  serviceChapters.forEach((item) => {
+    const rect = item.getBoundingClientRect();
+    if (rect.bottom < -50 || rect.top > viewportHeight + 100) return;
+    const local = clampProgress((viewportHeight * .84 - rect.top) / (viewportHeight * .72));
+    item.style.setProperty("--service-progress", local.toFixed(3));
+  });
+
+  processSteps.forEach((step) => {
+    const rect = step.getBoundingClientRect();
+    if (rect.bottom < -50 || rect.top > viewportHeight + 100) return;
+    const local = clampProgress((viewportHeight * .73 - rect.top) / (viewportHeight * .65));
+    step.style.setProperty("--step-progress", local.toFixed(3));
+  });
+
+  if (processChapterHeading) {
+    const rect = processChapterHeading.getBoundingClientRect();
+    if (rect.top < viewportHeight && rect.bottom > 0) {
+      const local = clampProgress((viewportHeight * .8 - rect.top) / (viewportHeight * .62));
+      processChapterHeading.style.setProperty("--process-title-y", Math.round((1 - local) * 17) + "px");
+    }
+  }
+
+  if (contactChapter) {
+    const rect = contactChapter.getBoundingClientRect();
+    if (rect.bottom > -100 && rect.top < viewportHeight + 100) {
+      const local = clampProgress((viewportHeight * .9 - rect.top) / viewportHeight);
+      contactChapter.style.setProperty("--contact-rotation", Math.round(-38 + 120 * local) + "deg");
+      contactChapter.style.setProperty("--contact-title-y", Math.round((1 - local) * 38) + "px");
+    }
+  }
+
+  if (footerChapter) {
+    const rect = footerChapter.getBoundingClientRect();
+    if (rect.top < viewportHeight + 100 && rect.bottom > -100) {
+      const local = clampProgress((viewportHeight - rect.top) / viewportHeight);
+      footerChapter.style.setProperty("--footer-rise", Math.round((1 - local) * 55) + "px");
+      footerChapter.style.setProperty("--footer-opacity", (.35 + .65 * local).toFixed(3));
+    }
+  }
+}
 let scrollQueued = false;
 function updateScroll() {
   const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -468,6 +557,7 @@ function updateScroll() {
       visual.style.setProperty("--scroll-clip", `${Math.round((1 - reveal) * 34)}%`);
       visual.style.setProperty("--scroll-shift", `${Math.round((1 - reveal) * 28)}px`);
       visual.style.setProperty("--scroll-scale", (1.045 - reveal * 0.045).toFixed(3));
+      visual.style.setProperty("--visual-line", (.2 + reveal * .8).toFixed(3));
     });
 
     const nextStep = processSteps.findIndex((step) =>
@@ -478,6 +568,7 @@ function updateScroll() {
       step.classList.toggle("is-current", index === activeStep),
     );
   }
+  updateStoryMotion(window.innerHeight);
   scrollQueued = false;
 }
 document.documentElement.classList.toggle("scroll-motion", !reducedMotion.matches);
