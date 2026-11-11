@@ -3964,3 +3964,61 @@ html.tb-intro-on { overflow: hidden; }
 .contact-form.letter-form textarea { display: block; width: 100%; min-height: 220px; margin-top: 14px; padding: 18px 20px; font: 400 clamp(16px, 1.6vw, 19px)/1.7 var(--display); background: var(--surface); border: 1px solid var(--line); resize: none; overflow-y: auto; }
 .contact-form.letter-form textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px #fb102322; }
 .contact-form.letter-form .letter-hint { margin: 12px 0 34px; color: var(--muted); font: 13px/1.7 var(--display); letter-spacing: 0; max-width: 56ch; width: auto; }
+
+/* A mesma leitura da rolagem move a marca, revela os projetos e acompanha o processo. */
+.scroll-motion .hero-copy {
+  transform: translate3d(0, var(--hero-copy-shift, 0px), 0);
+  opacity: var(--hero-copy-opacity, 1);
+}
+
+.scroll-motion .tb-hero-stage {
+  transform: perspective(1000px)
+    translate3d(0, var(--hero-art-shift, 0px), 0)
+    rotateX(var(--tilt-x, 0deg))
+    rotateY(calc(var(--tilt-y, 0deg) + var(--hero-art-turn, 0deg)))
+    rotateZ(var(--hero-art-spin, 0deg))
+    scale(var(--hero-art-scale, 1));
+  transition: transform 0.18s linear;
+}
+
+.scroll-motion [data-scroll-title] {
+  opacity: var(--title-opacity, 1);
+  transform: translate3d(0, var(--title-shift, 0px), 0);
+}
+
+.scroll-motion .project-visual {
+  clip-path: inset(0 0 var(--scroll-clip, 0%) 0);
+  transform: translate3d(0, var(--scroll-shift, 0px), 0)
+    scale(var(--scroll-scale, 1));
+}
+
+.scroll-motion .team-art {
+  clip-path: inset(0 0 var(--scroll-clip, 0%) 0);
+}
+
+.scroll-motion .process-steps h3,
+.scroll-motion .process-steps p,
+.scroll-motion .process-steps li > span {
+  transition: color 0.35s, opacity 0.35s, transform 0.35s;
+}
+
+.scroll-motion .process-steps .is-current h3 {
+  color: #db243c;
+  transform: translateX(8px);
+}
+
+.scroll-motion .process-steps .is-current p,
+.scroll-motion .process-steps li.is-current > span {
+  opacity: 1;
+}
+
+@media print {
+  .scroll-motion .hero-copy,
+  .scroll-motion [data-scroll-title],
+  .scroll-motion .project-visual,
+  .scroll-motion .team-art {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+}

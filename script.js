@@ -179,6 +179,7 @@ filterButtons.forEach((button) =>
     });
     $("#filter-status").textContent =
       `${count} ${count === 1 ? "projeto exibido" : "projetos exibidos"}.`;
+    requestAnimationFrame(updateScroll);
   }),
 );
 
@@ -430,12 +431,60 @@ $("#current-year").textContent = String(new Date().getFullYear());
 
 /* Rolagem sem trabalho excessivo: uma atualização por frame. */
 const progress = $(".scroll-progress");
+const hero = $("#inicio");
+const scrollTitles = $$("[data-scroll-title]");
+const scrollVisuals = $$(".project-card, .team-card").map((card) => ({
+  card,
+  visual: $(".project-visual, .team-art", card),
+}));
+const processSteps = $$(".process-steps li");
+const clampProgress = (value) => Math.max(0, Math.min(1, value));
 let scrollQueued = false;
 function updateScroll() {
   const max = document.documentElement.scrollHeight - window.innerHeight;
   progress.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+
+  if (!reducedMotion.matches) {
+    const viewportHeight = window.innerHeight;
+    const heroProgress = clampProgress(window.scrollY / (hero.offsetHeight * 0.85));
+    hero.style.setProperty("--hero-copy-shift", `${Math.round(heroProgress * -105)}px`);
+    hero.style.setProperty("--hero-copy-opacity", (1 - heroProgress * 0.68).toFixed(3));
+    hero.style.setProperty("--hero-art-shift", `${Math.round(heroProgress * 130)}px`);
+    hero.style.setProperty("--hero-art-turn", `${Math.round(heroProgress * -28)}deg`);
+    hero.style.setProperty("--hero-art-spin", `${Math.round(heroProgress * 13)}deg`);
+    hero.style.setProperty("--hero-art-scale", (1 - heroProgress * 0.24).toFixed(3));
+
+    scrollTitles.forEach((title) => {
+      const top = title.parentElement.getBoundingClientRect().top;
+      const reveal = clampProgress((viewportHeight * 0.95 - top) / (viewportHeight * 0.5));
+      title.style.setProperty("--title-shift", `${Math.round((1 - reveal) * 54)}px`);
+      title.style.setProperty("--title-opacity", (0.35 + reveal * 0.65).toFixed(3));
+    });
+
+    scrollVisuals.forEach(({ card, visual }) => {
+      if (card.hidden) return;
+      const top = card.getBoundingClientRect().top;
+      const reveal = clampProgress((viewportHeight * 0.94 - top) / (viewportHeight * 0.7));
+      visual.style.setProperty("--scroll-clip", `${Math.round((1 - reveal) * 34)}%`);
+      visual.style.setProperty("--scroll-shift", `${Math.round((1 - reveal) * 28)}px`);
+      visual.style.setProperty("--scroll-scale", (1.045 - reveal * 0.045).toFixed(3));
+    });
+
+    const nextStep = processSteps.findIndex((step) =>
+      step.getBoundingClientRect().bottom > viewportHeight * 0.52,
+    );
+    const activeStep = nextStep < 0 ? processSteps.length - 1 : nextStep;
+    processSteps.forEach((step, index) =>
+      step.classList.toggle("is-current", index === activeStep),
+    );
+  }
   scrollQueued = false;
 }
+document.documentElement.classList.toggle("scroll-motion", !reducedMotion.matches);
+reducedMotion.addEventListener("change", () => {
+  document.documentElement.classList.toggle("scroll-motion", !reducedMotion.matches);
+  updateScroll();
+});
 window.addEventListener(
   "scroll",
   () => {

@@ -160,7 +160,7 @@
     const g = window.gsap;
     g.from(".hero h1 > span", { yPercent: 70, opacity: 0, duration: 1, stagger: 0.1, ease: "expo.out", clearProps: "all" });
     g.from([".hero-intro", ".hero .button-primary", ".hero-bottom"], { y: 24, opacity: 0, duration: 0.8, stagger: 0.1, delay: 0.35, ease: "power3.out", clearProps: "all" });
-    g.from(".tb-hero-stage", { scale: 0.88, opacity: 0, duration: 1.2, delay: 0.2, ease: "expo.out", clearProps: "opacity,scale" });
+    g.from(".tb-hero-art", { scale: 0.88, opacity: 0, duration: 1.2, delay: 0.2, ease: "expo.out", clearProps: "opacity,scale" });
     g.from(".site-header", { y: -30, opacity: 0, duration: 0.8, ease: "power3.out", clearProps: "all" });
   }
 
