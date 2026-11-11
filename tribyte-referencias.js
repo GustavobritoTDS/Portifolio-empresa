@@ -48,19 +48,26 @@
    const section=create("section","system-references");
    section.id="referencias-de-sistemas";
    section.setAttribute("aria-labelledby","references-title");
-   section.innerHTML='<header class="refs-header"><div><span class="refs-eyebrow">REFERÊNCIAS REAIS / INTERFACES EM USO</span><h2 id="references-title">SISTEMAS QUE INSPIRAM.</h2></div><p>Exemplos de dashboards existentes para mostrar diferentes possibilidades de interfaces. São referências externas, não projetos desenvolvidos pela TRIBYTE.</p></header><div class="refs-grid"></div><p class="refs-note">Capturas provenientes das páginas oficiais dos respectivos produtos. Cada cartão possui um link para a fonte original.</p>';
+   section.innerHTML='<header class="refs-header"><div><span class="refs-eyebrow">REFERÊNCIAS REAIS / INTERFACES EM USO</span><h2 id="references-title">SISTEMAS QUE INSPIRAM.</h2></div><p>Exemplos de dashboards existentes para mostrar diferentes possibilidades de interfaces. São referências externas, não projetos desenvolvidos pela TRIBYTE.</p></header><div class="refs-grid"></div><p class="refs-note">Referências a produtos reais, com visual demonstrativo ilustrativo quando a captura original não carrega. Consulte a fonte oficial.</p>';
    const examples=[
-    {name:"Metabase",kind:"Análise comercial",description:"Interface real de um dashboard de e-commerce, com gráficos, metas e resultados de vendas.",url:METABASE_IMG,source:METABASE_SRC},
-    {name:"Grafana",kind:"Monitoramento e métricas",description:"Interface real de acompanhamento técnico com indicadores, séries temporais e gráficos de operação.",url:GRAFANA_IMG,source:GRAFANA_SRC}
+    {name:"Metabase",kind:"Análise comercial",description:"Exemplo de interface comercial. O visual demonstrativo é uma ilustração da categoria; confira o software real na fonte oficial.",url:METABASE_IMG,source:METABASE_SRC},
+    {name:"Grafana",kind:"Monitoramento e métricas",description:"Exemplo de interface de monitoramento. O visual demonstrativo é uma ilustração da categoria; confira o software real na fonte oficial.",url:GRAFANA_IMG,source:GRAFANA_SRC}
    ];
    const grid=section.querySelector(".refs-grid");
    examples.forEach((item,i)=>{
       const card=create("article","ref-card");
       const visual=create("div","ref-visual");
       const fallback=create("div","ref-fallback");
-      fallback.append(create("strong",null,item.name),create("span",null,"Visualização de referência. Consulte a captura real na fonte oficial."));
+      const demo=create("div","ref-dashboard-demo");
+      demo.setAttribute("aria-label","Ilustração demonstrativa de interface inspirada na categoria de "+item.name);
+      if(item.name==="Metabase"){
+        demo.innerHTML='<div class="ref-demo-toolbar"><b>▥ METABASE</b><span>PAINEL DE VENDAS</span><i>● ● ●</i></div><div class="ref-demo-kpis"><div><small>Receita</small><strong>R$ 42,8 mil</strong><em>↗ +12,4%</em></div><div><small>Pedidos</small><strong>1.284</strong><em>↗ +8,2%</em></div><div><small>Conversão</small><strong>4,8%</strong><em>↗ +1,1%</em></div></div><div class="ref-demo-charts"><div><small>RECEITA POR MÊS</small><div class="ref-demo-bars"><i style="--h:40%"></i><i style="--h:57%"></i><i style="--h:49%"></i><i style="--h:78%"></i><i style="--h:67%"></i><i style="--h:92%"></i><i style="--h:82%"></i></div></div><div><small>VENDAS POR CANAL</small><div class="ref-demo-donut"></div><small>Loja • Web • Outros</small></div></div>';
+      }else{
+        demo.innerHTML='<div class="ref-demo-toolbar"><b>◉ GRAFANA</b><span>MONITORAMENTO</span><i>● LIVE</i></div><div class="ref-demo-kpis"><div><small>Disponibilidade</small><strong>99,9%</strong><em>● Estável</em></div><div><small>CPU</small><strong>29,1%</strong><em>● Normal</em></div><div><small>Memória</small><strong>46,9%</strong><em>● Normal</em></div></div><div class="ref-demo-charts"><div><small>USO DE RECURSOS</small><div class="ref-demo-lines"><svg viewBox="0 0 300 110" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,83 30,77 55,91 82,46 112,63 140,38 167,56 193,21 224,44 256,17 300,36" fill="none" stroke="#68d58a" stroke-width="3"/><polyline points="0,98 32,94 66,78 91,88 124,69 149,77 181,59 204,67 243,49 267,56 300,40" fill="none" stroke="#6ca9f7" stroke-width="3"/></svg></div></div><div><small>ALERTAS</small><div class="ref-demo-alert">● Todos os serviços ativos</div><div class="ref-demo-alert">● Sem incidentes críticos</div></div></div>';
+      }
+      fallback.append(demo,create("span","ref-demo-disclaimer","VISUAL ILUSTRATIVO — NÃO É CAPTURA DO SOFTWARE ORIGINAL"));
       visual.append(fallback);
-      screenshot(visual,item.url,"Captura do sistema real "+item.name+", exemplo externo não desenvolvido pela TRIBYTE");
+      screenshot(visual,item.url,"Imagem de referência externa do sistema "+item.name+", exemplo externo não desenvolvido pela TRIBYTE");
       visual.append(create("span","ref-caption",String(i+1).padStart(2,"0")+" / REFERÊNCIA EXTERNA"));
       const body=create("div","ref-body");
       body.append(create("h3",null,item.name+" — "+item.kind),create("p",null,item.description));
