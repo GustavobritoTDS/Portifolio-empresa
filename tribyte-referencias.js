@@ -1,10 +1,10 @@
 "use strict";
 /* Galeria de interfaces reais. Créditos explícitos; não são projetos da TRIBYTE. */
 (() => {
- const METABASE_IMG="https://www.metabase.com/docs/latest/dashboards/images/interactive-dashboard.png";
- const METABASE_SRC="https://www.metabase.com/docs/latest/dashboards/introduction";
- const GRAFANA_IMG="https://grafana.com/media/blog/visualize-databricks/databricks-sample-dashboard.png";
- const GRAFANA_SRC="https://grafana.com/blog/visualize-databricks-in-grafana-write-custom-sql-queries-build-interactive-dashboards-and-more/";
+ const METABASE_IMG="https://www.metabase.com/images/product/pro/your-look-and-feel.png";
+ const METABASE_SRC="https://www.metabase.com/product/pro";
+ const GRAFANA_IMG="https://us1.discourse-cdn.com/grafana/original/3X/c/b/cb55ba287c1cfc4f10069b635c8885c0c7878820.jpeg";
+ const GRAFANA_SRC="https://community.grafana.com/t/grafana-datasource-plugin-for-prtg/144260?page=2";
  const ready=fn=>document.readyState==="loading"?document.addEventListener("DOMContentLoaded",fn,{once:true}):fn();
  const create=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;};
  function screenshot(parent,url,alt){
@@ -58,7 +58,7 @@
       const card=create("article","ref-card");
       const visual=create("div","ref-visual");
       const fallback=create("div","ref-fallback");
-      fallback.append(create("strong",null,item.name),create("span",null,"A imagem oficial não carregou. Abra a fonte original para visualizar."));
+      fallback.append(create("strong",null,item.name),create("span",null,"Visualização de referência. Consulte a captura real na fonte oficial."));
       visual.append(fallback);
       screenshot(visual,item.url,"Captura do sistema real "+item.name+", exemplo externo não desenvolvido pela TRIBYTE");
       visual.append(create("span","ref-caption",String(i+1).padStart(2,"0")+" / REFERÊNCIA EXTERNA"));
