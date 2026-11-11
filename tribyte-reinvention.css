@@ -989,3 +989,396 @@ h2 {letter-spacing:-.075em}
  .hero-copy, .tb-hero-stage {transition:none!important}
  .rb-split-ready .rb-word {opacity:1!important;transform:none!important;filter:none!important}
 }
+
+
+/* ======================================================================
+   TRIBYTE / SCREENSHOT FIX V3 — header, interactive team gallery, services.
+   Corrects the specific visual defects reported from 11 Nov screenshots.
+   ====================================================================== */
+
+/* Header logo & controls: a single optical centre line on every viewport. */
+.site-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.site-header .wordmark {
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex:0 0 auto;
+  height:100%;
+  min-height:0;
+  line-height:1;
+  gap:10px;
+  padding:0;
+  margin:0;
+  transform:none;
+}
+.site-header .wordmark .brand-icon {
+  width:32px;
+  height:32px;
+  flex:none;
+  align-self:center;
+  object-fit:contain;
+  margin:0;
+}
+.site-header .wordmark .brand-lettering {
+  display:block;
+  width:clamp(113px,10vw,153px);
+  height:auto;
+  aspect-ratio:1030 / 155;
+  flex:none;
+  align-self:center;
+  margin:0;
+  background-color:var(--text);
+}
+.site-header .header-actions {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  margin-left:auto;
+  flex:none;
+  gap:12px;
+}
+.site-header .theme-toggle,
+.site-header .menu-toggle {
+  width:42px;
+  height:42px;
+  min-width:42px;
+  min-height:42px;
+  padding:9px;
+  align-items:center;
+  justify-content:center;
+  margin:0;
+}
+.site-header .menu-toggle {
+  flex-direction:column;
+  gap:6px;
+}
+.site-header .menu-toggle span {flex:none}
+.site-header .theme-toggle svg {width:21px;height:21px;flex:none}
+.site-header .desktop-nav {margin-inline:auto}
+
+/* On laptop widths, keep the 3D monogram beside the statement
+   instead of leaving it far below the CTA. */
+@media (min-width:801px) and (max-width:1200px) {
+  .hero { min-height:0;padding-top:125px; }
+  .hero-composition {
+    display:grid;
+    grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+    align-items:center;
+    gap:clamp(20px,3vw,44px);
+    min-height:0;
+    padding-top:clamp(42px,5vw,65px);
+    padding-bottom:clamp(35px,4.5vw,65px);
+  }
+  .hero-copy {grid-column:1;max-width:none}
+  .hero h1 {
+    font-size:clamp(45px,5.15vw,67px);
+    line-height:.98;
+    letter-spacing:-.087em;
+  }
+  .hero h1 .red-type {font-size:.79em}
+  .hero-intro {margin-top:clamp(27px,3vw,40px);max-width:42ch}
+  .hero-intro p {font-size:clamp(14px,1.35vw,17px);line-height:1.65}
+  .hero-copy .button-primary {
+    margin:21px 0 0;
+    min-height:52px;
+    padding:12px 16px;
+    font-size:10px;
+    gap:15px;
+  }
+  .hero-art.tb-hero-art {
+    grid-column:2;
+    position:relative;
+    inset:auto;
+    top:auto;
+    right:auto;
+    width:100%;
+    height:auto;
+    min-height:0;
+    aspect-ratio:.83;
+    margin:0;
+    align-self:center;
+  }
+  .hero .tb-hero-stage {width:93%;right:3.5%;top:12%}
+  .hero .tb-piece-caption {font-size:9px;max-width:200px;right:1%;bottom:-4%}
+  .hero .rx-portal-label {font-size:8px;max-width:85%}
+  .hero .rx-portal-coordinate {font-size:8px}
+}
+@media (max-width:800px) {
+  .site-header .wordmark .brand-icon {width:29px;height:29px}
+  .site-header .wordmark .brand-lettering {width:116px}
+  .hero-copy .button-primary {margin-bottom:0}
+  .hero-art.tb-hero-art {margin-top:clamp(18px,4vw,35px)}
+}
+
+/* TEAM — equal-width, same-height photos; no oversized first card.
+   A card is a selectable preview. Its original profile button still works. */
+.studio .team-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-auto-rows:auto;
+  align-items:stretch;
+  gap:clamp(14px,1.8vw,28px);
+}
+.studio .team-grid > .team-card,
+.studio .team-grid > .team-card:first-child {
+  display:flex!important;
+  flex-direction:column;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
+  min-width:0;
+  min-height:0!important;
+  height:auto;
+  align-self:stretch;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  transform:none!important;
+  transition:
+    box-shadow .35s var(--rx-ease),
+    border-color .35s var(--rx-ease),
+    background .35s var(--rx-ease);
+}
+.studio .team-grid > .team-card .team-art,
+.studio .team-grid > .team-card:first-child .team-art {
+  display:block;
+  flex:0 0 auto;
+  width:100%;
+  height:clamp(230px,26vw,360px);
+  min-height:0;
+  grid-row:auto!important;
+  grid-column:auto!important;
+  overflow:hidden;
+  isolation:isolate;
+}
+.studio .team-card .team-photo {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 31%;
+  transition:transform .65s var(--rx-ease),filter .45s var(--rx-ease);
+}
+.studio .team-card .gustavo-art .team-photo {object-position:center 25%}
+.studio .team-card .marcio-art .team-photo {object-position:center 37%}
+.studio .team-card .lucas-art .team-photo {object-position:center 28%}
+.studio .team-grid > .team-card .team-info,
+.studio .team-grid > .team-card:first-child .team-info {
+  display:flex;
+  flex:1 1 auto;
+  flex-direction:column;
+  align-items:stretch;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  width:100%;
+  min-height:215px;
+  padding:clamp(21px,2.15vw,35px);
+  gap:9px;
+  background:transparent;
+}
+.studio .team-grid > .team-card .team-info h3,
+.studio .team-grid > .team-card:first-child .team-info h3 {
+  font:600 clamp(26px,2.3vw,39px)/1.09 var(--rx-display);
+  letter-spacing:-.056em;
+  min-width:0;
+  margin:0 0 6px;
+  overflow-wrap:normal;
+  color:inherit;
+}
+.studio .team-card .team-info>span {
+  display:block;
+  color:inherit;
+  opacity:.72;
+  font:10px/1.65 var(--rx-mono);
+  margin:0;
+  letter-spacing:.045em;
+}
+.studio .team-grid > .team-card .profile-open {
+  width:100%;
+  min-height:51px;
+  margin-top:auto;
+  padding:12px 17px;
+  text-align:left;
+  font:11px/1.5 var(--rx-mono);
+  white-space:normal;
+  gap:10px;
+  transition:background .3s,transform .3s;
+}
+.studio .team-grid > .team-card .team-footer,
+.studio .team-grid > .team-card:first-child .team-footer {
+  display:flex;
+  flex:0 0 auto;
+  justify-content:space-between;
+  align-items:center;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  width:100%;
+  min-height:51px;
+  gap:12px;
+  padding:12px clamp(21px,2.15vw,35px);
+  font:9px/1.5 var(--rx-mono);
+  opacity:.84;
+}
+.studio .team-card .team-footer a {
+  color:inherit;
+  font-size:10px;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.studio .team-card .team-number {font:10px/1.3 var(--rx-mono);opacity:.82}
+.studio .team-grid > .team-card .team-art::after {
+  bottom:18px;
+  left:18px;
+  font-size:10px;
+  opacity:.9;
+}
+.studio .team-grid > .team-card:hover,
+.studio .team-grid > .team-card.is-selected {
+  border-color:#f12b4a;
+  box-shadow:0 25px 55px #0000002e,0 0 0 1px #f12b4a68;
+}
+.studio .team-grid > .team-card:is(:hover,.is-selected) .team-photo {
+  transform:scale(1.065);
+  filter:grayscale(0) contrast(1.04);
+}
+.studio .team-grid > .team-card:focus-visible {
+  outline:3px solid var(--rx-red);
+  outline-offset:5px;
+}
+.studio .team-grid > .team-card.is-selected .profile-open {
+  background:#ed2447;
+  color:white;
+}
+.studio .team-grid > .team-card .profile-open:hover {transform:translateY(-2px)}
+/* Make all three titles and CTAs legible against their card backgrounds. */
+.studio .team-card:first-child .team-info,
+.studio .team-card:first-child .team-footer {color:#fff}
+.studio .team-card:nth-child(2) .team-info,
+.studio .team-card:nth-child(2) .team-footer {color:#171719}
+.studio .team-card:nth-child(3) .team-info,
+.studio .team-card:nth-child(3) .team-footer {color:#171719}
+
+@media (max-width:900px) {
+  .studio .team-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .studio .team-grid > .team-card .team-art,
+  .studio .team-grid > .team-card:first-child .team-art {height:clamp(245px,34vw,320px)}
+}
+@media (max-width:620px) {
+  .studio .team-grid {grid-template-columns:1fr;gap:20px}
+  .studio .team-grid > .team-card .team-art,
+  .studio .team-grid > .team-card:first-child .team-art {height:clamp(270px,80vw,420px)}
+  .studio .team-grid > .team-card .team-info,
+  .studio .team-grid > .team-card:first-child .team-info {
+    padding:24px;
+    min-height:185px;
+  }
+  .studio .team-grid > .team-card .team-info h3,
+  .studio .team-grid > .team-card:first-child .team-info h3 {
+    font-size:clamp(29px,8vw,38px);
+  }
+  .studio .team-grid > .team-card .team-footer,
+  .studio .team-grid > .team-card:first-child .team-footer {padding:13px 24px}
+}
+
+/* SERVICES — remove the light-on-light bug. Solid ink surface for open
+   and hovered details, with legible labels regardless of saved theme. */
+.services .service-item {
+  position:relative;
+  isolation:isolate;
+  background:transparent;
+  color:var(--rx-ink);
+  border-bottom:1px solid var(--rx-line);
+  overflow:hidden;
+  transition:background-color .35s var(--rx-ease),color .35s var(--rx-ease);
+}
+.services .service-item::before {display:none}
+.services .service-item:is([open],:hover,:focus-within) {
+  background:#19171c;
+  color:#fff;
+}
+.services .service-item summary {
+  display:grid;
+  grid-template-columns:clamp(30px,4vw,48px) minmax(0,1fr) clamp(43px,5vw,60px);
+  gap:clamp(13px,2.5vw,28px);
+  align-items:center;
+  padding:clamp(22px,2.7vw,40px) clamp(14px,2vw,30px);
+  margin:0;
+  min-height:clamp(103px,8.3vw,142px);
+  list-style:none;
+}
+.services .service-item summary::-webkit-details-marker {display:none}
+.services .service-item .service-number {
+  width:auto;
+  font:11px var(--rx-mono);
+  line-height:1.5;
+  color:var(--rx-red);
+  align-self:center;
+}
+.services .service-item h3 {
+  color:inherit;
+  font:600 clamp(25px,3.5vw,56px)/1.12 var(--rx-display);
+  letter-spacing:-.065em;
+  margin:0;
+  min-width:0;
+}
+.services .service-item:is([open],:hover,:focus-within) h3 {color:#fff}
+.services .service-item:is([open],:hover,:focus-within) .service-number {color:#ff718a}
+.services .service-item .service-expand {
+  display:grid;
+  place-items:center;
+  width:clamp(43px,5vw,60px);
+  height:clamp(43px,5vw,60px);
+  border:1px solid currentColor;
+  border-radius:50%;
+  font-size:28px;
+  font-weight:400;
+  color:inherit;
+  transition:transform .3s var(--rx-ease),background .3s,border-color .3s;
+}
+.services .service-item[open] .service-expand {
+  background:#f12a4d;
+  border-color:#f12a4d;
+  color:#fff;
+  transform:rotate(45deg);
+}
+.services .service-item .service-body {
+  color:#f5f0ee;
+  max-width:none;
+  padding:0 clamp(25px,5.5vw,100px) clamp(30px,4vw,68px) clamp(64px,7.6vw,120px);
+  animation:rx-service-reveal .36s var(--rx-ease) both;
+}
+.services .service-item .service-body>p {
+  color:#e3dce0;
+  font:clamp(14px,1.15vw,18px)/1.72 var(--rx-display);
+  max-width:56ch;
+}
+.services .service-item .service-chips span {
+  border:1px solid #ffffff6e;
+  color:#f3e9ea;
+  padding:9px 13px;
+  font:10px/1.4 var(--rx-mono);
+}
+.services .service-item .service-body>a {color:#ff9baa;border-bottom-color:#ff9baa}
+.services .service-item .service-body>a span {color:#ff9baa}
+@keyframes rx-service-reveal {
+  from {opacity:.2;transform:translateY(-9px)}
+  to {opacity:1;transform:translateY(0)}
+}
+@media (max-width:620px) {
+  .services .service-item summary {grid-template-columns:26px minmax(0,1fr) 43px;padding:22px 10px;gap:11px}
+  .services .service-item h3 {font-size:clamp(22px,6vw,34px)}
+  .services .service-item .service-body {padding:0 17px 28px 46px}
+}
+@media (prefers-reduced-motion:reduce) {
+  .studio .team-grid > .team-card,
+  .studio .team-grid > .team-card .team-photo,
+  .services .service-item,.services .service-item .service-body {
+    animation:none!important;transition:none!important;
+  }
+}
