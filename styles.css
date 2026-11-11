@@ -4030,7 +4030,7 @@ html.tb-intro-on { overflow: hidden; }
 
 :root {
   --editorial-ease: cubic-bezier(.22,1,.36,1);
-  --statement-red: #ef1732;
+  --statement-red: #f4233b; /* contraste AA com o texto escuro */
 }
 
 /* Índice vertical: capítulos clicáveis, sem interceptar a navegação habitual. */
