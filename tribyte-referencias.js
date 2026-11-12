@@ -17,10 +17,8 @@
   section.innerHTML = `
     <header class="refs-header">
       <div>
-        <span class="refs-eyebrow">REFERÊNCIAS EXTERNAS / NÃO SÃO PROJETOS DA EQUIPE</span>
         <h2 id="references-title">Ferramentas que usamos como referência.</h2>
       </div>
-      <p>Metabase e Grafana são produtos de terceiros. As telas abaixo são composições demonstrativas feitas para este portfólio; os números são fictícios.</p>
     </header>
     <div class="refs-grid"></div>
     <p class="refs-note">Consulte as páginas oficiais para ver os produtos originais.</p>`;

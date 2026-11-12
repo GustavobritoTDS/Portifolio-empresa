@@ -17,7 +17,7 @@
    eyebrow:"01 / SITES",
    headline:"Uma página para mostrar o que você faz.",
    body:"Site institucional, portfólio ou página de apresentação, com informações e contato fáceis de encontrar.",
-   symbol:"W.",
+   image:"assets/service-sites.webp",
    cta:"Site institucional",
    label:"01 / EXPERIÊNCIA WEB"
   },
@@ -25,7 +25,7 @@
    eyebrow:"02 / SISTEMAS",
    headline:"Um painel para acompanhar sua rotina.",
    body:"Painéis, cadastros e áreas de gestão para reunir informações usadas pela sua equipe.",
-   symbol:"S/",
+   image:"assets/service-systems.webp",
    cta:"Sistema web",
    label:"02 / INTERFACE & LÓGICA"
   },
@@ -33,7 +33,7 @@
    eyebrow:"03 / LANDING PAGES",
    headline:"Uma página para uma oferta.",
    body:"Página focada em um produto, serviço ou campanha, com as informações principais e um próximo passo visível.",
-   symbol:"↗",
+   image:"assets/service-landing.webp",
    cta:"Landing page",
    label:"03 / COMUNICAÇÃO DIGITAL"
   }
@@ -43,7 +43,7 @@
   const title=qs("#rx-lab-title",lab);
   const desc=qs("#rx-lab-desc",lab);
   const eyebrow=qs("#rx-lab-eyebrow",lab);
-  const symbol=qs("#rx-lab-symbol",lab);
+  const art=qs("#rx-lab-image",lab);
   const tag=qs("#rx-lab-tag",lab);
   const cta=qs("#rx-lab-cta",lab);
   const setMode=(id,focus=false)=>{
@@ -53,7 +53,7 @@
     if(title)title.innerHTML=item.headline;
     if(desc)desc.textContent=item.body;
     if(eyebrow)eyebrow.textContent=item.eyebrow;
-    if(symbol)symbol.textContent=item.symbol;
+    if(art&&art.getAttribute("src")!==item.image)art.setAttribute("src",item.image);
     if(tag)tag.textContent=item.label;
     if(cta)cta.dataset.service=item.cta;
     options.forEach(button=>{

@@ -4189,12 +4189,12 @@ h2 {letter-spacing:-.075em}
  box-shadow:0 0 90px #c7134644,inset 0 0 75px #c7134622}
 .rx-lab-orbit::before,.rx-lab-orbit::after {content:"";position:absolute;inset:14%;border:1px dashed #ff708c66;border-radius:50%}
 .rx-lab-orbit::after {inset:-16%;border:1px solid #ff708c22}
-.rx-lab-object {position:relative;z-index:1;color:#fff;font-size:clamp(110px,18vw,350px);font-weight:700;letter-spacing:-.14em;line-height:1;transform:rotate(-14deg);text-shadow:15px 17px 0 #ba082f,29px 31px 32px #000b;
- transition:transform .9s var(--rx-ease),filter .7s}
-.rx-lab[data-active="sistemas"] .rx-lab-object {transform:rotate(0) scale(.8);letter-spacing:-.1em}
-.rx-lab[data-active="landing"] .rx-lab-object {transform:rotate(14deg) scale(1.05)}
-.rx-lab[data-active="sistemas"] .rx-lab-canvas {background:radial-gradient(ellipse at 46% 46%,#173e54,transparent 58%),#11151d}
-.rx-lab[data-active="landing"] .rx-lab-canvas {background:radial-gradient(ellipse at 46% 46%,#603626,transparent 58%),#19120f}
+.rx-lab-image {position:relative;z-index:2;display:block;width:min(78%,440px);height:auto;max-height:82%;object-fit:contain;
+ border:1px solid #f6eee7a8;border-radius:6px;box-shadow:0 24px 64px #000b,0 0 0 1px #ffffff12;
+ transform:translate3d(var(--rx-art-x,0px),var(--rx-art-y,0px),0) rotate(-2deg);
+ transition:transform .7s var(--rx-ease),filter .45s,opacity .35s}
+.rx-lab[data-active="sistemas"] .rx-lab-image {transform:translate3d(var(--rx-art-x,0px),var(--rx-art-y,0px),0) rotate(0) scale(.96)}
+.rx-lab[data-active="landing"] .rx-lab-image {transform:translate3d(var(--rx-art-x,0px),var(--rx-art-y,0px),0) rotate(2deg) scale(1.01)}
 .rx-lab-canvas-label {position:absolute;left:30px;bottom:28px;font:10px var(--rx-mono);color:#e8e6e4;z-index:3;letter-spacing:.08em}
 .rx-lab-panel {display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,3.5vw,65px);
  background:#f3ede4;color:#111115}
@@ -4475,7 +4475,6 @@ h2 {letter-spacing:-.075em}
  .rx-lab-head p {margin-top:25px}
  .rx-lab-visual {grid-template-columns:1fr;min-height:0}
  .rx-lab-canvas {min-height:380px}
- .rx-lab-object {font-size:200px}
  .rx-lab-panel {min-height:440px;gap:30px}
  .rx-lab-panel h3 {font-size:54px}
  .projects {padding-block:100px}
@@ -4532,7 +4531,6 @@ h2 {letter-spacing:-.075em}
  .hero-bottom a {font-size:9px}
  .rx-lab-head h2 {font-size:clamp(48px,12vw,75px)}
  .rx-lab-canvas {min-height:310px}
- .rx-lab-object {font-size:158px}
  .rx-lab-panel {padding:26px;min-height:460px}
  .rx-lab-panel h3 {font-size:50px}
  .rx-lab-options button {font-size:11px;min-height:54px}
@@ -4568,7 +4566,7 @@ h2 {letter-spacing:-.075em}
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after {scroll-behavior:auto}
  .hero-art::before,.rx-portal-ring,.hero h1 .red-type {animation:none!important}
- .project-open,.rx-lab-object,.team-photo {transform:none!important;transition:none!important}
+ .project-open,.rx-lab-image,.team-photo {transform:none!important;transition:none!important}
  .project-card {position:relative;top:auto}
  .rx-lab-orbit {transform:translate(-50%,-50%)}
 }
@@ -5520,29 +5518,14 @@ h2 {letter-spacing:-.075em}
   padding: clamp(72px, 8vw, 124px) var(--rx-margin, 5vw);
 }
 .system-references .refs-header {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 42px;
-  margin-bottom: clamp(32px, 4vw, 58px);
-}
-.system-references .refs-eyebrow {
   display: block;
-  margin-bottom: 16px;
-  color: #a21735;
-  font: 11px/1.5 var(--mono, monospace);
-  letter-spacing: .06em;
+  margin-bottom: clamp(32px, 4vw, 58px);
 }
 .system-references h2 {
   max-width: 17ch;
   color: #151316;
   font: 700 clamp(38px, 5vw, 72px)/1.02 var(--display, Arial, sans-serif);
   letter-spacing: -.065em;
-}
-.system-references .refs-header > p {
-  max-width: 48ch;
-  color: #625b5e;
-  font: 16px/1.65 var(--display, Arial, sans-serif);
 }
 .system-references .refs-grid {
   display: grid;
@@ -5757,7 +5740,6 @@ h2 {letter-spacing:-.075em}
 }
 :root[data-theme="dark"] .system-references h2,
 :root[data-theme="dark"] .system-references .ref-body h3 { color: #fff; }
-:root[data-theme="dark"] .system-references .refs-header > p,
 :root[data-theme="dark"] .system-references .refs-note { color: #c3b8bd; }
 :root[data-theme="dark"] .system-references .ref-card {
   border-color: #514550;
@@ -5766,7 +5748,6 @@ h2 {letter-spacing:-.075em}
 :root[data-theme="dark"] .system-references .ref-body p { color: #cec0c7; }
 @media (max-width: 900px) {
   .system-references .refs-header { display: block; }
-  .system-references .refs-header > p { margin-top: 18px; }
   .system-references .refs-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 540px) {
