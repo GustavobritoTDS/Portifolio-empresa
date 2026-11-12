@@ -5945,8 +5945,8 @@ h2 {letter-spacing:-.075em}
   .site-footer .footer-bottom { gap: 12px; }
 }
 
-/* Ajustes finais pedidos: cartões coerentes com a paleta, biografias visíveis
-   e contato do rodapé sempre separado do lettering. */
+/* Ajustes finais pedidos: cartões coerentes com a paleta, biografias no perfil
+   e contato do rodapé separado do lettering. */
 .studio .team-grid > .team-card,
 .studio .team-grid > .team-card:first-child {
   background: var(--rx-white) !important;
@@ -5959,15 +5959,6 @@ h2 {letter-spacing:-.075em}
 .studio .team-grid > .team-card .team-footer,
 .studio .team-grid > .team-card:first-child .team-footer {
   color: var(--rx-ink) !important;
-}
-.studio .team-grid > .team-card .team-info > .team-bio {
-  display: block !important;
-  margin: 2px 0 10px;
-  color: inherit;
-  opacity: .82;
-  font: 13px/1.6 var(--rx-display);
-  letter-spacing: 0;
-  text-wrap: pretty;
 }
 .studio .team-grid > .team-card .profile-open {
   background: var(--rx-red) !important;
