@@ -10,6 +10,14 @@
     "M851 210 773 245 869 300 826 324 826 379 896 420 826 457 826 524 966 452 967 392 895 351 936 329 936 261Z",
   ];
   const hasGsap = () => typeof window.gsap !== "undefined";
+  const loadGsap = () => new Promise((resolve) => {
+    if (hasGsap()) return resolve();
+    const script = document.createElement("script");
+    script.src = "assets/gsap-3.12.5.min.js";
+    script.onload = resolve;
+    script.onerror = resolve;
+    document.head.append(script);
+  });
   const mix = (a, b, t) => Math.round(a + (b - a) * t);
 
   function buildLayer(index, total, front) {
@@ -169,15 +177,14 @@
   const siteRoot = document.getElementById("brand-intro");
   if (siteRoot) {
     if (document.documentElement.classList.contains("tb-intro-on")) {
-      mount(siteRoot, {
+      loadGsap().then(() => mount(siteRoot, {
         onDone() {
           document.documentElement.classList.remove("tb-intro-on");
           heroEntrance();
         },
-      });
+      }));
     } else {
       siteRoot.hidden = true;
-      heroEntrance();
     }
   }
 })();

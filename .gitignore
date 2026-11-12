@@ -1,0 +1,6 @@
+# Local tools and generated output
+.vercel/
+node_modules/
+dist/
+.DS_Store
+Thumbs.db

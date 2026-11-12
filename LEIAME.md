@@ -1,115 +1,44 @@
-# TRIBYTE — Ideias em outra dimensão
+# TRIBYTE — portfólio
 
-Portfólio de Gustavo de Brito Vieira, Márcio Andrey e Lucas Duarte Costa.
-Desenvolvido com HTML, CSS e JavaScript puros, sem framework, instalação ou etapa de build.
+Portfólio da equipe formada por Gustavo de Brito Vieira, Márcio Andrey e Lucas Duarte Costa. Os três estudam Desenvolvimento de Sistemas no SENAI. O site é feito com HTML, CSS e JavaScript puros, sem etapa de build.
 
-**Site oficial:** https://portifolio-tribyte.vercel.app/
+- **Site:** https://portifolio-tribyte.vercel.app/
+- **Repositório:** https://github.com/GustavobritoTDS/Portifolio-empresa
+- **Hospedagem:** projeto `portifolio-tribyte` na Vercel, conectado à branch `main`.
 
-**Hospedagem escolhida:** Vercel (projeto `portifolio-tribyte`). O repositório GitHub é a origem do código.
+## Executar localmente
 
-## Abrir e editar
+Na pasta do projeto, execute `python -m http.server 8000` e abra `http://localhost:8000`. Também é possível usar a extensão Live Server do VS Code.
 
-Extraia o ZIP e abra `index.html` no navegador. Para editar, abra a pasta no VS Code.
-Você também pode usar a extensão Live Server ou executar `python -m http.server 8000`
-na pasta do projeto e visitar `http://localhost:8000`.
+## Estrutura
 
-Arquivos principais:
+- `index.html`: conteúdo, navegação, cartões, diálogos e metadados.
+- `styles.css`: estilos consolidados, temas claro/escuro, responsividade e animações.
+- `script.js`: conteúdo dos projetos, filtros, diálogos, tema e formulário.
+- `site-init.js` e `intro.js`: preferência de tema e abertura 3D da marca.
+- `reactbits-effects.js`, `tribyte-reinvention.js` e `tribyte-referencias.js`: interações específicas da página.
+- `assets/`: fotos WebP, imagens dos projetos, logo SVG, fontes WOFF2 e licenças.
+- `docs/decisoes-do-portfolio.md`: critérios usados para apresentar o estágio real de cada trabalho.
 
-- `index.html`: conteúdo, estrutura semântica e ilustrações vetoriais.
-- `styles.css`: identidade visual, temas, animações e adaptações para celular.
-- `script.js`: projetos, filtros, diálogos, menu, tema e formulário de briefing.
-- `site-init.js` e `intro.js`: tema inicial e abertura 3D da marca.
-- `assets/`: imagens, fontes locais com suas licenças e a biblioteca GSAP.
+## Projetos apresentados
 
-## Personalizar
+- **SENAI Smart Class:** projeto acadêmico em equipe. As telas do portfólio são capturas do painel. Sem o Arduino conectado, as leituras exibidas são simuladas.
+- **Painel comercial:** conceito de interface com valores fictícios; não representa cliente ou sistema em produção.
+- **Vio Finanças:** projeto pessoal de Márcio Andrey, ainda sem demonstração pública.
+- **Portfólio TRIBYTE:** site atual da equipe.
 
-### Contato comercial
+A área de referências externas contém ilustrações locais com valores fictícios, identificadas como exemplos. Os links levam às páginas oficiais do Metabase e do Grafana.
 
-No início de `script.js`, preencha `CONTACT` com seu WhatsApp comercial
-(código do país + DDD + número, somente dígitos) e/ou e-mail.
-O botão de envio só aparece se um contato válido estiver configurado.
+## Contato
 
-O site não possui servidor de envio nem caixa de entrada. Por padrão, o formulário
-valida os campos, mostra o briefing para revisão e permite copiar ou baixar o texto.
-Se você configurar WhatsApp ou e-mail, o botão abre o aplicativo de destino com a
-mensagem preparada; o visitante confirma o envio no próprio aplicativo.
+Os botões abrem o WhatsApp com uma mensagem inicial editável. O visitante revisa e confirma o envio no próprio aplicativo. Não há envio automático pelo site nem endereço de e-mail apresentado como contato. O número usado nos links fica no começo de `script.js` e nos links de contato de `index.html`.
 
-### Fotos e logo
+## Fontes e licenças
 
-Os cartões da equipe usam retratos tipográficos originais com as iniciais G, M e L.
-Para usar fotos, substitua o conteúdo decorativo de cada `.team-art` por uma imagem
-com texto alternativo adequado e ajuste `object-fit: cover` no CSS.
+Space Grotesk e Space Mono são servidas localmente em WOFF2. Os arquivos de licença OFL acompanham as fontes. A abertura 3D usa GSAP local somente quando a introdução é exibida; se a abertura for pulada, a biblioteca não é carregada.
 
-O símbolo triangular e o wordmark são uma proposta visual para esta versão.
-Podem ser substituídos pela logo oficial quando ela estiver definida.
+## Publicação e segurança
 
-### Projetos e textos
+O envio de alterações para `main` inicia o deploy contínuo da Vercel. O `vercel.json` define cabeçalhos de segurança e uma CSP que autoriza scripts, estilos, imagens e fontes locais, além do hash necessário ao bloco JSON-LD de metadados.
 
-O objeto `PROJECTS`, em `script.js`, concentra os textos dos detalhes dos projetos.
-Edite também os cartões em `index.html` para manter título, resumo e categoria alinhados.
-Ao incluir um novo projeto, atualize as quantidades mostradas nos botões dos filtros.
-
-As interfaces de Smart Class e Gestão Comercial são ilustrações criadas para o
-portfólio, identificadas como tal. Elas não são capturas dos sistemas reais.
-Não há métricas, depoimentos ou resultados comerciais inventados.
-
-### Cores e fontes
-
-As variáveis de `:root` definem o tema escuro. O seletor
-`:root[data-theme="light"]` define o tema claro. A cor principal é `--accent`.
-As fontes Space Grotesk e Space Mono estão incluídas localmente; o site não faz
-requisições a provedores de fontes. As licenças devem acompanhar a redistribuição.
-
-## Recursos incluídos
-
-- Layout responsivo, menu móvel e navegação por âncoras.
-- Modos claro e escuro, com preferência salva no navegador.
-- Galeria com filtros e detalhes em diálogos nativos.
-- Serviços em acordeões e seleção refletida no briefing.
-- Validação do formulário, cópia e download de briefing em TXT.
-- Animações de entrada, símbolo flutuante e cursor complementar no computador.
-- Preferência de movimento reduzido, foco visível, link de salto e rótulos acessíveis.
-- Relógio do estúdio com horário de Brasília.
-
-## Abertura 3D
-
-A abertura aparece uma vez por sessão, tem botão para pular e respeita a
-preferência por movimento reduzido. Use `index.html?intro` para revê-la.
-Em `intro-teste.html`, ajuste camadas, profundidade e velocidade do modelo e
-abra a versão do site em outra aba.
-
-O GSAP 3.12.5 é servido a partir de `assets/gsap-3.12.5.min.js`. O arquivo
-mantém o aviso de licença original ([GSAP Standard License](https://gsap.com/standard-license/)).
-Se o GSAP estiver indisponível, a abertura usa a animação em CSS.
-
-## Hospedagem definitiva: Vercel
-
-A hospedagem de produção do portfólio TRIBYTE é a **Vercel**, no projeto
-`portifolio-tribyte`, endereço: https://portifolio-tribyte.vercel.app/.
-
-Os arquivos estáticos estão na raiz do repositório GitHub
-`GustavobritoTDS/Portifolio-empresa`, branch `main`.
-O site utiliza HTML, CSS e JavaScript puros, sem etapa de compilação.
-
-O arquivo `vercel.json` define cabeçalhos de segurança, Content Security
-Policy (CSP), prevenção de incorporação em iframes e cache curto para arquivos
-de mídia e fontes. O arquivo `_headers` era usado na tentativa de hospedagem
-no Cloudflare Pages e não é utilizado pela Vercel.
-
-### Atualizar o portfólio
-
-1. Envie as alterações para a branch `main` no GitHub.
-2. Publique o commit no projeto `portifolio-tribyte` na Vercel.
-3. Confirme o status `READY` no painel e teste a página em computador
-   e celular: navegação, abertura, perfis da equipe, imagens e formulário.
-
-### Publicações antigas na Cloudflare
-
-Durante testes anteriores foram criados Workers na Cloudflare. Eles **não são**
-o endereço oficial do portfólio. Para ter uma única hospedagem pública,
-esses Workers podem ser desativados no painel Cloudflare depois de confirmar
-que o endereço da Vercel está funcionando. A exclusão não é necessária
-para o funcionamento do site na Vercel.
-
-Nenhuma configuração de segurança garante proteção absoluta; mantenha
-conteúdo, acessos e políticas da hospedagem em conformidade com o serviço.
+`robots.txt` e `sitemap.xml` apontam para o endereço público do portfólio.

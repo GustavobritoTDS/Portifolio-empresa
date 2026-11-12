@@ -1,8 +1,7 @@
 "use strict";
 
-/* Edite aqui os contatos comerciais quando estiverem definidos.
-   WhatsApp: código do país + DDD + número, apenas dígitos.
-   Sem contatos, o formulário funciona como um gerador local de briefing. */
+/* O formulário prepara uma mensagem editável para o WhatsApp.
+   O visitante revisa e confirma o envio no próprio aplicativo. */
 const CONTACT = Object.freeze({ whatsapp: "5562992106861", email: "" });
 
 /* Conteúdo centralizado para facilitar a manutenção dos estudos de caso. */
@@ -10,58 +9,75 @@ const PROJECTS = Object.freeze({
   smart: {
     index: "01",
     title: "SENAI Smart Class",
-    liveUrl: "https://smart-sala.vercel.app/",
+    liveUrl: "https://senai-smart-class-one.vercel.app/",
     art: "SMART\nCLASS",
     image: "assets/smart-class-sensores-hq.webp",
-    category: "SISTEMA WEB / EDUCAÇÃO",
+    category: "PROJETO ACADÊMICO / EDUCAÇÃO",
     description:
-      "Um projeto acadêmico que aproxima a tecnologia do ambiente de aprendizagem. A proposta reúne monitoramento e controles da sala em uma interface acessível.",
-    type: "Projeto acadêmico",
-    focus: "Interface e controle de sala",
+      "Projeto acadêmico desenvolvido em equipe no SENAI. O painel reúne leituras de temperatura, umidade, luminosidade e ocupação; com o Arduino UNO R4 WiFi conectado, também permite acionar controles da sala.",
+    type: "Projeto acadêmico em equipe",
+    focus: "Monitoramento e automação de sala",
     color: "#c8c2d9",
     ink: "#302446",
     features: [
-      "Painel para visualizar informações do ambiente.",
-      "Interface para iluminação e climatização.",
-      "Experiências de acesso para diferentes perfis.",
+      "Leituras de temperatura, umidade, luminosidade e ocupação.",
+      "Controles de iluminação, ventilador e servo motor pelo Arduino.",
+      "HTML, CSS, JavaScript, Supabase e Arduino UNO R4 WiFi.",
     ],
-    note: "Imagens reais da interface do projeto acadêmico SENAI Smart Class. Os valores exibidos correspondem às capturas e podem variar no sistema ao vivo.",
+    note: "As imagens mostram telas reais do painel. Sem o Arduino conectado, as leituras são simuladas; não são resultados medidos em uma sala em operação.",
   },
   gestao: {
     index: "02",
-    title: "Gestão Comercial",
-    art: "GESTÃO\nCOMERCIAL",
-    category: "SISTEMA WEB / NEGÓCIOS",
+    title: "Painel comercial (conceito)",
+    art: "PAINEL\nCOMERCIAL",
+    category: "CONCEITO DE INTERFACE",
     description:
-      "Um projeto de sistema para organizar a rotina comercial: acompanhar vendas, visualizar metas e reunir informações que ajudam a equipe no dia a dia.",
-    type: "Projeto de sistema",
-    focus: "Vendas e operação comercial",
+      "Exercício visual de um painel para acompanhamento de vendas e metas. O cartão não representa cliente, empresa ou sistema comercial em produção.",
+    type: "Conceito de interface",
+    focus: "Visualização comercial",
     color: "#b6c4b1",
     ink: "#203927",
     features: [
-      "Visão geral de vendas e metas.",
-      "Organização de registros e acompanhamento comercial.",
-      "Áreas voltadas à gestão e à equipe de vendas.",
+      "Composição demonstrativa feita para este portfólio.",
+      "Os valores da ilustração são fictícios.",
+      "Não há cliente ou resultado comercial associado.",
     ],
-    note: "A prévia do portfólio é uma composição ilustrativa. Dados comerciais, nomes de clientes e acessos de terceiros não são apresentados.",
+    note: "O painel é um conceito. Não é uma captura de um sistema real.",
+  },
+  vio: {
+    index: "03",
+    title: "Vio Finanças",
+    art: "VIO\nFINANÇAS",
+    category: "PROJETO INDIVIDUAL / EM DESENVOLVIMENTO",
+    description:
+      "Projeto pessoal de Márcio Andrey para organização financeira. Ainda não há uma demonstração pública para apresentar.",
+    type: "Em desenvolvimento",
+    focus: "Organização financeira pessoal",
+    color: "#d9e3d7",
+    ink: "#203927",
+    features: [
+      "Iniciativa individual de Márcio Andrey.",
+      "O portfólio não apresenta telas ou funções como concluídas.",
+    ],
+    note: "A descrição será ampliada quando houver uma versão demonstrável.",
   },
   tribyte: {
-    index: "03",
-    title: "Nosso próprio universo",
-    art: "TRI\nBYTE™",
-    category: "WEBSITE / IDENTIDADE DIGITAL",
+    index: "04",
+    title: "Portfólio TRIBYTE",
+    art: "TRI\nBYTE",
+    category: "SITE E IDENTIDADE DA EQUIPE",
     description:
-      "A TRIBYTE apresentada através de uma experiência autoral. Tipografia expressiva, três perspectivas visuais e uma identidade que conecta o estúdio aos seus projetos.",
-    type: "Portfólio do estúdio",
-    focus: "Design e desenvolvimento web",
+      "Site da equipe, feito em HTML, CSS e JavaScript. A experiência reúne a identidade da TRIBYTE, os projetos e o contato pelo WhatsApp.",
+    type: "Projeto da equipe",
+    focus: "Site e identidade digital",
     color: "#ff3547",
     ink: "#1b090c",
     features: [
-      "Composição responsiva com identidade própria.",
-      "Galeria de projetos com filtros e estudos de caso.",
-      "Modo claro e escuro e animações adaptadas à preferência do visitante.",
+      "Layout adaptado a computador e celular.",
+      "Galeria com projetos identificados por status.",
+      "Temas claro e escuro e abertura animada da marca.",
     ],
-    note: "Desenvolvido em HTML, CSS e JavaScript puros. Os retratos tipográficos representam a equipe até a inclusão das fotografias oficiais.",
+    note: "Este é o portfólio publicado da própria equipe TRIBYTE.",
   },
 });
 
@@ -113,7 +129,9 @@ menuToggle.addEventListener("click", () =>
 $$("a", mobileMenu).forEach((link) =>
   link.addEventListener("click", () => {
     setMenu(false);
-    const target = $(link.getAttribute("href"));
+    const href = link.getAttribute("href");
+    if (!href?.startsWith("#")) return;
+    const target = $(href);
     if (target) {
       target.tabIndex = -1;
       target.focus({ preventScroll: true });
@@ -206,23 +224,24 @@ $$("dialog").forEach((dialog) => {
   });
 });
 const projectDialog = $("#project-dialog");
-$$("[data-project]").forEach((button) =>
-  button.addEventListener("click", () => {
-    const project = PROJECTS[button.dataset.project];
+$$("[data-project]").forEach((link) =>
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const project = PROJECTS[link.dataset.project];
     if (!project) return;
     $("#project-dialog-title").textContent = project.title;
     $("#project-dialog-category").textContent = project.category;
     $("#project-dialog-description").textContent = project.description;
     $("#project-dialog-note").textContent = project.note;
-    $("#smart-modal-gallery").hidden = button.dataset.project !== "smart";
-    $("#project-dialog-side-gallery").hidden = button.dataset.project !== "smart";
+    $("#smart-modal-gallery").hidden = link.dataset.project !== "smart";
+    $("#project-dialog-side-gallery").hidden = link.dataset.project !== "smart";
     const liveLink = $("#project-dialog-live");
     liveLink.hidden = !project.liveUrl;
     if (project.liveUrl) liveLink.href = project.liveUrl;
     else liveLink.removeAttribute("href");
     const artBox = $(".dialog-project-art");
     const artImg = $("#project-dialog-art-img");
-    artBox.classList.toggle("has-side-gallery", button.dataset.project === "smart");
+    artBox.classList.toggle("has-side-gallery", link.dataset.project === "smart");
     if (project.image) {
       artImg.src = project.image;
       artImg.alt = project.title || "";
@@ -311,20 +330,6 @@ function growMessage() {
   messageField.style.height = `${Math.min(messageField.scrollHeight, 520)}px`;
 }
 messageField.addEventListener("input", growMessage);
-const IDEAS = [
-  "Tenho uma clínica e quero que meus pacientes me encontrem e agendem pelo celular…",
-  "Preciso de um sistema para controlar as vendas e o estoque da minha loja…",
-  "Quero um site que mostre meu trabalho do jeito que eu imagino…",
-  "Vou lançar um produto e preciso de uma página que convença quem chegar…",
-];
-if (!reducedMotion.matches) {
-  let idea = 0;
-  setInterval(() => {
-    if (document.activeElement === messageField || messageField.value) return;
-    messageField.placeholder = IDEAS[idea++ % IDEAS.length];
-  }, 3800);
-}
-
 let briefingText = "";
 let senderName = "";
 const isValidContact = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || value.replace(/\D/g, "").length >= 10;
@@ -429,72 +434,19 @@ updateClock();
 setInterval(updateClock, 30000);
 $("#current-year").textContent = String(new Date().getFullYear());
 
-/* Rolagem sem trabalho excessivo: uma atualização por frame. */
+/* Progresso da página: um único trabalho por frame. */
 const progress = $(".scroll-progress");
-const hero = $("#inicio");
-const scrollTitles = $$("[data-scroll-title]");
-const scrollVisuals = $$(".project-card, .team-card").map((card) => ({
-  card,
-  visual: $(".project-visual, .team-art", card),
-}));
-const processSteps = $$(".process-steps li");
-const clampProgress = (value) => Math.max(0, Math.min(1, value));
 let scrollQueued = false;
 function updateScroll() {
   const max = document.documentElement.scrollHeight - window.innerHeight;
   progress.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
-
-  if (!reducedMotion.matches) {
-    const viewportHeight = window.innerHeight;
-    const heroProgress = clampProgress(window.scrollY / (hero.offsetHeight * 0.85));
-    hero.style.setProperty("--hero-copy-shift", `${Math.round(heroProgress * -105)}px`);
-    hero.style.setProperty("--hero-copy-opacity", (1 - heroProgress * 0.68).toFixed(3));
-    hero.style.setProperty("--hero-art-shift", `${Math.round(heroProgress * 130)}px`);
-    hero.style.setProperty("--hero-art-turn", `${Math.round(heroProgress * -28)}deg`);
-    hero.style.setProperty("--hero-art-spin", `${Math.round(heroProgress * 13)}deg`);
-    hero.style.setProperty("--hero-art-scale", (1 - heroProgress * 0.24).toFixed(3));
-
-    scrollTitles.forEach((title) => {
-      const top = title.parentElement.getBoundingClientRect().top;
-      const reveal = clampProgress((viewportHeight * 0.95 - top) / (viewportHeight * 0.5));
-      title.style.setProperty("--title-shift", `${Math.round((1 - reveal) * 54)}px`);
-      title.style.setProperty("--title-opacity", (0.35 + reveal * 0.65).toFixed(3));
-    });
-
-    scrollVisuals.forEach(({ card, visual }) => {
-      if (card.hidden) return;
-      const top = card.getBoundingClientRect().top;
-      const reveal = clampProgress((viewportHeight * 0.94 - top) / (viewportHeight * 0.7));
-      visual.style.setProperty("--scroll-clip", `${Math.round((1 - reveal) * 34)}%`);
-      visual.style.setProperty("--scroll-shift", `${Math.round((1 - reveal) * 28)}px`);
-      visual.style.setProperty("--scroll-scale", (1.045 - reveal * 0.045).toFixed(3));
-    });
-
-    const nextStep = processSteps.findIndex((step) =>
-      step.getBoundingClientRect().bottom > viewportHeight * 0.52,
-    );
-    const activeStep = nextStep < 0 ? processSteps.length - 1 : nextStep;
-    processSteps.forEach((step, index) =>
-      step.classList.toggle("is-current", index === activeStep),
-    );
-  }
   scrollQueued = false;
 }
-document.documentElement.classList.toggle("scroll-motion", !reducedMotion.matches);
-reducedMotion.addEventListener("change", () => {
-  document.documentElement.classList.toggle("scroll-motion", !reducedMotion.matches);
-  updateScroll();
-});
-window.addEventListener(
-  "scroll",
-  () => {
-    if (!scrollQueued) {
-      scrollQueued = true;
-      requestAnimationFrame(updateScroll);
-    }
-  },
-  { passive: true },
-);
+window.addEventListener("scroll", () => {
+  if (scrollQueued) return;
+  scrollQueued = true;
+  requestAnimationFrame(updateScroll);
+}, { passive: true });
 window.addEventListener("resize", updateScroll, { passive: true });
 updateScroll();
 if ("IntersectionObserver" in window) {
@@ -531,20 +483,6 @@ const relPos = (el, event) => {
   return [(event.clientX - box.left) / box.width - 0.5, (event.clientY - box.top) / box.height - 0.5];
 };
 
-/* Cursor complementar: mantém o cursor nativo e não roda em telas de toque. */
-if (finePointer) {
-  const halo = $(".cursor-halo");
-  onPointerFrame(document, (event) => {
-    halo.style.left = `${event.clientX}px`;
-    halo.style.top = `${event.clientY}px`;
-    halo.style.opacity = "1";
-  });
-  document.addEventListener("pointerover", (event) =>
-    halo.classList.toggle("is-hovering", Boolean(event.target.closest("a,button,summary,label"))));
-  document.addEventListener("pointerout", (event) => { if (!event.relatedTarget) halo.style.opacity = "0"; });
-  document.addEventListener("visibilitychange", () => { if (document.hidden) halo.style.opacity = "0"; });
-}
-
 /* As três faces da marca têm significado e são operáveis com teclado. */
 const pieceInfo = ["Sites com identidade.", "Sistemas que simplificam.", "Landing pages que conectam."];
 $$(".tb-piece").forEach((piece, index) => {
@@ -569,19 +507,6 @@ if (finePointer) {
     stage.style.setProperty("--tilt-x", (-y * 8).toFixed(2) + "deg");
     stage.style.setProperty("--tilt-y", (x * 8).toFixed(2) + "deg");
   }, () => { stage.style.removeProperty("--tilt-x"); stage.style.removeProperty("--tilt-y"); });
-  $$(".project-card, .team-card").forEach((card) =>
-    onPointerFrame(card, (event) => {
-      const [x, y] = relPos(card, event);
-      card.style.setProperty("--card-x", (-y * 3).toFixed(2) + "deg");
-      card.style.setProperty("--card-y", (x * 3).toFixed(2) + "deg");
-      card.style.setProperty("--shine-x", (x + 0.5) * 100 + "%");
-      card.style.setProperty("--shine-y", (y + 0.5) * 100 + "%");
-      card.style.setProperty("--shine-opacity", "1");
-    }, () => {
-      card.style.removeProperty("--card-x");
-      card.style.removeProperty("--card-y");
-      card.style.setProperty("--shine-opacity", "0");
-    }));
 }
 
 /* Sensor opcional: só começa após ação explícita e nunca pede permissão sozinho. */

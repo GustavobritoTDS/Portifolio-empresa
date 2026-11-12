@@ -14,25 +14,25 @@
  const lab=qs(".rx-lab");
  const modes=Object.freeze({
   sites: {
-   eyebrow:"01 / SITES QUE NÃO PASSAM DESPERCEBIDOS",
-   headline:"Seu negócio.<br>Outra presença.",
-   body:"Sites com personalidade, estrutura clara e experiências feitas para serem lembradas.",
+   eyebrow:"01 / SITES",
+   headline:"Uma página para mostrar o que você faz.",
+   body:"Site institucional, portfólio ou página de apresentação, com informações e contato fáceis de encontrar.",
    symbol:"W.",
    cta:"Site institucional",
    label:"01 / EXPERIÊNCIA WEB"
   },
   sistemas:{
-   eyebrow:"02 / SISTEMAS FEITOS PARA FUNCIONAR",
-   headline:"Menos fricção.<br>Mais resultado.",
-   body:"Painéis e aplicações com fluxos intuitivos para transformar operações complexas em ações simples.",
+   eyebrow:"02 / SISTEMAS",
+   headline:"Um painel para acompanhar sua rotina.",
+   body:"Painéis, cadastros e áreas de gestão para reunir informações usadas pela sua equipe.",
    symbol:"S/",
    cta:"Sistema web",
    label:"02 / INTERFACE & LÓGICA"
   },
   landing:{
-   eyebrow:"03 / LANDING PAGES COM DIREÇÃO",
-   headline:"Uma ideia.<br>Todo impacto.",
-   body:"Narrativas digitais focadas na sua oferta, com organização e caminhos claros para o próximo passo.",
+   eyebrow:"03 / LANDING PAGES",
+   headline:"Uma página para uma oferta.",
+   body:"Página focada em um produto, serviço ou campanha, com as informações principais e um próximo passo visível.",
    symbol:"↗",
    cta:"Landing page",
    label:"03 / COMUNICAÇÃO DIGITAL"
@@ -74,24 +74,7 @@
     });
   });
   setMode("sites");
-  // Former generic [data-service] links are handled by script.js.
-  // This dynamic CTA must register its own handler because it was created as a new link.
-  if(cta){
-    cta.addEventListener("click",()=>{
-      const field=qs("#message"),hidden=qs("#service");
-      const chosen=cta.dataset.service;
-      if(hidden)hidden.value=chosen;
-      if(field&&!field.value.trim()){
-        const templates={
-          "Site institucional":"Quero um site institucional para ",
-          "Sistema web":"Quero um sistema web para ",
-          "Landing page":"Quero uma landing page para "
-        };
-        field.value=templates[chosen]||"";
-      }
-      if(field)setTimeout(()=>field.focus({preventScroll:true}),450);
-    });
-  }
+
   if(fine.matches&&!reduced.matches){
     let scheduled=false,px=0,py=0;
     lab.addEventListener("pointermove",ev=>{
@@ -166,24 +149,6 @@
    });
   });
  });
-
- /* Text Pressure-inspired pointer interaction on headline: no layout shift. */
- const hero=qs(".hero");
- if(hero&&fine.matches&&!reduced.matches){
-  let scheduled=false,x=0,y=0;
-  hero.addEventListener("pointermove",ev=>{
-    const r=hero.getBoundingClientRect();
-    x=clamp((ev.clientX-r.left)/Math.max(1,r.width));
-    y=clamp((ev.clientY-r.top)/Math.max(1,r.height));
-    if(scheduled)return;
-    scheduled=true;
-    requestAnimationFrame(()=>{
-      scheduled=false;
-      hero.style.setProperty("--rx-pressure-x",(x*100).toFixed(2)+"%");
-      hero.style.setProperty("--rx-pressure-y",(y*100).toFixed(2)+"%");
-    });
-  },{passive:true});
- }
 
  /* TEAM PROFILE CARDS V3: entire photo/card opens the existing profile
     modal; buttons and external GitHub links retain their own click behavior.

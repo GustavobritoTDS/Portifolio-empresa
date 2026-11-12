@@ -13,7 +13,7 @@ try {
   const replayIntro = new URLSearchParams(window.location.search).has("intro");
   if (
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
-    (replayIntro || sessionStorage.getItem("tribyte-intro") !== "seen")
+    (replayIntro || ((navigator.hardwareConcurrency || 8) > 4 && !navigator.connection?.saveData && sessionStorage.getItem("tribyte-intro") !== "seen"))
   ) {
     sessionStorage.setItem("tribyte-intro", "seen");
     document.documentElement.classList.add("tb-intro-on");
