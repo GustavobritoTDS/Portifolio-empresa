@@ -8,14 +8,10 @@ try {
   }
 } catch (_) {}
 
-// A abertura aparece uma vez por sessão. O parâmetro ?intro permite revê-la.
+// A abertura é exibida quando a página é carregada. O parâmetro ?intro
+// continua disponível como link explícito para rever a animação.
 try {
-  const replayIntro = new URLSearchParams(window.location.search).has("intro");
-  if (
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
-    (replayIntro || ((navigator.hardwareConcurrency || 8) > 4 && !navigator.connection?.saveData && sessionStorage.getItem("tribyte-intro") !== "seen"))
-  ) {
-    sessionStorage.setItem("tribyte-intro", "seen");
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("tb-intro-on");
     window.setTimeout(() => document.documentElement.classList.remove("tb-intro-on"), 8000);
   }
