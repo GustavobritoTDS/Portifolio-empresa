@@ -20,7 +20,7 @@ Somos uma equipe de estudantes de Desenvolvimento de Sistemas no SENAI. Este por
 ## Equipe
 
 - [Gustavo de Brito Vieira](https://github.com/GustavobritoTDS)
-- Márcio Andrey
+- [Márcio Andrey](https://github.com/marcioandrey627-code)
 - [Lucas Duarte Costa](https://github.com/lucasduartecosta09)
 
 [Conheça cada integrante no portfólio](https://portifolio-tribyte.vercel.app/#estudio).
