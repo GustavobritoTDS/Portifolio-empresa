@@ -8,8 +8,8 @@ try {
   }
 } catch (_) {}
 
-// A abertura é exibida quando a página é carregada. O parâmetro ?intro
-// continua disponível como link explícito para rever a animação.
+// Executa antes da primeira pintura. A abertura roda a cada carregamento,
+// exceto com movimento reduzido; a URL e a sessão não alteram essa decisão.
 try {
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("tb-intro-on");
