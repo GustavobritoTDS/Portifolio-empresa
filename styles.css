@@ -5909,3 +5909,188 @@ h2 {letter-spacing:-.075em}
   .site-footer .footer-top { gap: 18px 12px; }
   .site-footer .footer-mark { width: 32px; }
 }
+
+/* ===========================================================================
+   MODO CLARO — faixas que continuavam escuras
+   A paleta segue a mesma: papel, tinta e vermelho. O que muda aqui é só o
+   lado claro do tema. O modo escuro não é tocado por nenhuma regra abaixo.
+   =========================================================================== */
+:root[data-theme="light"] {
+  --rx-band: #f8f6f0;        /* faixa clara sobre o papel */
+  --rx-band-deep: #e5e1d8;   /* faixa um tom abaixo, para separar seções */
+  --rx-band-ink: #121315;
+  --rx-edge: #00000012;      /* contorno discreto no claro */
+}
+
+/* 02 — faixa de movimento */
+:root[data-theme="light"] .marquee {
+  background: var(--rx-band);
+  color: var(--rx-band-ink);
+  border-top: 1px solid var(--rx-line);
+  border-bottom: 1px solid var(--rx-line);
+}
+:root[data-theme="light"] .marquee-track span:nth-of-type(even),
+:root[data-theme="light"] .marquee b {
+  color: var(--rx-red);
+}
+:root[data-theme="light"] .marquee b { background: var(--rx-red); }
+
+/* 03 — laboratório de serviços */
+:root[data-theme="light"] .rx-lab-visual {
+  background: #f1ede4;
+  color: var(--rx-band-ink);
+}
+:root[data-theme="light"] .rx-lab-canvas {
+  background: radial-gradient(ellipse at 46% 42%, #e21b3c24, transparent 53%), #ece7dd;
+}
+:root[data-theme="light"] .rx-lab-canvas::before {
+  background-image:
+    linear-gradient(#12131512 1px, transparent 1px),
+    linear-gradient(90deg, #12131512 1px, transparent 1px);
+}
+:root[data-theme="light"] .rx-lab-orbit {
+  border-color: #e21b3c66;
+  box-shadow: 0 0 90px #e21b3c26, inset 0 0 75px #e21b3c14;
+}
+:root[data-theme="light"] .rx-lab-orbit::before { border-color: #e21b3c55; }
+:root[data-theme="light"] .rx-lab-orbit::after { border-color: #e21b3c26; }
+:root[data-theme="light"] .rx-lab-image {
+  border-color: #12131524;
+  box-shadow: 0 24px 64px #1213151f, 0 0 0 1px #0000000a;
+}
+:root[data-theme="light"] .rx-lab-canvas-label { color: var(--rx-muted); }
+
+/* 04 — projetos */
+:root[data-theme="light"] .projects {
+  background: var(--rx-band-deep);
+  color: var(--rx-band-ink);
+}
+:root[data-theme="light"] .projects .section-topline { border-bottom-color: var(--rx-line); }
+:root[data-theme="light"] .projects .section-heading h2 { color: var(--rx-band-ink); }
+:root[data-theme="light"] .project-heading-side p { color: var(--rx-muted); }
+:root[data-theme="light"] .projects .filter-button {
+  background: #ffffffcc;
+  color: var(--rx-band-ink);
+  border-color: var(--rx-line);
+}
+:root[data-theme="light"] .projects .filter-button.is-active {
+  background: var(--rx-red);
+  color: #fff;
+  border-color: var(--rx-red);
+}
+:root[data-theme="light"] .project-card,
+:root[data-theme="light"] .project-featured {
+  box-shadow: 0 22px 70px #12131518, 0 0 0 1px var(--rx-edge);
+}
+:root[data-theme="light"] .project-card::before { border-color: #12131512; }
+:root[data-theme="light"] .project-card:nth-child(1) {
+  --rx-case-bg: #e3ded3;
+  --rx-case-ink: #1b1a18;
+}
+:root[data-theme="light"] .project-card:nth-child(4) {
+  --rx-case-bg: #f0dad6;
+  --rx-case-ink: #2a1a1c;
+}
+:root[data-theme="light"] .project-card .sales-visual { background: #e3d7d2; }
+
+/* 06 — estúdio */
+:root[data-theme="light"] .team-card:first-child {
+  background: var(--rx-band);
+  color: var(--rx-band-ink);
+}
+:root[data-theme="light"] .studio .team-card .lucas-art { background: #e8e3da; }
+
+/* 07 — processo */
+:root[data-theme="light"] .process {
+  background: var(--rx-band);
+  color: var(--rx-band-ink);
+}
+:root[data-theme="light"] .process .section-topline { border-bottom-color: var(--rx-line); }
+:root[data-theme="light"] .process-heading h2 em { color: var(--rx-red); }
+:root[data-theme="light"] .process-heading > p { color: var(--rx-muted); }
+:root[data-theme="light"] .process-steps li { border-top-color: var(--rx-line); }
+:root[data-theme="light"] .process-steps li > span { color: var(--rx-red); }
+:root[data-theme="light"] .process-steps p { color: var(--rx-muted); }
+:root[data-theme="light"] .process-steps li.is-current {
+  background: linear-gradient(90deg, #e21b3c14, transparent 55%);
+}
+:root[data-theme="light"] .process-steps li.is-current h3 { color: var(--rx-red); }
+:root[data-theme="light"] .process-steps li::before { background: var(--rx-red); }
+
+/* 08 — carta de contato */
+:root[data-theme="light"] .contact-form.letter-form {
+  background: var(--rx-band);
+  color: var(--rx-band-ink);
+  border-color: var(--rx-line);
+  box-shadow: 0 24px 60px #1213151a;
+}
+:root[data-theme="light"] .contact-form.letter-form .form-heading {
+  border-color: var(--rx-line);
+  color: var(--rx-band-ink);
+}
+:root[data-theme="light"] .contact-form.letter-form label,
+:root[data-theme="light"] .contact-form.letter-form .letter-label { color: var(--rx-band-ink); }
+:root[data-theme="light"] .contact-form.letter-form textarea {
+  background: #fff;
+  border-color: var(--rx-line);
+  color: var(--rx-band-ink);
+}
+:root[data-theme="light"] .contact-form.letter-form input {
+  color: var(--rx-band-ink);
+  border-color: var(--rx-line);
+}
+:root[data-theme="light"] .contact-form.letter-form input::placeholder,
+:root[data-theme="light"] .contact-form.letter-form textarea::placeholder,
+:root[data-theme="light"] .contact-form.letter-form .letter-hint,
+:root[data-theme="light"] .contact-form.letter-form .form-bottom > p { color: var(--rx-muted); }
+:root[data-theme="light"] .contact-form.letter-form .form-status { color: #a40a27; }
+
+/* 05 — índice de serviços: linha aberta deixa de virar bloco preto */
+:root[data-theme="light"] .services .service-item:is([open], :hover, :focus-within) {
+  background: #fff;
+  color: var(--rx-band-ink);
+  box-shadow: inset 3px 0 0 var(--rx-red);
+}
+
+/* Referências de sistema: só a moldura clareia. A simulação de painel
+   continua escura porque imita a interface real da ferramenta citada. */
+:root[data-theme="light"] .system-references .ref-visual { background: #e9e5dd; }
+
+/* Hero: sombra da arte calibrada para fundo claro */
+:root[data-theme="light"] .tb-hero-stage {
+  filter: drop-shadow(0 30px 24px #12131533);
+}
+
+/* Conteúdo do item de serviço: no claro o texto era branco sobre o bloco
+   escuro. Com o fundo claro, ele passa a usar tinta e vermelho. */
+:root[data-theme="light"] .services .service-item:is([open], :hover, :focus-within) h3 {
+  color: var(--rx-band-ink);
+}
+:root[data-theme="light"] .services .service-item:is([open], :hover, :focus-within) .service-number {
+  color: var(--rx-red);
+}
+:root[data-theme="light"] .services .service-item .service-body { color: var(--rx-band-ink); }
+:root[data-theme="light"] .services .service-item .service-body > p { color: var(--rx-muted); }
+:root[data-theme="light"] .services .service-item .service-chips span {
+  border-color: var(--rx-line);
+  color: var(--rx-muted);
+}
+:root[data-theme="light"] .services .service-item .service-body > a,
+:root[data-theme="light"] .services .service-item .service-body > a span {
+  color: #a40a27;
+  border-bottom-color: #a40a27;
+}
+
+/* Contraste: texto de apoio e rótulos pequenos sobre as faixas claras.
+   Alvo mínimo 4.5:1 para texto normal. */
+:root[data-theme="light"] {
+  --rx-muted-strong: #56534f; /* 5.86:1 sobre a faixa funda */
+  --rx-red-text: #b31030;     /* 6.41:1 sobre a faixa clara */
+}
+:root[data-theme="light"] .project-heading-side p,
+:root[data-theme="light"] .process-steps p,
+:root[data-theme="light"] .process-heading > p { color: var(--rx-muted-strong); }
+:root[data-theme="light"] .process-steps li > span,
+:root[data-theme="light"] .services .service-item:is([open], :hover, :focus-within) .service-number {
+  color: var(--rx-red-text);
+}
